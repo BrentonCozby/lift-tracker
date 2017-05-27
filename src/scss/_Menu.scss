@@ -1,0 +1,84 @@
+.menu-button {
+    box-sizing: content-box;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    padding: 15px 10px;
+    z-index: 101;
+    width: 25px;
+    height: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .bar {
+        display: block;
+        background-color: #aaa;
+        width: 100%;
+        height: 2px;
+
+        @media all and (min-width: 768px) {
+            background-color: #333;
+        }
+    }
+
+    &.close {
+        .bar:nth-of-type(1) {
+            transform-origin: 0% 0%;
+            transform: rotate(45deg) translateY(-3px);
+        }
+        .bar:nth-of-type(2) {
+            opacity: 0;
+        }
+        .bar:nth-of-type(3) {
+            transform-origin: 0% 100%;
+            transform: rotate(-45deg) translateY(3px);
+        }
+    }
+
+    &:hover .bar {
+        background-color: $fvi-blue;
+    }
+}
+
+.Menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 260px;
+    background-color: #fff;
+    z-index: 100;
+    height: 100vh;
+    box-shadow: 10px 0 40px 10px #000;
+
+    &-logo {
+        width: 100%;
+        padding: 20px 50px;
+    }
+
+    &-item {
+        padding: 15px 25px;
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        text-decoration: none;
+        color: #333;
+
+        &:hover {
+            background-color: #eee;
+            color: $fvi-blue;
+        }
+    }
+
+    &-name {
+        padding: 15px 25px;
+        display: block;
+        background-color: #eee;
+        margin: 30px 0 0 0;
+    }
+
+    &.visible {
+        right: 0;
+    }
+}

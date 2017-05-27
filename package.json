@@ -1,0 +1,8 @@
+{
+  "name": "lift-tracker",
+  "version": "1.0.0",
+  "main": "src/js/index.js",
+  "repository": "https://github.com/BrentonCozby/lift-tracker.git",
+  "author": "Brenton Cozby <brenton.cozby@gmail.com>",
+  "license": "MIT"
+}
