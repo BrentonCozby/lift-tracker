@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 
-import thingsReducer from './example.js'
+import userReducer from './user.js'
+import programsReducer from './programs.js'
 
 const rootReducer = combineReducers({
-    things: thingsReducer
+    programs: programsReducer,
+    user: userReducer
 })
 
 export default rootReducer

@@ -4,9 +4,9 @@ export const rootUrl = (process.env.NODE_ENV === 'production')
     ? '/'
     : '/'
 
-export const title = 'React Frontend Boilerplate'
-export const description = 'Boilerplate for a frontend react project'
-export const site_url = 'example.com'
+export const title = 'Lift Tracker'
+export const description = ''
+export const site_url = ''
 
 export const Dir = {
     src: resolve(__dirname, 'src'),

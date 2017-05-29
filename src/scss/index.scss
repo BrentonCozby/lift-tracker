@@ -8,12 +8,8 @@
 @import "./_Footer";
 @import "./_NoMatch";
 
-.Home {
+.App {
     width: 100%;
     min-height: 100vh;
     padding-bottom: 140px;
-    padding: 40px;
-    background-image: url('../../assets/images/canvas-texture.jpg');
-    background-size: cover;
-    background-position: center top;
 }

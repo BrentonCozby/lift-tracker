@@ -1,36 +1,17 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 
-import { getOneThing } from '../actions/index.js'
-import computerMouseImg from '../../../assets/images/computer-mouse.jpg'
+import ProgramsListContainer from '../containers/ProgramsListContainer.jsx'
 
-class Home extends Component {
+const Home = ({
+    isLoggedIn,
+    username,
+    saveNewProgram
+}) => (
+    <div className="Home">
+        <h2>This is the homepage</h2>
+        <ProgramsListContainer />
+        {isLoggedIn && <button onClick={saveNewProgram}>Save New Program</button>}
+    </div>
+)
 
-    componentWillMount() {
-        this.props.getOneThing('the things is this')
-    }
-
-    render() {
-        return (
-            <div className="Home">
-                <h2>This is the homepage</h2>
-                <h4>The active thing:</h4>
-                <p>{this.props.activeThing}</p>
-                <img src={computerMouseImg} width="400px" alt=""/>
-            </div>
-        )
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        activeThing: state.things.active
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    {
-        getOneThing
-    }
-)(Home)
+export default Home

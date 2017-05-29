@@ -6,7 +6,7 @@ import { AppContainer as ReactHotLoader } from 'react-hot-loader'
 
 import { rootUrl } from '../../config.js'
 import configStore from './store.js'
-import App from './components/App.jsx'
+import AppContainer from './containers/AppContainer.jsx'
 import '../scss/index.scss'
 
 // import views so they can live-reload during development
@@ -43,12 +43,12 @@ const render = (Component) => {
     }
 }
 
-render(App)
+render(AppContainer)
 
 // Hot Module Replacement API
 if (module.hot) {
-    module.hot.accept('./components/App.jsx', () => {
-        const nextApp = require('./components/App.jsx').default
+    module.hot.accept('./containers/AppContainer.jsx', () => {
+        const nextApp = require('./containers/AppContainer.jsx').default
         render(nextApp)
     })
 }
