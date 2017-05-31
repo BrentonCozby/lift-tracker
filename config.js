@@ -1,8 +1,8 @@
 import { resolve } from 'path'
 
 export const rootUrl = (process.env.NODE_ENV === 'production')
-    ? '/'
-    : '/'
+    ? '/lift-tracker/'
+    : '/lift-tracker/'
 
 export const title = 'Lift Tracker'
 export const description = ''
