@@ -1,0 +1,45 @@
+.LoginPage {
+    padding: 20px;
+
+    &-title {
+        margin-top: 0;
+        font-size: 28px;
+        letter-spacing: 1px;
+        border-bottom: 1px solid #bbb;
+        padding-bottom: 10px;
+    }
+
+    .login-btn {
+        display: block;
+        width: 180px;
+        margin: 20px auto;
+        padding: 12px;
+        font-size: 16px;
+        letter-spacing: 1px;
+        font-weight: 700;
+        color: #fff;
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 2px 2px -1px rgba(0, 0, 0, .5);
+        transform: translateY(-1px);
+        cursor: pointer;
+
+        &:active {
+            transition: all 0s;
+            transform: translateY(0);
+            box-shadow: none;
+        }
+
+        &.facebook {
+            background-color: #3B5998;
+        }
+
+        &.google {
+            background-color: #DC4A3D;
+        }
+
+        &.twitter {
+            background-color: #00ACEC;
+        }
+    }
+}

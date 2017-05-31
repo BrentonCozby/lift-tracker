@@ -6,17 +6,16 @@ const LoginPage = ({
 }) => {
     const btnAttrs = {
         onClick: firebaseLoginRedirect,
-        className: `login-button`,
         disabled: isLoading
     }
 
     return (
         <div className="LoginPage">
-            <h1>Login Page</h1>
+            <h1 className="LoginPage-title">Login</h1>
             <div className="login-buttons-container">
-                <button data-method="Facebook" {...btnAttrs}>facebook</button>
-                <button data-method="Google" {...btnAttrs}>google</button>
-                <button data-method="Twitter" {...btnAttrs}>twitter</button>
+                <button data-method="Facebook" {...btnAttrs} className="login-btn facebook">facebook</button>
+                <button data-method="Google" {...btnAttrs} className="login-btn google">google</button>
+                <button data-method="Twitter" {...btnAttrs} className="login-btn twitter">twitter</button>
             </div>
         </div>
     )
