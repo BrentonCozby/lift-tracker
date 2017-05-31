@@ -8,9 +8,15 @@ export function saveNewProgram(programData) {
     return dispatch => createProgram(programData)
 }
 
-export function updatePlan(dbref, val) {
+export function updateProgram(dbref, data) {
     return dispatch => {
-        programsRef.child(dbref).set(val)
+        programsRef.child(dbref).update(data)
+    }
+}
+
+export function setProgramValue(dbref, value) {
+    return dispatch => {
+        programsRef.child(dbref).set(value)
     }
 }
 

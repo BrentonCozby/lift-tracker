@@ -3,8 +3,9 @@ import { cloneDeep } from 'lodash'
 const INITAL_STATE = {
     uid: null,
     token: null,
-    name: null,
-    programs: null
+    username: null,
+    programs: null,
+    isAdmin: false
 }
 
 export default function(state = INITAL_STATE, action) {
@@ -13,13 +14,14 @@ export default function(state = INITAL_STATE, action) {
             const { data, uid } = action.payload
             return {...state,
                 uid,
-                name: data.name,
-                programs: cloneDeep(data.programs)
+                username: data.username,
+                programs: cloneDeep(data.programs),
+                isAdmin: data.isAdmin
             }
         case 'RETRIEVE_LOGIN_RESULT':
             return {...state, token: action.payload.credential.accessToken}
         case 'LOGOUT':
-            return {...state, uid: null, name: null, token: null}
+            return {...state, uid: null, username: null, token: null}
         default:
             return state
     }

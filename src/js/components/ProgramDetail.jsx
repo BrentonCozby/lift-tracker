@@ -1,37 +1,30 @@
 import React from 'react'
-
-import DayContainer from '../containers/DayContainer.jsx'
-
-const Week = ({ days, programId, weekIndex }) => (
-    <div className="ProgramDetail-week">
-        {days.map((day, index) => (
-            <DayContainer
-                {...day}
-                programId={programId}
-                weekIndex={weekIndex}
-                dayIndex={index}
-                key={index}
-            />
-        ))}
-    </div>
-)
+import Week from './Week.jsx'
+import OneRepMaxesContainer from '../containers/OneRepMaxesContainer.jsx'
 
 const ProgramDetail = ({
-    programId,
+    dbref,
     title,
-    plan
-}) => (
-    <div className="ProgramDetail">
-        <h1 className="ProgramDetail-title">{title}</h1>
-        {plan && plan.map((week, index) => (
-            <Week
-                programId={programId}
-                weekIndex={index}
-                days={week}
-                key={index}
+    plan,
+    oneRepMaxes,
+    setProgramValue
+}) => {
+    return (
+        <div className="ProgramDetail">
+            <h1 className="ProgramDetail-title">{title}</h1>
+            <OneRepMaxesContainer
+                dbref={dbref}
             />
-        ))}
-    </div>
-)
+            {plan && plan.map((week, index) => (
+                <Week
+                    dbref={`${dbref}/plan/${index}`}
+                    weekIndex={index}
+                    days={week}
+                    key={index}
+                />
+            ))}
+        </div>
+    )
+}
 
 export default ProgramDetail

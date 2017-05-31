@@ -1,0 +1,44 @@
+.ProgramsList {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+
+    td {
+        border: 1px solid #ddd;
+    }
+
+    &-title {
+        font-size: 24px;
+        font-weight: 300;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: left;
+        margin: 10px 0;
+    }
+
+    .save-new-program-btn {
+        border: none;
+        display: block;
+        width: 100%;
+        background-color: #bef;
+        text-transform: uppercase;
+        padding: 15px;
+        font-weight: 800;
+        letter-spacing: 3px;
+        font-size: 12px;
+    }
+}
+
+.ProgramCard {
+    text-decoration: none;
+
+    &-title {
+        background-color: #eee;
+        font-weight: 700;
+        font-size: 12px;
+        padding: 12px 5px;
+        margin: 0;
+        color: #000;
+        text-transform: uppercase;
+    }
+}

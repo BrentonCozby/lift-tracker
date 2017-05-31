@@ -1,15 +1,19 @@
 // shared
-@import "./_normalize.css";
-@import "./_base.scss";
-@import "./_helpers.scss";
+@import "normalize";
+@import "base";
+@import "helpers";
 
 // components
-@import "./_Menu";
-@import "./_Footer";
-@import "./_NoMatch";
+@import "Menu";
+@import "Footer";
+@import "NoMatch";
+@import "Home";
+@import "ProgramsList";
+@import "ProgramDetail";
 
 .App {
     width: 100%;
     min-height: 100vh;
+    padding-top: 5px;
     padding-bottom: 140px;
 }

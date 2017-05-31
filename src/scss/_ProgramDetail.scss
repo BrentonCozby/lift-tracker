@@ -1,0 +1,158 @@
+.ProgramDetail {
+    background-color: #eee;
+    padding-bottom: 5px;
+    min-height: calc(100vh - 140px);
+
+    &-title {
+        margin: 0;
+        margin-bottom: 20px;
+        padding: 10px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    &-one-rep-maxes {
+
+        .title {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 10px;
+            margin: 0;
+            margin-top: 5px;
+            background-color: #fff;
+            font-weight: 400;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .one-rep-maxes-container {
+            display: none;
+
+            &.expanded {
+                display: block;
+            }
+        }
+
+        .form-input {
+            padding: 0 10px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 300px;
+            margin: 10px auto;
+        }
+
+        label {
+            font-size: 16px;
+        }
+
+        input {
+            width: 55px;
+            padding: 6px 8px;
+            font-size: 14px;
+        }
+    }
+}
+
+.ProgramDetail-week {
+
+    .title {
+        font-size: 16px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 12px;
+        margin: 0;
+        margin-top: 5px;
+        background-color: #fff;
+        font-weight: 400;
+        border-bottom: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+}
+
+.days-container {
+    display: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+
+    &.expanded {
+        display: flex;
+    }
+}
+
+.ProgramDetail-day {
+    margin-top: 10px;
+    width: 100%;
+    border-collapse: collapse;
+
+    @media all and (min-width: 768px) {
+        max-width: 300px;
+        margin: 10px 5px 0 5px;
+    }
+
+    td, th {
+        border: 1px solid #aaa;
+    }
+
+    .day-number {
+        font-weight: 800;
+        padding: 12px;
+        background-color: #ffc677;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .sets-reps-rest {
+        background-color: #fff;
+
+        div {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            font-size: 12px;
+        }
+    }
+
+    .labels {
+        background-color: #fff;
+
+        th {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 12px;
+            padding: 8px;
+        }
+    }
+
+    .exercise-name,
+    .exercise-weight,
+    .exercise-difficulty {
+        background-color: #fff;
+        font-size: 12px;
+        text-align: center;
+        padding: 8px;
+    }
+
+    .exercise-weight {
+        font-style: italic;
+    }
+
+    .exercise-difficulty {
+        padding: 0;
+
+        select {
+            padding: 8px;
+            width: 100%;
+            border: none;
+            background-color: #fff;
+        }
+    }
+}
