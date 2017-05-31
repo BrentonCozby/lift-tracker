@@ -5,7 +5,7 @@ require('dotenv').config()
 
 const PORT = process.env.PORT || 3005
 
-app.use(express.static('./dist')))
+app.use(express.static('./dist'))
 
 app.all('/*', (req, res) => {
     res.sendFile(resolve(__dirname, 'dist', 'index.html'))
