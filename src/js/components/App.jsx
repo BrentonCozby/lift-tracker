@@ -14,7 +14,7 @@ const App = () => (
         <MenuContainer />
         <Switch>
             <Route exact path={`${rootUrl}`} component={HomeContainer} />
-            <Route exact path={`${rootUrl}Login`} component={LoginPageContainer} />
+            <Route exact path={`${rootUrl}login`} component={LoginPageContainer} />
             <Route path={`${rootUrl}programs/:id`} exact component={ProgramDetailContainer} />
             <Route component={NoMatch}/>
         </Switch>
