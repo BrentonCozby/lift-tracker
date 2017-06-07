@@ -5,10 +5,9 @@ const OneRepMaxes = ({
     maxesContainerClasses,
     oneRepMaxes,
     setOneRepMax,
-    dbref,
     expand
 }) => (
-    <div className="ProgramDetail-one-rep-maxes">
+    <div className="DUHR-one-rep-maxes">
         <h3 className="title" onClick={expand}>one rep maxes</h3>
         <div className={maxesContainerClasses}>
             {oneRepMaxes && oneRepMaxes.map((max, maxIndex) => (

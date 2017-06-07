@@ -15,6 +15,8 @@ export default function(state = INITAL_STATE, action) {
             return {...state, titles: titles}
         case 'GET_ONE_PROGRAM':
             return {...state, current: action.payload}
+        case 'NULLIFY_CURRENT_PROGRAM':
+            return {...state, current: null}
         default:
             return state
     }

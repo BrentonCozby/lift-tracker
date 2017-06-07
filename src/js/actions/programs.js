@@ -1,6 +1,6 @@
 import {
     createProgram,
-    programsRef,
+    db,
     getOneProgram
 } from '../firebase.js'
 
@@ -8,44 +8,88 @@ export function saveNewProgram(programData) {
     return dispatch => createProgram(programData)
 }
 
-export function updateProgram(dbref, data) {
+export function updateProgram(userId, programId, location, data) {
+    db.ref(`users/${userId}/programs/${programId}${(location) ? '/' + location : ''}`).update(data)
+    return {type: null}
+}
+
+export function setProgramValue(userId, programId, location, value) {
+    db.ref(`users/${userId}/programs/${programId}/${location}`).set(value)
+    return {type: null}
+}
+
+export function nullifyCurrentProgram() {
     return dispatch => {
-        programsRef.child(dbref).update(data)
+        dispatch({type: 'NULLIFY_CURRENT_PROGRAM'})
     }
 }
 
-export function setProgramValue(dbref, value) {
-    return dispatch => {
-        programsRef.child(dbref).set(value)
-    }
+function saveProgramToUser(userId, programId) {
+    return new Promise((resolve, reject) => {
+        db.ref(`users/${userId}/programs/${programId}`).once('value', snapshot => {
+            if(!snapshot.val()) {
+                db.ref(`programs/${programId}`).once('value', program => {
+                    db.ref(`users/${userId}/programs/${programId}`).set(program.val())
+                    setCurrentProgram(userId, programId)
+                })
+                resolve(null)
+            }
+            else {
+                resolve(snapshot.val())
+            }
+        })
+    })
 }
 
-export function listenForProgramsEdit() {
+export function getProgramTitles() {
     return dispatch => {
-        programsRef.on('value', snapshot => {
-            if(!snapshot.val()) return false
+        db.ref(`programs`).once('value', snapshot => {
+            if(!snapshot) return false
             dispatch({
                 type: 'GET_PROGRAM_TITLES',
-                payload: snapshot.val()
+                payload: {...snapshot.val()}
             })
         })
     }
 }
 
-export function listenForCurrentProgramEdit(id) {
+
+export function setCurrentProgram(userId, programId) {
+    const getProgram = saveProgramToUser(userId, programId)
+
     return dispatch => {
-        programsRef.child(id).on('value', snapshot => {
-            if(!snapshot.val()) return false
+        getProgram.then(program => {
+            if(program) {
+                dispatch({
+                    type: 'GET_ONE_PROGRAM',
+                    payload: {...program, id: programId}
+                })
+            }
+            else {
+                saveProgramToUser(userId, programId).then(program => {
+                    dispatch({
+                        type: 'GET_ONE_PROGRAM',
+                        payload: {...program, id: programId}
+                    })
+                })
+            }
+        })
+    }
+}
+
+export function listenForCurrentProgramEdit(userId, programId) {
+    return dispatch => {
+        db.ref(`users/${userId}/programs/${programId}`).on('value', snapshot => {
+            if(!snapshot) return false
             dispatch({
                 type: 'GET_ONE_PROGRAM',
-                payload: snapshot.val()
+                payload: {...snapshot.val(), id: programId}
             })
         })
     }
 }
 
-export function stopListeningCurrentProgramEdit(id) {
-    return dispatch => {
-        programsRef.child(id).off('value')
-    }
+export function stopListeningToCurrentProgram(userId) {
+    db.ref(`users/${userId}/programs`).off()
+    return {type: null}
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setProgramValue } from '../actions/programs.js'
+import { setProgramValue } from '../../actions/programs.js'
 
-import Day from '../components/Day.jsx'
+import Day from '../../components/DUHR/Day.jsx'
 
 class DayContainer extends Component {
 
@@ -15,7 +15,8 @@ class DayContainer extends Component {
 
 const mapStateToProps = function(state) {
     return {
-
+        userId: state.user.uid,
+        programId: state.programs.current.id
     }
 }
 

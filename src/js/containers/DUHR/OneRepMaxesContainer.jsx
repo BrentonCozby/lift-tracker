@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateProgram } from '../actions/programs.js'
 import classnames from 'classnames'
+import { updateProgram } from '../../actions/programs.js'
 
-import OneRepMaxes from '../components/OneRepMaxes.jsx'
+import OneRepMaxes from '../../components/DUHR/OneRepMaxes.jsx'
 
 class OneRepMaxesContainer extends Component {
 
@@ -16,7 +16,8 @@ class OneRepMaxesContainer extends Component {
     }
 
     setOneRepMax = (e) => {
-        const updated = {...this.props.currentProgram}
+        const updatedProgram = {...this.props.currentProgram}
+        delete updatedProgram.id
         const newMax = e.target.value
         const location = e.target.dataset.location
 
@@ -26,18 +27,18 @@ class OneRepMaxesContainer extends Component {
                 this.props.currentProgram.oneRepMaxes.forEach((max, maxIndex) => {
                     if(max.name === exercise.name && +location === +maxIndex) {
                         const firstWeight = Math.round(+newMax * +day.firstWeightFactor)
-                        updated.oneRepMaxes[maxIndex].oneRepMax = (+newMax === 0) ? '' : +newMax
-                        updated.plan[0][dayIndex].exercises[exerciseIndex].weight = firstWeight
+                        updatedProgram.oneRepMaxes[maxIndex].oneRepMax = (+newMax === 0) ? '' : +newMax
+                        updatedProgram.plan[0][dayIndex].exercises[exerciseIndex].weight = firstWeight
                     }
                 })
             })
         })
 
-        this.props.updateProgram(this.props.dbref, updated)
+        this.props.updateProgram(this.props.userId, this.props.currentProgram.id, null, updatedProgram)
     }
 
     render() {
-        const { dbref, currentProgram } = this.props
+        const { currentProgram } = this.props
 
         const maxesContainerClasses = classnames({
             'one-rep-maxes-container': true,
@@ -46,7 +47,6 @@ class OneRepMaxesContainer extends Component {
 
         return (
             <OneRepMaxes
-                dbref={dbref}
                 expand={this.expand}
                 setOneRepMax={this.setOneRepMax}
                 oneRepMaxes={currentProgram && currentProgram.oneRepMaxes}
@@ -58,7 +58,8 @@ class OneRepMaxesContainer extends Component {
 
 const mapStateToProps = function(state) {
     return {
-        currentProgram: state.programs.current
+        currentProgram: state.programs.current,
+        userId: state.user.uid
     }
 }
 

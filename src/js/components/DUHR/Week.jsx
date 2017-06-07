@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 
-import DayContainer from '../containers/DayContainer.jsx'
+import DayContainer from '../../containers/DUHR/DayContainer.jsx'
 
 class Week extends Component {
 
@@ -22,14 +22,14 @@ class Week extends Component {
         })
 
         return (
-            <div className="ProgramDetail-week">
+            <div className="DUHR-week">
                 <h3
                     className="title"
                     onClick={this.expand}>
                     Week {weekIndex + 1}
                 </h3>
                 <div className={daysContainerClasses}>
-                    {days.map((day, index) => (
+                    {days && days.map((day, index) => (
                         <DayContainer
                             {...day}
                             dbref={`${dbref}/${index}`}

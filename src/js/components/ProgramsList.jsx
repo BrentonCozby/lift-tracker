@@ -1,5 +1,5 @@
 import React from 'react'
-import ProgramCard from './ProgramCard.jsx'
+import ProgramCardContainer from '../containers/ProgramCardContainer.jsx'
 
 const ProgramsList = ({
     programTitles,
@@ -20,8 +20,8 @@ const ProgramsList = ({
                 {programTitles.map(program => (
                     <tr key={program.id}>
                         <td>
-                            <ProgramCard
-                                id={program.id}
+                            <ProgramCardContainer
+                                programId={program.id}
                                 title={program.title}
                             />
                         </td>

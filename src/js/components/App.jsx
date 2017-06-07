@@ -9,13 +9,15 @@ import HomeContainer from '../containers/HomeContainer.jsx'
 import LoginPageContainer from '../containers/LoginPageContainer.jsx'
 import ProgramDetailContainer from '../containers/ProgramDetailContainer.jsx'
 
-const App = () => (
+const App = ({ isLoggedIn }) => (
     <div className="App">
         <MenuContainer />
         <Switch>
             <Route exact path={`${rootUrl}`} component={HomeContainer} />
             <Route exact path={`${rootUrl}login`} component={LoginPageContainer} />
-            <Route path={`${rootUrl}programs/:id`} exact component={ProgramDetailContainer} />
+            <Route path={`${rootUrl}programs/:id`} exact component={({ match }) => {
+                return <ProgramDetailContainer programId={match.params.id} />
+            }} />
             <Route component={NoMatch}/>
         </Switch>
         <Footer />

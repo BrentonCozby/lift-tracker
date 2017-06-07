@@ -3,6 +3,8 @@ import React from 'react'
 const Day = ({
     setProgramValue,
     dayIndex,
+    userId,
+    programId,
     dbref,
     sets,
     reps,
@@ -10,11 +12,11 @@ const Day = ({
     exercises
 }) => {
     const setDifficulty = function(e) {
-        setProgramValue(e.target.dataset.dbref, e.target.value)
+        setProgramValue(userId, programId, e.target.dataset.dbref, e.target.value)
     }
 
     return (
-        <table className="ProgramDetail-day">
+        <table className="DUHR-day">
             <thead>
                 <tr>
                     <th className="day-number" colSpan="3">

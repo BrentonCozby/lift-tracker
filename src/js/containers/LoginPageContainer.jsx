@@ -18,7 +18,7 @@ class LoginPageContainer extends Component {
     }
 
     componentDidUpdate() {
-        if(!this.state.isLoading && this.props.uid) {
+        if(!this.state.isLoading && this.props.uid && this.props.history) {
             this.props.history.push(rootUrl)
         }
     }
