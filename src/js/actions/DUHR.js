@@ -29,16 +29,25 @@ export function calcNextWeights(userId, programId, plan) {
                     difficulty: undefined
                 }
 
-                if(weekIndex === plan.length - 2) {
+                // if it is first week and only week
+                if(weekIndex === 0 && plan.length === 1) {
                     newNextExercise.difficulty = ''
                 }
-                else if(plan[weekIndex + 1][dayIndex]) {
+                // if the next day exists
+                else if(plan[weekIndex + 1] && plan[weekIndex + 1][dayIndex]) {
                     plan[weekIndex + 1][dayIndex].exercises.forEach(nextExercise => {
                         if(nextExercise.name === currentExercise.name) {
                             newNextExercise.difficulty = nextExercise.difficulty
                         }
                     })
+                    if(newNextExercise.difficulty === undefined) {
+                        newNextExercise.difficulty = ''
+                    }
                 }
+                else {
+                    newNextExercise.difficulty = ''
+                }
+
 
                 newNextExercise.weight = (() => {
                     switch(currentExercise.difficulty) {
@@ -66,6 +75,52 @@ export function calcNextWeights(userId, programId, plan) {
 
     // update database
     db.ref(`users/${userId}/programs/${programId}/plan/`).update(newPlan)
+
+    return {type: null}
+}
+
+export function setOneRepMax(params) {
+    const { userId, programId, currentProgram, newMax, location } = params
+
+    const updatedProgram = {...currentProgram}
+
+    // set first week weights from one-rep-maxes
+    currentProgram.plan[0].forEach((day, dayIndex) => {
+        day.exercises.forEach((exercise, exerciseIndex) => {
+            currentProgram.oneRepMaxes.forEach((max, maxIndex) => {
+                if(max.name === exercise.name && +location === +maxIndex) {
+                    const firstWeight = Math.round(+newMax * +day.firstWeightFactor)
+                    updatedProgram.oneRepMaxes[maxIndex].oneRepMax = (+newMax === 0) ? '' : +newMax
+                    updatedProgram.plan[0][dayIndex].exercises[exerciseIndex].weight = firstWeight
+                }
+            })
+        })
+    })
+
+    db.ref(`users/${userId}/programs/${programId}`).update(updatedProgram)
+
+    return {type: null}
+}
+
+export function setExerciseName(params) {
+    const { userId, programId, currentProgram, newName, location } = params
+
+    const updatedProgram = {...currentProgram}
+
+    updatedProgram.oneRepMaxes[location].name = newName
+
+    // set first week weights from one-rep-maxes
+    currentProgram.plan.forEach((week, weekIndex) => {
+        week.forEach((day, dayIndex) => {
+            day.exercises.forEach((exercise, exerciseIndex) => {
+                if(location === exerciseIndex) {
+                    updatedProgram.plan[weekIndex][dayIndex].exercises[exerciseIndex].name = newName
+                }
+            })
+        })
+    })
+
+    db.ref(`users/${userId}/programs/${programId}`).update(updatedProgram)
 
     return {type: null}
 }

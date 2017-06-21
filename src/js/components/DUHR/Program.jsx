@@ -3,15 +3,13 @@ import Week from './Week.jsx'
 import OneRepMaxesContainer from '../../containers/DUHR/OneRepMaxesContainer.jsx'
 
 const DUHR = ({
-    title,
-    plan,
-    oneRepMaxes,
-    updates,
-    setProgramValue
+    currentProgram
 }) => {
+    const { plan } = currentProgram
+
     return (
         <div className="DUHR">
-            <OneRepMaxesContainer />
+            <OneRepMaxesContainer currentProgram={currentProgram} />
             {plan && plan.map((week, index) => (
                 <Week
                     dbref={`plan/${index}`}

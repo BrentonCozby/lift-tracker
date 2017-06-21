@@ -70,9 +70,6 @@ export default {
                             limit: 40000,
                             name: '[path][name].[ext]'
                         }
-                    }, {
-                        loader: 'image-webpack-loader',
-                        options: {}
                     }
                 ]
             }

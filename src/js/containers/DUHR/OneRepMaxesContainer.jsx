@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
+import escape from 'escape-html'
+import { setOneRepMax, setExerciseName } from '../../actions/DUHR.js'
 import { updateProgram } from '../../actions/programs.js'
-
 import OneRepMaxes from '../../components/DUHR/OneRepMaxes.jsx'
 
 class OneRepMaxesContainer extends Component {
@@ -15,21 +16,53 @@ class OneRepMaxesContainer extends Component {
         this.setState({ isExpanded: !this.state.isExpanded })
     }
 
-    setOneRepMax = (e) => {
-        const updatedProgram = {...this.props.currentProgram}
-        delete updatedProgram.id
-        const newMax = e.target.value
-        const location = e.target.dataset.location
+    setOneRepMax = e => {
+        const programWithoutId = {...this.props.currentProgram}
+        delete programWithoutId.id
 
-        // set first week weights from one-rep-maxes
-        this.props.currentProgram.plan[0].forEach((day, dayIndex) => {
-            day.exercises.forEach((exercise, exerciseIndex) => {
-                this.props.currentProgram.oneRepMaxes.forEach((max, maxIndex) => {
-                    if(max.name === exercise.name && +location === +maxIndex) {
-                        const firstWeight = Math.round(+newMax * +day.firstWeightFactor)
-                        updatedProgram.oneRepMaxes[maxIndex].oneRepMax = (+newMax === 0) ? '' : +newMax
-                        updatedProgram.plan[0][dayIndex].exercises[exerciseIndex].weight = firstWeight
-                    }
+        const params = {
+            userId: this.props.userId,
+            programId: this.props.currentProgram.id,
+            currentProgram: programWithoutId,
+            newMax: +e.target.value,
+            location: +e.target.dataset.location
+        }
+
+        this.props.setOneRepMax(params)
+    }
+
+    setExerciseName = e => {
+        const programWithoutId = {...this.props.currentProgram}
+        delete programWithoutId.id
+
+        const params = {
+            userId: this.props.userId,
+            programId: this.props.currentProgram.id,
+            currentProgram: programWithoutId,
+            newName: escape(e.target.value),
+            location: +e.target.dataset.location
+        }
+
+        this.props.setExerciseName(params)
+    }
+
+    addExercise = () => {
+        const updatedProgram = {...this.props.currentProgram}
+        // delete the id because we don't want to store that in the database
+        delete updatedProgram.id
+
+        // add new exercise to one rep maxes
+        updatedProgram.oneRepMaxes.push({name: '', oneRepMax: 0})
+
+        // add new exercise to each day in the plan
+        updatedProgram.plan.forEach((week, weekIndex) => {
+            week.forEach((day, dayIndex) => {
+                const diff = day.exercises[0].diff
+                updatedProgram.plan[weekIndex][dayIndex].exercises.push({
+                    diff: diff,
+                    difficulty: '',
+                    name: '',
+                    weight: 0
                 })
             })
         })
@@ -49,6 +82,8 @@ class OneRepMaxesContainer extends Component {
             <OneRepMaxes
                 expand={this.expand}
                 setOneRepMax={this.setOneRepMax}
+                addExercise={this.addExercise}
+                setExerciseName={this.setExerciseName}
                 oneRepMaxes={currentProgram && currentProgram.oneRepMaxes}
                 maxesContainerClasses={maxesContainerClasses}
             />
@@ -58,11 +93,12 @@ class OneRepMaxesContainer extends Component {
 
 const mapStateToProps = function(state) {
     return {
-        currentProgram: state.programs.current,
         userId: state.user.uid
     }
 }
 
 export default connect(mapStateToProps, {
+    setOneRepMax,
+    setExerciseName,
     updateProgram
 })(OneRepMaxesContainer)

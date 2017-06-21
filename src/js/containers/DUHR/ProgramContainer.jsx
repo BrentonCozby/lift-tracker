@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
     listenForCurrentProgramEdit,
-    stopListeningToCurrentProgram,
-    nullifyCurrentProgram,
-    setProgramValue
+    stopListeningToCurrentProgram
 } from '../../actions/programs.js'
 import {
     calcNextWeights
@@ -30,12 +28,16 @@ class ProgramContainer extends Component {
         }
     }
 
+    componentWillUnmount(){
+        this.props.stopListeningToCurrentProgram(this.props.userId)
+    }
+
     render() {
         const { userId, currentProgram } = this.props
+
         return (
             <Program
-                {...this.props.currentProgram}
-                setProgramValue={this.props.setProgramValue}
+                currentProgram={this.props.currentProgram}
             />
         )
     }
@@ -51,7 +53,5 @@ const mapStateToProps = function(state) {
 export default connect(mapStateToProps, {
     listenForCurrentProgramEdit,
     stopListeningToCurrentProgram,
-    nullifyCurrentProgram,
-    setProgramValue,
     calcNextWeights
 })(ProgramContainer)

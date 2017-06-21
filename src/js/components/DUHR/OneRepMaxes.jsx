@@ -5,6 +5,8 @@ const OneRepMaxes = ({
     maxesContainerClasses,
     oneRepMaxes,
     setOneRepMax,
+    setExerciseName,
+    addExercise,
     expand
 }) => (
     <div className="DUHR-one-rep-maxes">
@@ -12,8 +14,15 @@ const OneRepMaxes = ({
         <div className={maxesContainerClasses}>
             {oneRepMaxes && oneRepMaxes.map((max, maxIndex) => (
                 <div key={maxIndex} className="form-input">
-                    <label>{max.name}</label>
                     <input
+                        className="name"
+                        type="text"
+                        value={max.name}
+                        onChange={setExerciseName}
+                        data-location={maxIndex}
+                    />
+                    <input
+                        className="weight"
                         type="number"
                         value={max.oneRepMax}
                         onChange={setOneRepMax}
@@ -21,6 +30,9 @@ const OneRepMaxes = ({
                     />
                 </div>
             ))}
+            <div className="form-input">
+                <button onClick={addExercise} className="add-exercise">+ Add Exercise</button>
+            </div>
         </div>
     </div>
 )
