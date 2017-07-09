@@ -11,6 +11,6 @@ app.all('/*', (req, res) => {
     res.sendFile(resolve(__dirname, 'dist', 'index.html'))
 })
 
-app.listen(PORT, () => {
+app.listen(PORT, function() {
     console.log(`Listening on port ${PORT}...`);
 })
