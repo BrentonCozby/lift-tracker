@@ -25,6 +25,7 @@ const Menu = ({
                     ? <a className="Menu-item" onClick={logoutOfFirebase}>Logout</a>
                     : <Link className="Menu-item" onClick={toggleMenu} to={`${rootUrl}login`}>Login</Link>
                 }
+                <Link to={`${rootUrl}payment`}>Payment Form</Link>
                 {isLoggedIn && <p className="username">Logged in as {username}</p>}
             </div>
         </div>

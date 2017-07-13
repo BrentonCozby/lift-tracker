@@ -7,6 +7,7 @@ import {
 import merge from 'webpack-merge'
 import HtmlPlugin from 'html-webpack-plugin'
 import CopyPlugin from 'copy-webpack-plugin'
+require('dotenv').config()
 
 import { Dir, rootUrl, title, description, site_url } from '../config.js'
 import devConfig from './dev.js'
@@ -50,7 +51,8 @@ let common = {
         }),
         new DefinePlugin({
             'process.env': {
-               'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+               'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+               'perishable_key': JSON.stringify(process.env.perishable_key)
             }
         }),
         new CopyPlugin([
