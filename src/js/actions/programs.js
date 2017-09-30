@@ -1,11 +1,10 @@
 import {
     createProgram,
-    db,
-    getOneProgram
+    db
 } from '../firebase.js'
 
 export function saveNewProgram(programData) {
-    return dispatch => createProgram(programData)
+    return () => createProgram(programData)
 }
 
 export function updateProgram(userId, programId, location, data) {
@@ -25,7 +24,7 @@ export function nullifyCurrentProgram() {
 }
 
 function saveProgramToUser(userId, programId) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         db.ref(`users/${userId}/programs/${programId}`).once('value', snapshot => {
             if(!snapshot.val()) {
                 db.ref(`programs/${programId}`).once('value', program => {
@@ -43,7 +42,7 @@ function saveProgramToUser(userId, programId) {
 
 export function getProgramTitles() {
     return dispatch => {
-        db.ref(`programs`).once('value', snapshot => {
+        db.ref('programs').once('value', snapshot => {
             if(!snapshot) return false
             dispatch({
                 type: 'GET_PROGRAM_TITLES',

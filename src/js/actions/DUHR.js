@@ -7,7 +7,6 @@ export function calcNextWeights(userId, programId, plan) {
     plan.forEach((week, weekIndex) => {
         week.forEach((day, dayIndex) => {
             if(!day.exercises) {
-                console.log(`No exercises exist yet for this day: ${dayIndex}, week: ${weekIndex}`)
                 return false
             }
 
@@ -22,7 +21,7 @@ export function calcNextWeights(userId, programId, plan) {
             nextDay.exercises = []
 
             // create the next day, with calculated weights from same day last week
-            day.exercises.forEach((currentExercise, exerciseIndex) => {
+            day.exercises.forEach((currentExercise) => {
                 const newNextExercise = {
                     diff: currentExercise.diff,
                     name: currentExercise.name,

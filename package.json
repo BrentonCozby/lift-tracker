@@ -39,6 +39,8 @@
         "copy-webpack-plugin": "^4.0.1",
         "cross-env": "^4.0.0",
         "css-loader": "^0.28.0",
+        "eslint": "^4.8.0",
+        "eslint-plugin-react": "^7.4.0",
         "extract-text-webpack-plugin": "^2.1.0",
         "favicons-webpack-plugin": "^0.0.7",
         "file-loader": "^0.11.1",

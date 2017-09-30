@@ -1,7 +1,7 @@
 import * as firebase from '../firebase.js'
 
 export function firebaseLoginRedirect(loginMethod) {
-    return dispatch => firebase.loginRedirect(loginMethod)
+    return () => firebase.loginRedirect(loginMethod)
 }
 
 export function retrieveLoginResult() {
