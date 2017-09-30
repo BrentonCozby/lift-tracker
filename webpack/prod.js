@@ -3,13 +3,13 @@ import {
     optimize
 } from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import ChunkManifestPlugin from "chunk-manifest-webpack-plugin"
-import WebpackChunkHash from "webpack-chunk-hash"
+import ChunkManifestPlugin from 'chunk-manifest-webpack-plugin'
+import WebpackChunkHash from 'webpack-chunk-hash'
 import ResourceHintsPlugin from 'resource-hints-webpack-plugin'
 import FaviconsPlugin from 'favicons-webpack-plugin'
 import { resolve } from 'path'
 
-import { Dir, rootUrl, title } from '../config.js'
+import { Dir, title } from '../config.js'
 
 export default {
     entry: {
@@ -103,8 +103,8 @@ export default {
             minChunks: Infinity
         }),
         new ChunkManifestPlugin({
-            filename: "chunk-manifest.json",
-            manifestVariable: "webpackManifest"
+            filename: 'chunk-manifest.json',
+            manifestVariable: 'webpackManifest'
         }),
         new ResourceHintsPlugin(),
         new HashedModuleIdsPlugin(),
