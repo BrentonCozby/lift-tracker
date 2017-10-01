@@ -71,23 +71,23 @@ export function onAuthStateChanged() {
                     })
                 }
             })
-            .then(snapshot => {
-                if(snapshot.val() && snapshot.val()[user.uid]) {
-                    resolve({
-                        data: {...snapshot.val()[user.uid]},
-                        uid: user.uid
-                    })
-                }
-                // if new user is created, another snapshot is required to get new data
-                else {
-                    usersRef.once('value', snapshot => {
+                .then(snapshot => {
+                    if(snapshot.val() && snapshot.val()[user.uid]) {
                         resolve({
                             data: {...snapshot.val()[user.uid]},
                             uid: user.uid
                         })
-                    })
-                }
-            })
+                    }
+                    // if new user is created, another snapshot is required to get new data
+                    else {
+                        usersRef.once('value', snapshot => {
+                            resolve({
+                                data: {...snapshot.val()[user.uid]},
+                                uid: user.uid
+                            })
+                        })
+                    }
+                })
         })
     })
 

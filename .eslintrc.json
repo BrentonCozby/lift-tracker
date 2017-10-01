@@ -17,6 +17,10 @@
         "react"
     ],
     "rules": {
+        "indent": [
+            "error",
+            4
+        ],
         "linebreak-style": [
             "error",
             "unix"
@@ -29,6 +33,6 @@
             "error",
             "never"
         ],
-        "no-case-declarations": "off"
+        "no-fallthrough": "off"
     }
 }

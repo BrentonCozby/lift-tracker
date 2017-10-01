@@ -5,19 +5,20 @@ const INITAL_STATE = {
 
 export default function(state = INITAL_STATE, action) {
     switch(action.type) {
-        case 'GET_PROGRAM_TITLES':
-            const titles = Object.keys(action.payload).map(id => {
-                return {
-                    title: action.payload[id].title,
-                    id: id
-                }
-            })
-            return {...state, titles: titles}
-        case 'GET_ONE_PROGRAM':
-            return {...state, current: action.payload}
-        case 'NULLIFY_CURRENT_PROGRAM':
-            return {...state, current: null}
-        default:
-            return state
+    case 'GET_PROGRAM_TITLES': {
+        const titles = Object.keys(action.payload).map(id => {
+            return {
+                title: action.payload[id].title,
+                id: id
+            }
+        })
+        return { ...state, titles: titles }
+    }    
+    case 'GET_ONE_PROGRAM':
+        return {...state, current: action.payload}
+    case 'NULLIFY_CURRENT_PROGRAM':
+        return {...state, current: null}
+    default:
+        return state
     }
 }

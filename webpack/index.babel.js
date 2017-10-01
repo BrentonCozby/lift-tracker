@@ -49,8 +49,8 @@ let common = {
         }),
         new DefinePlugin({
             'process.env': {
-               'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-               'perishable_key': JSON.stringify(process.env.perishable_key)
+                'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+                'perishable_key': JSON.stringify(process.env.perishable_key)
             }
         }),
         new CopyPlugin([

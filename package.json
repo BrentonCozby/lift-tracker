@@ -7,7 +7,8 @@
     "license": "MIT",
     "scripts": {
         "dev": "cross-env NODE_ENV=development webpack-dev-server --env=dev --config ./webpack/index.babel.js",
-        "prod": "rimraf dist && cross-env NODE_ENV=production webpack -p --env=prod --config ./webpack/index.babel.js --progress --profile --colors"
+        "prod": "rimraf dist && cross-env NODE_ENV=production webpack -p --env=prod --config ./webpack/index.babel.js --progress --profile --colors",
+        "eslint": "eslint"
     },
     "dependencies": {
         "babel-polyfill": "^6.23.0",

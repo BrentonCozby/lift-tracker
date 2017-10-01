@@ -10,19 +10,21 @@ const INITAL_STATE = {
 
 export default function(state = INITAL_STATE, action) {
     switch(action.type) {
-        case 'GET_USER_DATA':
-            const { data, uid } = action.payload
-            return {...state,
-                uid,
-                username: data.username,
-                programs: cloneDeep(data.programs),
-                isAdmin: data.isAdmin
-            }
-        case 'RETRIEVE_LOGIN_RESULT':
-            return {...state, token: action.payload.credential.accessToken}
-        case 'LOGOUT':
-            return {...state, uid: null, username: null, token: null}
-        default:
-            return state
+    case 'GET_USER_DATA': {
+        const { data, uid } = action.payload
+        return {
+            ...state,
+            uid,
+            username: data.username,
+            programs: cloneDeep(data.programs),
+            isAdmin: data.isAdmin
+        }
+    }
+    case 'RETRIEVE_LOGIN_RESULT':
+        return {...state, token: action.payload.credential.accessToken}
+    case 'LOGOUT':
+        return {...state, uid: null, username: null, token: null}
+    default:
+        return state
     }
 }

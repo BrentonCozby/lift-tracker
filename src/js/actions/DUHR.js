@@ -50,12 +50,12 @@ export function calcNextWeights(userId, programId, plan) {
 
                 newNextExercise.weight = (() => {
                     switch(currentExercise.difficulty) {
-                        case 'easy':
-                            return +currentExercise.weight + +currentExercise.diff
-                        case 'ok':
-                            return +currentExercise.weight
-                        case 'difficult':
-                            return +currentExercise.weight - +currentExercise.diff
+                    case 'easy':
+                        return +currentExercise.weight + +currentExercise.diff
+                    case 'ok':
+                        return +currentExercise.weight
+                    case 'difficult':
+                        return +currentExercise.weight - +currentExercise.diff
                     }
                 })()
 

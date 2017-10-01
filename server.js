@@ -11,6 +11,7 @@ app.all('/*', (req, res) => {
     res.sendFile(resolve(__dirname, 'dist', 'index.html'))
 })
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
+    // eslint-disable-next-line no-console
     console.log(`Listening on port ${PORT}...`)
 })
