@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { rootUrl } from '../../../config.js'
+import { PP } from '../../../config.js'
 import { StripeProvider } from 'react-stripe-elements'
 
 import MenuContainer from '../containers/MenuContainer.jsx'
@@ -16,12 +16,12 @@ const App = ({ isLoggedIn }) => (
         <div className="App">
             <MenuContainer />
             <Switch>
-                <Route exact path={`${rootUrl}`} component={HomeContainer} />
-                <Route exact path={`${rootUrl}login`} component={LoginPageContainer} />
-                <Route path={`${rootUrl}programs/:id`} exact component={({ match }) => {
+                <Route exact path={`${PP}`} component={HomeContainer} />
+                <Route exact path={`${PP}login`} component={LoginPageContainer} />
+                <Route path={`${PP}programs/:id`} exact component={({ match }) => {
                     return <ProgramDetailContainer programId={match.params.id} />
                 }} />
-                <Route exact path={`${rootUrl}payment`} component={PaymentForm} />
+                <Route exact path={`${PP}payment`} component={PaymentForm} />
                 <Route component={NoMatch}/>
             </Switch>
             <Footer />

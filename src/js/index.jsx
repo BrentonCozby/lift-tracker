@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { AppContainer as ReactHotLoader } from 'react-hot-loader'
 
-import { rootUrl } from '../../config.js'
+import { PP } from '../../config.js'
 import configStore from './store.js'
 import AppContainer from './containers/AppContainer.jsx'
 import '../scss/index.scss'
@@ -27,7 +27,7 @@ const render = (Component) => {
             <ReactHotLoader>
                 <Provider store={store}>
                     <Router>
-                        <Route path={rootUrl} component={Component} />
+                        <Route path={`${PP}`} component={Component} />
                     </Router>
                 </Provider>
             </ReactHotLoader>,
@@ -36,7 +36,7 @@ const render = (Component) => {
         ReactDOM.render(
             <Provider store={store}>
                 <Router>
-                    <Route path={rootUrl} component={Component} />
+                    <Route path={`${PP}`} component={Component} />
                 </Router>
             </Provider>,
         document.getElementById('root'))

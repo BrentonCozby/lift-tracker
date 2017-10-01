@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve, sep } from 'path'
 import {
     DefinePlugin
 } from 'webpack'
@@ -7,7 +7,7 @@ import HtmlPlugin from 'html-webpack-plugin'
 import CopyPlugin from 'copy-webpack-plugin'
 require('dotenv').config()
 
-import { Dir, rootUrl, title, description, site_url } from '../config.js'
+import { Dir, PP, title, description, site_url } from '../config.js'
 import devConfig from './dev.js'
 import prodConfig from './prod.js'
 
@@ -17,7 +17,7 @@ const env = (TARGET === 'dev') ? 'dev' : 'prod'
 let common = {
     output: {
         path: Dir.dist,
-        publicPath: rootUrl
+        publicPath: sep + PP
     },
     module: {
         rules: [

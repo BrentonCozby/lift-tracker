@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { rootUrl } from '../../../config.js'
+import { PP } from '../../../config.js'
 
 const Menu = ({
     toggleMenu,
@@ -20,12 +20,12 @@ const Menu = ({
                 <span className="bar"></span>
             </div>
             <div className={menuClasses}>
-                <Link className="Menu-item" onClick={toggleMenu} to={`${rootUrl}`}>Home</Link>
+                <Link className="Menu-item" onClick={toggleMenu} to={`${PP}`}>Home</Link>
                 {(isLoggedIn)
                     ? <a className="Menu-item" onClick={logoutOfFirebase}>Logout</a>
-                    : <Link className="Menu-item" onClick={toggleMenu} to={`${rootUrl}login`}>Login</Link>
+                    : <Link className="Menu-item" onClick={toggleMenu} to={`${PP}login`}>Login</Link>
                 }
-                <Link to={`${rootUrl}payment`}>Payment Form</Link>
+                <Link to={`${PP}payment`}>Payment Form</Link>
                 {isLoggedIn && <p className="username">Logged in as {username}</p>}
             </div>
         </div>

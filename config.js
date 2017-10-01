@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 
-export const rootUrl = (process.env.NODE_ENV === 'production')
+export const PP = (process.env.NODE_ENV === 'production')
     ? '/lift-tracker/'
     : '/'
 

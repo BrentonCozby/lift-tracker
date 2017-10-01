@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { firebaseLoginRedirect, retrieveLoginResult } from '../actions/user.js'
-import { rootUrl } from '../../../config.js'
+import { PP } from '../../../config.js'
 
 import LoginPage from '../components/LoginPage.jsx'
 
@@ -19,7 +19,7 @@ class LoginPageContainer extends Component {
 
     componentDidUpdate() {
         if(!this.state.isLoading && this.props.uid && this.props.history) {
-            this.props.history.push(rootUrl)
+            this.props.history.push(`${PP}`)
         }
     }
 
