@@ -27,7 +27,7 @@ const render = (Component) => {
             <ReactHotLoader>
                 <Provider store={store}>
                     <Router>
-                        <Route path={`${PP}`} component={Component} />
+                        <Route path={PP} component={Component} />
                     </Router>
                 </Provider>
             </ReactHotLoader>,
@@ -36,7 +36,7 @@ const render = (Component) => {
         ReactDOM.render(
             <Provider store={store}>
                 <Router>
-                    <Route path={`${PP}`} component={Component} />
+                    <Route path={PP} component={Component} />
                 </Router>
             </Provider>,
         document.getElementById('root'))

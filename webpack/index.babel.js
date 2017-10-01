@@ -1,4 +1,4 @@
-import { resolve, sep } from 'path'
+import { resolve } from 'path'
 import {
     DefinePlugin
 } from 'webpack'
@@ -17,7 +17,7 @@ const env = (TARGET === 'dev') ? 'dev' : 'prod'
 let common = {
     output: {
         path: Dir.dist,
-        publicPath: sep + PP
+        publicPath: PP
     },
     module: {
         rules: [

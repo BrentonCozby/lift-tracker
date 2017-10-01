@@ -1,4 +1,4 @@
-import { resolve, sep } from 'path'
+import { resolve } from 'path'
 import {
     HotModuleReplacementPlugin,
     NamedModulesPlugin
@@ -59,7 +59,7 @@ export default {
     devServer : {
         hot: true,
         contentBase: Dir.dist,
-        publicPath: sep + PP,
+        publicPath: PP,
         historyApiFallback: true
     },
     devtool: 'eval'
