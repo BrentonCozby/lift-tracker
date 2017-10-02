@@ -51,7 +51,8 @@ let common = {
             'process.env': {
                 'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
                 'perishable_key': JSON.stringify(process.env.perishable_key)
-            }
+            },
+            PP: JSON.stringify(PP)
         }),
         new CopyPlugin([
             {from: resolve(Dir.src, 'humans.txt')},

@@ -4,16 +4,17 @@
 @import "helpers";
 
 // components
-@import "Menu";
-@import "Footer";
-@import "NoMatch";
-@import "Home";
-@import "LoginPage";
-@import "ProgramsList";
-@import "ProgramDetail";
+@import "components/Menu";
+@import "components/Footer";
+@import "components/NoMatch";
+@import "components/Home";
+@import "components/LoginPage";
+@import "components/ProgramsList";
+@import "components/ProgramDetail";
+@import "components/LoadingOverlay";
 
 // programs
-@import "DUHR/index.scss";
+@import "components/programs/DUHR/index.scss";
 
 .App {
     width: 100%;

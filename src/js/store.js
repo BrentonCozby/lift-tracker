@@ -1,16 +1,20 @@
 import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import reduxPromise from 'redux-promise'
 import thunk from 'redux-thunk'
-
 import rootReducer from './reducers'
 
-const createStoreWithMiddleware = applyMiddleware(
+const composeEnhancers = composeWithDevTools({
+    // Specify here name, actionsBlacklist, actionsCreators and other options 
+})
+
+const middleware = applyMiddleware(
     reduxPromise,
     thunk
-)(createStore)
+)
 
 export default function configStore(initialState) {
-    const store = createStoreWithMiddleware(rootReducer, initialState)
+    const store = createStore(rootReducer, initialState, composeEnhancers(middleware))
 
     if (module.hot) {
         module.hot.accept('./reducers', () => {

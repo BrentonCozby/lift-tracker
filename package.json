@@ -26,6 +26,7 @@
         "react-script-loader": "0.0.1",
         "react-stripe-elements": "0.0.2",
         "redux": "^3.7.2",
+        "redux-devtools-extension": "^2.13.2",
         "redux-promise": "^0.5.3",
         "redux-thunk": "^2.2.0"
     },

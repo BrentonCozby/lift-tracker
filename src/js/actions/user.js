@@ -13,27 +13,39 @@ export function retrieveLoginResult() {
                     payload: result
                 })
             }
-            return null
+            
+            dispatch({
+                type: 'RETRIEVE_LOGIN_RESULT',
+                payload: null
+            })
         })
 }
 
 export function listenForAuthStateChanged() {
-    return dispatch => firebase.onAuthStateChanged()
-        .then(user => {
-            if(user) {
+    return dispatch => {
+        firebase.onAuthStateChanged()
+            .then(user => {
+                if (user) {
+                    dispatch({
+                        type: 'GET_USER_DATA',
+                        payload: user
+                    })
+                }
+
                 dispatch({
                     type: 'GET_USER_DATA',
-                    payload: user
+                    payload: null
                 })
-            }
-        })
+            })
+    }
 }
 
 export function logoutOfFirebase() {
     return dispatch => firebase.logout()
         .then(function() {
             dispatch({
-                type: 'LOGOUT'
+                type: 'LOGOUT',
+                payload: null
             })
         })
 }

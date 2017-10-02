@@ -24,17 +24,20 @@ export function createProgram(programData) {
 
 export function loginRedirect(loginMethod) {
     let provider = new firebase.auth[`${loginMethod}AuthProvider`]()
+    
     return new Promise((resolve) => {
         firebase.auth().signInWithRedirect(provider)
-        resolve()
+            .then(function (data) {
+                resolve(data)
+            })
     })
 }
 
 export function retrieveLoginResult() {
     return new Promise((resolve, reject) => {
         firebase.auth().getRedirectResult().then(function(result) {
-            if (!result.credential)
-                return resolve(null)
+            if (!result.credential) return resolve(null)
+            
             resolve(result)
         }).catch(function(error) {
             const errorCode = error.code
@@ -57,20 +60,25 @@ export function retrieveLoginResult() {
 export function onAuthStateChanged() {
     return new Promise((resolve) => {
         firebase.auth().onAuthStateChanged(user => {
-            if(!user) return resolve(null)
+            if (!user) {
+                resolve(null)
 
-            usersRef.once('value', snapshot => {
-                const data = snapshot.val() || {}
+                return false
+            }
 
-                if(!data[user.uid]) {
-                    db.ref('users/' + user.uid).set({
-                        programs: {},
-                        username: user.displayName,
-                        email: user.email,
-                        isAdmin: false
-                    })
-                }
-            })
+            usersRef
+                .once('value', snapshot => {
+                    const data = snapshot.val() || {}
+
+                    if(!data[user.uid]) {
+                        db.ref('users/' + user.uid).set({
+                            programs: {},
+                            username: user.displayName,
+                            email: user.email,
+                            isAdmin: false
+                        })
+                    }
+                })
                 .then(snapshot => {
                     if(snapshot.val() && snapshot.val()[user.uid]) {
                         resolve({

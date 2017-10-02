@@ -12,12 +12,28 @@ export default function(state = INITAL_STATE, action) {
                     id: id
                 }
             })
+            
             return { ...state, titles: titles }
         }    
-        case 'GET_ONE_PROGRAM':
-            return {...state, current: action.payload}
-        case 'NULLIFY_CURRENT_PROGRAM':
+        case 'GET_ONE_PROGRAM': {
+            if (!action.payload) {
+                return { ...state, current: { ...state.current } }
+            }
+
+            return { ...state, current: action.payload }
+        }
+        case 'SET_ONE_REP_MAX': {
+            return { ...state, current: { ...state.current } }
+        }
+        case 'SET_EXERCISE_NAME': {
+            return { ...state, current: { ...state.current } }
+        }
+        case 'STOP_LISTENING_TO_CURRENT_PROGRAM': {
+            return { ...state, current: null }
+        }
+        case 'NULLIFY_CURRENT_PROGRAM': {
             return {...state, current: null}
+        }
         default:
             return state
     }

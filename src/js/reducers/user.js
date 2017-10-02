@@ -1,29 +1,67 @@
 import { cloneDeep } from 'lodash'
 
 const INITAL_STATE = {
+    isLoggedIn: false,
     uid: null,
     token: null,
     username: null,
     programs: null,
-    isAdmin: false
+    isAdmin: false,
+    loadingStates: {
+        isGettingUserData: true,
+        isRetrievingLoginResult: true
+    }
 }
 
 export default function(state = INITAL_STATE, action) {
-    switch(action.type) {
+    switch (action.type) {
         case 'GET_USER_DATA': {
-            const { data, uid } = action.payload
+            const newState = {
+                ...state,
+                loadingStates: {
+                    ...state.loadingStates,
+                    isGettingUserData: false
+                }
+            }
+
+            if (action.payload) {
+                const { data, uid } = action.payload
+
+                newState.uid = uid,
+                newState.username = data.username,
+                newState.programs = cloneDeep(data.programs),
+                newState.isAdmin = data.isAdmin
+                newState.isLoggedIn = true
+            }
+
+            return newState
+        }
+        case 'RETRIEVE_LOGIN_RESULT': {
+            const newState = {
+                ...state,
+                loadingStates: {
+                    ...state.loadingStates,
+                    isRetrievingLoginResult: false
+                }
+            }
+
+            if (action.payload) {
+                const { user, credential } = action.payload
+
+                newState.token = credential.accessToken
+            }
+
+            return newState
+        }
+        case 'LOGOUT':
             return {
                 ...state,
-                uid,
-                username: data.username,
-                programs: cloneDeep(data.programs),
-                isAdmin: data.isAdmin
+                uid: null,
+                username: null,
+                token: null,
+                isLoggedIn: false,
+                isAdmin: false
             }
-        }
-        case 'RETRIEVE_LOGIN_RESULT':
-            return {...state, token: action.payload.credential.accessToken}
-        case 'LOGOUT':
-            return {...state, uid: null, username: null, token: null}
         default:
             return state
     }
