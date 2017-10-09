@@ -4,9 +4,8 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { AppContainer as ReactHotLoader } from 'react-hot-loader'
 
-import { PP } from '../../config.js'
 import configStore from './store.js'
-import App from './components/App/index.jsx'
+import App from './components/app-component.jsx'
 import '../scss/index.scss'
 
 // import views so they can live-reload during development
@@ -31,7 +30,7 @@ const render = (Component) => {
                     </Router>
                 </Provider>
             </ReactHotLoader>,
-        document.getElementById('root'))
+            document.getElementById('root'))
     } else {
         ReactDOM.render(
             <Provider store={store}>
@@ -39,7 +38,7 @@ const render = (Component) => {
                     <Route path={PP} component={Component} />
                 </Router>
             </Provider>,
-        document.getElementById('root'))
+            document.getElementById('root'))
     }
 }
 
@@ -47,8 +46,8 @@ render(App)
 
 // Hot Module Replacement API
 if (module.hot) {
-    module.hot.accept('./components/App/index.jsx', () => {
-        const nextApp = require('./components/App/index.jsx').default
+    module.hot.accept('./components/app-component.jsx', () => {
+        const nextApp = require('./components/app-component.jsx').default
         render(nextApp)
     })
 }

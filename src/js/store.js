@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import reduxPromise from 'redux-promise'
 import thunk from 'redux-thunk'
-import rootReducer from './reducers'
+import rootReducer from './actions-and-reducers/root-reducer.js'
 
 const composeEnhancers = composeWithDevTools({
     // Specify here name, actionsBlacklist, actionsCreators and other options 
@@ -17,8 +17,8 @@ export default function configStore(initialState) {
     const store = createStore(rootReducer, initialState, composeEnhancers(middleware))
 
     if (module.hot) {
-        module.hot.accept('./reducers', () => {
-            const nextRootReducer = require('./reducers/index.js').default
+        module.hot.accept('./actions-and-reducers/root-reducer.js', () => {
+            const nextRootReducer = require('./actions-and-reducers/root-reducer.js').default
             store.replaceReducer(nextRootReducer)
         })
     }
