@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
+import sanitizeHtml from 'sanitize-html'
 
 import { setOneRepMax, setExerciseName } from '../DUHR-actions.js'
 import { updateProgram } from '../../../actions-and-reducers/programs/programs-actions.js'
@@ -47,7 +48,7 @@ class OneRepMaxes extends Component {
             userId: this.props.userId,
             programId: this.props.currentProgram.id,
             currentProgram: programWithoutId,
-            newName: escape(e.target.value),
+            newName: sanitizeHtml(e.target.value),
             location: +e.target.dataset.location
         }
 
