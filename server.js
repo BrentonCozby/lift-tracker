@@ -4,7 +4,7 @@ const { resolve } = require('path')
 require('dotenv').config()
 const { PP } = require('./config.js')
 
-const PORT = process.env.PORT || 3005
+const PORT = process.env.PORT || 3000
 
 app.use(express.static('./dist'))
 
