@@ -48,9 +48,18 @@ class Day extends Component {
                     <tr>
                         <td colSpan="3" className="sets-reps-rest">
                             <div>
-                                <span>Sets: {sets}</span>
-                                <span>Reps: {reps}</span>
-                                <span>Rest: {rest}</span>
+                                <em style={{fontSize: '11px'}}>
+                                    <b style={{letterSpacing: '1px'}}>SETS</b>:
+                                    &nbsp;&nbsp;{sets}
+                                </em>
+                                <em style={{fontSize: '11px'}}>
+                                    <b style={{letterSpacing: '1px'}}>REPS</b>:
+                                    &nbsp;&nbsp;{reps}
+                                </em>
+                                <em style={{fontSize: '11px'}}>
+                                    <b style={{letterSpacing: '1px'}}>REST</b>:
+                                    &nbsp;&nbsp;{rest}
+                                </em>
                             </div>
                         </td>
                     </tr>

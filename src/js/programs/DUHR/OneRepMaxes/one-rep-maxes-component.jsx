@@ -26,7 +26,8 @@ class OneRepMaxes extends Component {
     }
 
     setOneRepMax = e => {
-        const programWithoutId = {...this.props.currentProgram}
+        const programWithoutId = { ...this.props.currentProgram }
+        // delete the id because we don't want to store that in the database
         delete programWithoutId.id
 
         const params = {
@@ -79,6 +80,31 @@ class OneRepMaxes extends Component {
         this.props.updateProgram(this.props.userId, this.props.currentProgram.id, null, updatedProgram)
     }
 
+    deleteExercise = e => {
+        const confirmDelete = confirm(`Delete exercise "${e.target.dataset.name}"?`)
+
+        if (!confirmDelete) {
+            return
+        }
+
+        const updatedProgram = { ...this.props.currentProgram }
+        // delete the id because we don't want to store that in the database
+        delete updatedProgram.id
+
+        // add new exercise to one rep maxes
+        updatedProgram.oneRepMaxes.splice(+e.target.dataset.location, 1)
+
+        // add new exercise to each day in the plan
+        updatedProgram.plan.forEach((week, weekIndex) => {
+            week.forEach((day, dayIndex) => {
+                updatedProgram.plan[weekIndex][dayIndex].exercises
+                    .splice(+e.target.dataset.location, 1)
+            })
+        })
+
+        this.props.updateProgram(this.props.userId, this.props.currentProgram.id, null, updatedProgram)
+    }
+
     render() {
         const {
             currentProgram = {}
@@ -111,6 +137,13 @@ class OneRepMaxes extends Component {
                                 onChange={this.setOneRepMax}
                                 data-location={maxIndex}
                             />
+                            <button
+                                className="delete"
+                                data-location={maxIndex}
+                                data-name={max.name}
+                                onClick={this.deleteExercise}>
+                                ×
+                            </button>
                         </div>
                     ))}
                     <div className="form-input">
