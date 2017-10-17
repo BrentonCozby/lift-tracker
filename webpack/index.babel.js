@@ -1,13 +1,10 @@
 import { resolve } from 'path'
-import {
-    DefinePlugin
-} from 'webpack'
+import { DefinePlugin } from 'webpack'
 import merge from 'webpack-merge'
 import HtmlPlugin from 'html-webpack-plugin'
 import CopyPlugin from 'copy-webpack-plugin'
-require('dotenv').config()
 
-import { Dir, PP, title, description, site_url } from '../config.js'
+import { Dir, PP, SITE_TITLE, DESCRIPTION, SITE_URL } from '../config.js'
 import devConfig from './dev.js'
 import prodConfig from './prod.js'
 
@@ -43,9 +40,9 @@ let common = {
         new HtmlPlugin({
             filename: 'index.html',
             template: resolve(Dir.views, 'pages', 'index.pug'),
-            title,
-            description,
-            site_url
+            SITE_TITLE,
+            DESCRIPTION,
+            SITE_URL
         }),
         new DefinePlugin({
             'process.env': {
@@ -55,8 +52,9 @@ let common = {
             PP: JSON.stringify(PP)
         }),
         new CopyPlugin([
-            {from: resolve(Dir.src, 'humans.txt')},
-            {from: resolve(Dir.src, 'robots.txt')}
+            { from: resolve(Dir.src, 'humans.txt') },
+            { from: resolve(Dir.src, 'robots.txt') },
+            { from: resolve(Dir.src, '.htaccess') }
         ])
     ],
     resolve: {
@@ -69,11 +67,11 @@ let common = {
 
 let config
 
-if(env === 'dev') {
+if (env === 'dev') {
     config = merge(common, devConfig)
 }
 
-if(env === 'prod') {
+if (env === 'prod') {
     config = merge(common, prodConfig)
 }
 

@@ -28,7 +28,7 @@ export default {
                     loader: 'babel-loader',
                     options: {
                         presets: [
-                            ['env', {modules: false}],
+                            ['env', { modules: false }],
                             'react',
                             'stage-0'
                         ],
@@ -56,7 +56,7 @@ export default {
         new HotModuleReplacementPlugin(),
         new NamedModulesPlugin()
     ],
-    devServer : {
+    devServer: {
         hot: true,
         contentBase: Dir.dist,
         publicPath: PP,
