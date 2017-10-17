@@ -7,6 +7,7 @@ import CopyPlugin from 'copy-webpack-plugin'
 import { Dir, PP, SITE_TITLE, DESCRIPTION, SITE_URL } from '../config.js'
 import devConfig from './dev.js'
 import prodConfig from './prod.js'
+require('dotenv').config()
 
 const TARGET = process.env.npm_lifecycle_event
 const env = (TARGET === 'dev') ? 'dev' : 'prod'
