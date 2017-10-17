@@ -39,6 +39,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(process.env.perishable_key)
         return (
             <StripeProvider apiKey={process.env.perishable_key}>
                 <div className="App">
