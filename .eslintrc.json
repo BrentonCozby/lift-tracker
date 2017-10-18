@@ -5,7 +5,8 @@
         "es6": true,
         "node": true,
         "shared-node-browser": true,
-        "serviceworker": true
+        "serviceworker": true,
+        "jest": true
     },
     "extends": ["eslint:recommended", "plugin:react/recommended"],
     "parser": "babel-eslint",
@@ -46,6 +47,15 @@
         "no-fallthrough": "off"
     },
     "globals": {
-        "PP": false
+        "PP": false,
+        "SITE_TITLE": false,
+        "SITE_NAME": false,
+        "DESCRIPTION": false,
+        "SITE_URL": false,
+        "SITE_IMAGE": false,
+        "DEVELOPER_NAME": false,
+        "DEVELOPER_URL": false,
+        "GOOGLE_ANALYTICS_ID": false,
+        "DEV_PATH": false
     }
 }

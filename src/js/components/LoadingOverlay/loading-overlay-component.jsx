@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
-import loadingSpinner from '../../../../assets/images/loading-spinner.gif'
+import loadingSpinner from 'images/loading-spinner.gif'
 
 class LoadingOverlay extends Component {
 

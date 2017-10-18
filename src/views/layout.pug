@@ -5,7 +5,7 @@ html(lang='en')
     body
         block content
 
-        if process.env.NODE_ENV === 'production'
+        if htmlWebpackPlugin.options.env === 'production'
             script(defer, async).
                 if ('serviceWorker' in navigator) {
                     window.addEventListener('load', function() {

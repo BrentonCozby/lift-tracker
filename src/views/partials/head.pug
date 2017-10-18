@@ -17,3 +17,7 @@ mixin makeHead(title, description)
     meta(name='twitter:image:alt', content='')
     meta(name='twitter:site', content= htmlWebpackPlugin.options.SITE_URL)
     script(type="text/javascript", src="https://js.stripe.com/v3/")
+
+    //- vendor files
+    link(rel="stylesheet", href= htmlWebpackPlugin.options.PP + 'vendor/html5boilerplate.css')
+    link(rel="stylesheet", href= htmlWebpackPlugin.options.PP + 'vendor/normalize.min.css')
