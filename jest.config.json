@@ -11,6 +11,7 @@
         "**src/js/programs/**/*.{js,jsx}",
         "!**/node_modules/**"
     ],
+    "coverageReporters": ["json", "lcov"],
     "globals": {
         "Dir": "",
         "PP": "",
@@ -25,5 +26,6 @@
         "DEV_PATH": "",
         "process.env.NODE_ENV": "",
         "process.env.perishable_key": ""
-    }
+    },
+    "testURL": "https://example.com"
 }

@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app-component renders App with router and store without crashing 1`] = `
+<div
+  className="App"
+>
+  <div>
+    <div
+      className="menu-overlay"
+      onClick={[Function]}
+    />
+    <div
+      className="menu-button"
+      onClick={[Function]}
+    >
+      <span
+        className="bar"
+      />
+      <span
+        className="bar"
+      />
+      <span
+        className="bar"
+      />
+    </div>
+    <div
+      className="Menu"
+    >
+      <a
+        className="Menu-item"
+        href="/"
+        onClick={[Function]}
+      >
+        Home
+      </a>
+      <a
+        className="Menu-item"
+        href="login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </div>
+  </div>
+  <div
+    className="LoadingOverlay visible"
+  >
+    <img
+      alt="loading spinner"
+      className="spinner"
+      src="test-file-stub"
+    />
+  </div>
+  <div
+    className="Home"
+  >
+    <h2
+      className="app-title"
+    >
+      Lift Tracker
+    </h2>
+    <table
+      className="ProgramsList"
+    >
+      <thead>
+        <tr>
+          <th>
+            <h2
+              className="ProgramsList-title"
+            >
+              Programs
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td />
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <footer
+    className="Footer"
+  >
+    <p
+      className="copyright"
+    >
+      © 2017. Brenton Cozby. View more projects at 
+      <a
+        href="https://brentoncozby.com"
+      >
+        brentoncozby.com
+      </a>
+      .
+    </p>
+  </footer>
+</div>
+`;
