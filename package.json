@@ -37,7 +37,7 @@
         "redux-devtools-extension": "^2.13.2",
         "redux-promise": "^0.5.3",
         "redux-thunk": "^2.2.0",
-        "sanitize-html": "^1.15.0"
+        "sanitize-html": "^1.16.1"
     },
     "devDependencies": {
         "autoprefixer": "^6.7.7",
