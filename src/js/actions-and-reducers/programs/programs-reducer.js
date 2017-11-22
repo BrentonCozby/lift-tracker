@@ -1,11 +1,11 @@
 const INITAL_STATE = {
-    titles: null,
-    current: null
+    titles: [],
+    current: {}
 }
 
 export default function(state = INITAL_STATE, action) {
     switch(action.type) {
-        case 'GET_PROGRAM_TITLES': {
+        case 'GET_PROGRAM_TITLES_SUCCESS': {
             const titles = Object.keys(action.payload).map(id => {
                 return {
                     title: action.payload[id].title,
@@ -15,7 +15,7 @@ export default function(state = INITAL_STATE, action) {
             
             return { ...state, titles: titles }
         }    
-        case 'GET_ONE_PROGRAM': {
+        case 'GET_ONE_PROGRAM_SUCCESS': {
             if (!action.payload) {
                 return { ...state, current: { ...state.current } }
             }
@@ -28,10 +28,10 @@ export default function(state = INITAL_STATE, action) {
         case 'SET_EXERCISE_NAME': {
             return { ...state, current: { ...state.current } }
         }
-        case 'STOP_LISTENING_TO_CURRENT_PROGRAM': {
+        case 'STOP_LISTENING_TO_CURRENT_PROGRAM_SUCCESS': {
             return { ...state, current: null }
         }
-        case 'NULLIFY_CURRENT_PROGRAM': {
+        case 'NULLIFY_CURRENT_PROGRAM_SUCCESS': {
             return {...state, current: null}
         }
         default:

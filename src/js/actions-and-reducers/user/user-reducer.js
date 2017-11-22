@@ -15,7 +15,7 @@ const INITAL_STATE = {
 
 export default function(state = INITAL_STATE, action) {
     switch (action.type) {
-        case 'GET_USER_DATA': {
+        case 'GET_USER_DATA_SUCCESS': {
             const newState = {
                 ...state,
                 loadingStates: {
@@ -36,7 +36,7 @@ export default function(state = INITAL_STATE, action) {
 
             return newState
         }
-        case 'RETRIEVE_LOGIN_RESULT': {
+        case 'RETRIEVE_LOGIN_RESULT_SUCCESS': {
             const newState = {
                 ...state,
                 loadingStates: {
@@ -53,7 +53,7 @@ export default function(state = INITAL_STATE, action) {
 
             return newState
         }
-        case 'LOGOUT':
+        case 'LOGOUT_SUCCESS':
             return {
                 ...state,
                 uid: null,

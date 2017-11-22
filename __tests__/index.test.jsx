@@ -2,13 +2,9 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-15'
 
 import configStore from '../src/js/store.js'
 import App from '../src/js/components/app-component.jsx'
-
-configure({ adapter: new Adapter() })
 
 describe('app-component', () => {
     let stripeMockFn

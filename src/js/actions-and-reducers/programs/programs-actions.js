@@ -4,32 +4,75 @@ import {
 } from '../../firebase.js'
 
 export function saveNewProgram(programData) {
-    return () => createProgram(programData)
+    return (dispatch) => {
+        return createProgram(programData).then(() => {
+            dispatch({type: 'SAVE_NEW_PROGRAM_SUCCESS'})
+        })
+    }
 }
 
 export function updateProgram(userId, programId, location, data) {
-    if (!userId) {
-        return { type: null }
-    }
+    return (dispatch) => {
+        return new Promise((resolve) => {
+            if (!userId) {
+                dispatch({ type: null })
+                
+                return resolve()
+            }
 
-    db.ref(`users/${userId}/programs/${programId}${(location) ? '/' + location : ''}`).update(data)
-    
-    return { type: 'UPDATE_PROGRAM' }
+            db.ref(`users/${userId}/programs/${programId}${(location) ? '/' + location : ''}`).update(data)
+
+            dispatch({ type: 'UPDATE_PROGRAM_SUCCESS' })
+
+            resolve()
+        })
+    }
 }
 
 export function setProgramValue(userId, programId, location, value) {
-    if (!userId) {
-        return { type: null }
-    }
+    return (dispatch) => {
+        return new Promise((resolve) => {
+            if (!userId) {
+                dispatch({ type: null })
 
-    db.ref(`users/${userId}/programs/${programId}/${location}`).set(value)
-    
-    return {type: 'SET_PROGRAM_VALUE'}
+                return resolve()
+            }
+
+            db.ref(`users/${userId}/programs/${programId}/${location}`).set(value)
+
+            dispatch({ type: 'SET_PROGRAM_VALUE_SUCCESS' })
+
+            resolve()
+        })
+    }
 }
 
 export function nullifyCurrentProgram() {
-    return dispatch => {
-        dispatch({type: 'NULLIFY_CURRENT_PROGRAM'})
+    return (dispatch) => {
+        return new Promise((resolve) => {
+            dispatch({ type: 'NULLIFY_CURRENT_PROGRAM_SUCCESS' })
+
+            resolve()
+        })
+    }
+}
+
+export function getProgramTitles() {
+    return (dispatch) => {
+        return new Promise((resolve) => {
+            db.ref('programs').once('value', snapshot => {
+                if (!snapshot || !snapshot.val()) {
+                    dispatch({ type: null })
+                } else {
+                    dispatch({
+                        type: 'GET_PROGRAM_TITLES_SUCCESS',
+                        payload: { ...snapshot.val() }
+                    })
+                }
+
+                resolve()
+            })
+        })
     }
 }
 
@@ -44,93 +87,93 @@ function getProgramFromDB(programId) {
 function saveProgramToUser(userId, programId) {
     return new Promise((resolve) => {
         db.ref(`users/${userId}/programs/${programId}`).once('value', snapshot => {
-            if(!snapshot.val()) {
-                getProgramFromDB(snapshot => {
-                    db.ref(`users/${userId}/programs/${programId}`).set(snapshot.val())
+            if (!snapshot || !snapshot.val()) {
+                getProgramFromDB(programId).then((program) => {
+                    db.ref(`users/${userId}/programs/${programId}`).set(program)
+
                     setCurrentProgram(userId, programId)
+
+                    resolve(null)
                 })
-                resolve(null)
-            }
-            else {
+            } else {
                 resolve(snapshot.val())
             }
         })
     })
 }
 
-export function getProgramTitles() {
-    return dispatch => {
-        db.ref('programs').once('value', snapshot => {
-            if (!snapshot) {
-                dispatch({ type: null })
-            }
-            
-            dispatch({
-                type: 'GET_PROGRAM_TITLES',
-                payload: {...snapshot.val()}
-            })
-        })
-    }
-}
-
-
 export function setCurrentProgram(userId, programId) {
-    if (!userId) {
-        return dispatch => {
-            getProgramFromDB(programId).then(program => {
-                dispatch({
-                    type: 'GET_ONE_PROGRAM',
-                    payload: { ...program, programId }
-                })
-            })
-        }
-    }
+    return (dispatch) => {
+        return new Promise((resolve) => {
+            if (!userId) {
+                getProgramFromDB(programId).then((program) => {
+                    dispatch({
+                        type: 'GET_ONE_PROGRAM_SUCCESS',
+                        payload: { ...program, id: programId }
+                    })
 
-    const getProgram = saveProgramToUser(userId, programId)
-
-    return dispatch => {
-        getProgram.then(program => {
-            if(program) {
-                dispatch({
-                    type: 'GET_ONE_PROGRAM',
-                    payload: {...program, id: programId}
+                    resolve()
                 })
+
+                return
             }
-            else {
+
+            saveProgramToUser(userId, programId).then(program => {
+                if (program) {
+                    dispatch({
+                        type: 'GET_ONE_PROGRAM_SUCCESS',
+                        payload: { ...program, id: programId }
+                    })
+
+                    return resolve()
+                }
+
                 saveProgramToUser(userId, programId).then(program => {
                     dispatch({
-                        type: 'GET_ONE_PROGRAM',
-                        payload: {...program, id: programId}
+                        type: 'GET_ONE_PROGRAM_SUCCESS',
+                        payload: { ...program, id: programId }
                     })
+
+                    resolve()
                 })
-            }
+            })
         })
     }
 }
 
 export function listenForCurrentProgramEdit(userId, programId) {
-    if (!userId) {
-        return dispatch => {
-            dispatch({ type: null })
-        }
-    }
-
-    return dispatch => {
-        db.ref(`users/${userId}/programs/${programId}`).on('value', snapshot => {
-            if (!snapshot) {
+    return (dispatch) => {
+        return new Promise((resolve) => {
+            if (!userId) {
                 dispatch({ type: null })
+
+                return resolve()
             }
 
-            dispatch({
-                type: 'GET_ONE_PROGRAM',
-                payload: {...snapshot.val(), id: programId}
+            db.ref(`users/${userId}/programs/${programId}`).on('value', snapshot => {
+                if (!snapshot || !snapshot.val()) {
+                    dispatch({ type: null })
+                } else {
+                    dispatch({
+                        type: 'GET_ONE_PROGRAM_SUCCESS',
+                        payload: { ...snapshot.val(), id: programId }
+                    })
+                }
+
+                resolve()
             })
         })
     }
 }
 
 export function stopListeningToCurrentProgram(userId) {
-    db.ref(`users/${userId}/programs`).off()
+    return (dispatch) => {
+        return new Promise((resolve) => {
+            db.ref(`users/${userId}/programs`).off()
 
-    return { type: 'STOP_LISTENING_TO_CURRENT_PROGRAM' }
+            dispatch({ type: 'STOP_LISTENING_TO_CURRENT_PROGRAM_SUCCESS' })
+
+            resolve()
+        })
+    }
 }
