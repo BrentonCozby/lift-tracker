@@ -25,7 +25,10 @@ class Program extends Component {
     }
 
     componentWillMount() {
-        this.props.listenForCurrentProgramEdit(this.props.userId, this.props.currentProgram.id)
+        this.props.listenForCurrentProgramEdit({
+            userId: this.props.userId,
+            programId: this.props.currentProgram.id
+        })
     }
 
     componentDidUpdate() {
@@ -34,14 +37,17 @@ class Program extends Component {
             this.props.calcNextWeights(this.props.userId, this.props.currentProgram.id, plan)
 
             if(!this.state.programId) {
-                this.props.listenForCurrentProgramEdit(this.props.userId, this.props.currentProgram.id)
+                this.props.listenForCurrentProgramEdit({
+                    userId: this.props.userId,
+                    programId: this.props.currentProgram.id
+                })
                 this.setState({programId: this.props.currentProgram.id})
             }
         }
     }
 
     componentWillUnmount(){
-        this.props.stopListeningToCurrentProgram(this.props.userId)
+        this.props.stopListeningToCurrentProgram({userId: this.props.userId})
     }
 
     render() {

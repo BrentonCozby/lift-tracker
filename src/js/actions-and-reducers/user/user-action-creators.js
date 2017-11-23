@@ -1,6 +1,6 @@
 import * as firebase from '../../firebase.js'
 
-export function firebaseLoginRedirect(loginMethod) {
+export function firebaseLoginRedirect({loginMethod}) {
     return (dispatch) => {
         return firebase.loginRedirect(loginMethod)
             .then(() => {

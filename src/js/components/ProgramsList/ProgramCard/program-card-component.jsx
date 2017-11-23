@@ -15,7 +15,10 @@ class ProgramCard extends Component {
     }
 
     setCurrentProgram = () => {
-        this.props.setCurrentProgram(this.props.userId, this.props.programId)
+        this.props.setCurrentProgram({
+            userId: this.props.userId,
+            programId: this.props.programId
+        })
     }
 
     render() {

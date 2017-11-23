@@ -25,7 +25,7 @@ class ProgramsList extends Component {
     }
 
     componentWillMount() {
-        this.props.stopListeningToCurrentProgram(this.props.userId)
+        this.props.stopListeningToCurrentProgram({userId: this.props.userId})
         this.props.nullifyCurrentProgram()
 
         if (this.props.isLoggedIn) {
@@ -34,7 +34,7 @@ class ProgramsList extends Component {
     }
 
     saveNewProgram = (program) => {
-        this.props.saveNewProgram(program)
+        this.props.saveNewProgram({programData: program})
     }
 
     render() {

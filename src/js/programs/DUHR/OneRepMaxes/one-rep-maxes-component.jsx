@@ -77,7 +77,11 @@ class OneRepMaxes extends Component {
             })
         })
 
-        this.props.updateProgram(this.props.userId, this.props.currentProgram.id, null, updatedProgram)
+        this.props.updateProgram({
+            userId: this.props.userId,
+            programId: this.props.currentProgram.id,
+            data: updatedProgram
+        })
     }
 
     deleteExercise = e => {
@@ -102,7 +106,11 @@ class OneRepMaxes extends Component {
             })
         })
 
-        this.props.updateProgram(this.props.userId, this.props.currentProgram.id, null, updatedProgram)
+        this.props.updateProgram({
+            userId: this.props.userId,
+            programId: this.props.currentProgram.id,
+            data: updatedProgram
+        })
     }
 
     render() {

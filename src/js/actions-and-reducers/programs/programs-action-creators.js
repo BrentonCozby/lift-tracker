@@ -3,7 +3,7 @@ import {
     db
 } from '../../firebase.js'
 
-export function saveNewProgram(programData) {
+export function saveNewProgram({programData}) {
     return (dispatch) => {
         return createProgram(programData).then(() => {
             dispatch({type: 'SAVE_NEW_PROGRAM_SUCCESS'})
@@ -11,7 +11,7 @@ export function saveNewProgram(programData) {
     }
 }
 
-export function updateProgram(userId, programId, location, data) {
+export function updateProgram({userId, programId, location, data}) {
     return (dispatch) => {
         return new Promise((resolve) => {
             if (!userId) {
@@ -29,7 +29,7 @@ export function updateProgram(userId, programId, location, data) {
     }
 }
 
-export function setProgramValue(userId, programId, location, value) {
+export function setProgramValue({userId, programId, location, value}) {
     return (dispatch) => {
         return new Promise((resolve) => {
             if (!userId) {
@@ -76,7 +76,7 @@ export function getProgramTitles() {
     }
 }
 
-function getProgramFromDB(programId) {
+function getProgramFromDB({programId}) {
     return new Promise((resolve) => {
         db.ref(`programs/${programId}`).once('value', snapshot => {
             resolve(snapshot.val())
@@ -84,14 +84,14 @@ function getProgramFromDB(programId) {
     })
 }
 
-function saveProgramToUser(userId, programId) {
+function saveProgramToUser({userId, programId}) {
     return new Promise((resolve) => {
         db.ref(`users/${userId}/programs/${programId}`).once('value', snapshot => {
             if (!snapshot || !snapshot.val()) {
-                getProgramFromDB(programId).then((program) => {
+                getProgramFromDB({programId}).then((program) => {
                     db.ref(`users/${userId}/programs/${programId}`).set(program)
 
-                    setCurrentProgram(userId, programId)
+                    setCurrentProgram({userId, programId})
 
                     resolve(null)
                 })
@@ -102,11 +102,11 @@ function saveProgramToUser(userId, programId) {
     })
 }
 
-export function setCurrentProgram(userId, programId) {
+export function setCurrentProgram({userId, programId}) {
     return (dispatch) => {
         return new Promise((resolve) => {
             if (!userId) {
-                getProgramFromDB(programId).then((program) => {
+                getProgramFromDB({programId}).then((program) => {
                     dispatch({
                         type: 'GET_ONE_PROGRAM_SUCCESS',
                         payload: { ...program, id: programId }
@@ -118,7 +118,7 @@ export function setCurrentProgram(userId, programId) {
                 return
             }
 
-            saveProgramToUser(userId, programId).then(program => {
+            saveProgramToUser({userId, programId}).then(program => {
                 if (program) {
                     dispatch({
                         type: 'GET_ONE_PROGRAM_SUCCESS',
@@ -128,7 +128,7 @@ export function setCurrentProgram(userId, programId) {
                     return resolve()
                 }
 
-                saveProgramToUser(userId, programId).then(program => {
+                saveProgramToUser({userId, programId}).then(program => {
                     dispatch({
                         type: 'GET_ONE_PROGRAM_SUCCESS',
                         payload: { ...program, id: programId }
@@ -141,7 +141,7 @@ export function setCurrentProgram(userId, programId) {
     }
 }
 
-export function listenForCurrentProgramEdit(userId, programId) {
+export function listenForCurrentProgramEdit({userId, programId}) {
     return (dispatch) => {
         return new Promise((resolve) => {
             if (!userId) {
@@ -166,7 +166,7 @@ export function listenForCurrentProgramEdit(userId, programId) {
     }
 }
 
-export function stopListeningToCurrentProgram(userId) {
+export function stopListeningToCurrentProgram({userId}) {
     return (dispatch) => {
         return new Promise((resolve) => {
             db.ref(`users/${userId}/programs`).off()

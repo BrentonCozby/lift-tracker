@@ -35,7 +35,7 @@ describe('program-actions', () => {
             bar: ['bar']
         }
 
-        return store.dispatch(actions.saveNewProgram(newProgram))
+        return store.dispatch(actions.saveNewProgram({programData: newProgram}))
             .then(() => {
                 expect(firebase.createProgram).toHaveBeenCalledWith(newProgram)
                 expect(store.getActions()).toEqual([{ type: 'SAVE_NEW_PROGRAM_SUCCESS' }])
@@ -62,7 +62,7 @@ describe('program-actions', () => {
                 { type: null }
             ]
 
-            return store.dispatch(actions.updateProgram(userId))
+            return store.dispatch(actions.updateProgram({userId}))
                 .then(() => {
                     expect(firebase.db.ref).not.toHaveBeenCalled()
                     expect(updateSpy).not.toHaveBeenCalled()
@@ -77,7 +77,7 @@ describe('program-actions', () => {
                 { type: 'UPDATE_PROGRAM_SUCCESS' }
             ]
 
-            return store.dispatch(actions.updateProgram(userId, programId, dbLocation, data))
+            return store.dispatch(actions.updateProgram({userId, programId, location: dbLocation, data}))
                 .then(() => {
                     expect(firebase.db.ref).toHaveBeenCalledWith(expectedRefString)
                     expect(updateSpy).toHaveBeenCalledWith(data)
@@ -93,7 +93,7 @@ describe('program-actions', () => {
                 { type: 'UPDATE_PROGRAM_SUCCESS' }
             ]
             
-            return store.dispatch(actions.updateProgram(userId, programId, dbLocation, data))
+            return store.dispatch(actions.updateProgram({userId, programId, location: dbLocation, data}))
                 .then(() => {
                     expect(firebase.db.ref).toHaveBeenCalledWith(expectedRefString)
                     expect(updateSpy).toHaveBeenCalledWith(data)
@@ -123,7 +123,7 @@ describe('program-actions', () => {
                 { type: null }
             ]
 
-            return store.dispatch(actions.setProgramValue(userId))
+            return store.dispatch(actions.setProgramValue({userId}))
                 .then(() => {
                     expect(firebase.db.ref).not.toHaveBeenCalled()
                     expect(setSpy).not.toHaveBeenCalled()
@@ -140,7 +140,7 @@ describe('program-actions', () => {
                 { type: 'SET_PROGRAM_VALUE_SUCCESS' }
             ]
 
-            return store.dispatch(actions.setProgramValue(userId, programId, dbLocation, value))
+            return store.dispatch(actions.setProgramValue({userId, programId, location: dbLocation, value}))
                 .then(() => {
                     expect(firebase.db.ref).toHaveBeenCalledWith(expectedRefString)
                     expect(setSpy).toHaveBeenCalledWith(value)
@@ -204,7 +204,7 @@ describe('program-actions', () => {
 
             const expectedRefString = `programs/${programId}`
 
-            return store.dispatch(actions.setCurrentProgram(userId, programId))
+            return store.dispatch(actions.setCurrentProgram({userId, programId}))
                 .then(() => {
                     expect(firebase.db.ref).toHaveBeenCalledWith(expectedRefString)
                     expect(onceSpy).toHaveBeenCalled()
@@ -215,7 +215,7 @@ describe('program-actions', () => {
         test('saves program to the user and then dispatches program if it is truthy', () => {
             const expectedRefString = `users/${userId}/programs/${programId}`
 
-            return store.dispatch(actions.setCurrentProgram(userId, programId))
+            return store.dispatch(actions.setCurrentProgram({userId, programId}))
                 .then(() => {
                     expect(firebase.db.ref).toHaveBeenCalledWith(expectedRefString)
                     expect(onceSpy).toHaveBeenCalled()
@@ -246,13 +246,13 @@ describe('program-actions', () => {
                 }
             ]
 
-            return store.dispatch(actions.setCurrentProgram(userId, programId))
+            return store.dispatch(actions.setCurrentProgram({userId, programId}))
                 .then(() => {
                     snapshot = {
                         val: () => program
                     }
 
-                    return store.dispatch(actions.setCurrentProgram(userId, programId))
+                    return store.dispatch(actions.setCurrentProgram({userId, programId}))
                         .then(() => {
                             expect(firebase.db.ref).toHaveBeenCalledWith(expectedRefString)
                             expect(onceSpy).toHaveBeenCalled()
@@ -352,7 +352,7 @@ describe('program-actions', () => {
         })
 
         test('dispatches GET_ONE_PROGRAM_SUCCESS with program', () => {
-            return store.dispatch(actions.listenForCurrentProgramEdit(userId, programId))
+            return store.dispatch(actions.listenForCurrentProgramEdit({userId, programId}))
                 .then(() => {
                     expect(firebase.db.ref).toHaveBeenCalledWith(`users/${userId}/programs/${programId}`)
                     expect(onSpy).toHaveBeenCalled()
@@ -365,7 +365,7 @@ describe('program-actions', () => {
 
             expectedActions = [{ type: null }]
             
-            return store.dispatch(actions.listenForCurrentProgramEdit(userId, programId))
+            return store.dispatch(actions.listenForCurrentProgramEdit({userId, programId}))
                 .then(() => {
                     expect(firebase.db.ref).not.toHaveBeenCalled()
                     expect(onSpy).not.toHaveBeenCalled()
@@ -380,7 +380,7 @@ describe('program-actions', () => {
 
             expectedActions = [{ type: null }]
 
-            return store.dispatch(actions.listenForCurrentProgramEdit(userId, programId))
+            return store.dispatch(actions.listenForCurrentProgramEdit({userId, programId}))
                 .then(() => {
                     expect(firebase.db.ref).toHaveBeenCalledWith(`users/${userId}/programs/${programId}`)
                     expect(onSpy).toHaveBeenCalled()

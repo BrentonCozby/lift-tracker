@@ -29,7 +29,7 @@ class LoginPage extends Component {
     }
 
     firebaseLoginRedirect = e => {
-        this.props.firebaseLoginRedirect(e.currentTarget.dataset.method)
+        this.props.firebaseLoginRedirect({loginMethod: e.currentTarget.dataset.method})
     }
 
     render() {

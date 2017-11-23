@@ -19,12 +19,12 @@ class Day extends Component {
     }
 
     setDifficulty = e => {
-        this.props.setProgramValue(
-            this.props.userId,
-            this.props.programId,
-            e.target.dataset.dbref,
-            e.target.value
-        )
+        this.props.setProgramValue({
+            userId: this.props.userId,
+            programId: this.props.programId,
+            location: e.target.dataset.dbref,
+            value: e.target.value
+        })
     }
 
     render() {
