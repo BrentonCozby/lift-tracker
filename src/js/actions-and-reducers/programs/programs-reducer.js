@@ -3,7 +3,7 @@ const INITAL_STATE = {
     current: {}
 }
 
-export default function(state = INITAL_STATE, action) {
+export default function programsReducer(state = INITAL_STATE, action) {
     switch(action.type) {
         case 'GET_PROGRAM_TITLES_SUCCESS': {
             const titles = Object.keys(action.payload).map(id => {

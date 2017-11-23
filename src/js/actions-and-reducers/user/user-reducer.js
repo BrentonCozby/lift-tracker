@@ -13,9 +13,9 @@ const INITAL_STATE = {
     }
 }
 
-export default function(state = INITAL_STATE, action) {
+export default function userReducer(state = INITAL_STATE, action) {
     switch (action.type) {
-        case 'GET_USER_DATA_SUCCESS': {
+        case 'GET_USER_DATA_SUCCESS_WITH_PAYLOAD': {
             const newState = {
                 ...state,
                 loadingStates: {
@@ -24,19 +24,28 @@ export default function(state = INITAL_STATE, action) {
                 }
             }
 
-            if (action.payload) {
-                const { data, uid } = action.payload
+            const { data, uid } = action.payload
 
-                newState.uid = uid,
-                newState.username = data.username,
-                newState.programs = cloneDeep(data.programs),
-                newState.isAdmin = data.isAdmin
-                newState.isLoggedIn = true
+            newState.uid = uid
+            newState.username = data.username
+            newState.programs = cloneDeep(data.programs)
+            newState.isAdmin = data.isAdmin
+            newState.isLoggedIn = true
+
+            return newState
+        }
+        case 'GET_USER_DATA_SUCCESS_NO_PAYLOAD': {
+            const newState = {
+                ...state,
+                loadingStates: {
+                    ...state.loadingStates,
+                    isGettingUserData: false
+                }
             }
 
             return newState
         }
-        case 'RETRIEVE_LOGIN_RESULT_SUCCESS': {
+        case 'RETRIEVE_LOGIN_RESULT_SUCCESS_WITH_PAYLOAD': {
             const newState = {
                 ...state,
                 loadingStates: {
@@ -45,10 +54,19 @@ export default function(state = INITAL_STATE, action) {
                 }
             }
 
-            if (action.payload) {
-                const { user, credential } = action.payload // eslint-disable-line no-unused-vars
+            const { user, credential } = action.payload // eslint-disable-line no-unused-vars
 
-                newState.token = credential.accessToken
+            newState.token = credential.accessToken
+
+            return newState
+        }
+        case 'RETRIEVE_LOGIN_RESULT_SUCCESS_NO_PAYLOAD': {
+            const newState = {
+                ...state,
+                loadingStates: {
+                    ...state.loadingStates,
+                    isRetrievingLoginResult: false
+                }
             }
 
             return newState
