@@ -3,10 +3,18 @@ import {
     db
 } from '../../firebase.js'
 
+const SAVE_NEW_PROGRAM_SUCCESS = 'SAVE_NEW_PROGRAM_SUCCESS'
+const UPDATE_PROGRAM_SUCCESS = 'UPDATE_PROGRAM_SUCCESS'
+const SET_PROGRAM_VALUE_SUCCESS = 'SET_PROGRAM_VALUE_SUCCESS'
+const NULLIFY_CURRENT_PROGRAM_SUCCESS = 'NULLIFY_CURRENT_PROGRAM_SUCCESS'
+const GET_PROGRAM_TITLES_SUCCESS = 'GET_PROGRAM_TITLES_SUCCESS'
+const GET_ONE_PROGRAM_SUCCESS = 'GET_ONE_PROGRAM_SUCCESS'
+const STOP_LISTENING_TO_CURRENT_PROGRAM_SUCCESS = 'STOP_LISTENING_TO_CURRENT_PROGRAM_SUCCESS'
+
 export function saveNewProgram({programData}) {
     return (dispatch) => {
         return createProgram(programData).then(() => {
-            dispatch({type: 'SAVE_NEW_PROGRAM_SUCCESS'})
+            dispatch({type: SAVE_NEW_PROGRAM_SUCCESS})
         })
     }
 }
@@ -22,7 +30,7 @@ export function updateProgram({userId, programId, location, data}) {
 
             db.ref(`users/${userId}/programs/${programId}${(location) ? '/' + location : ''}`).update(data)
 
-            dispatch({ type: 'UPDATE_PROGRAM_SUCCESS' })
+            dispatch({ type: UPDATE_PROGRAM_SUCCESS })
 
             resolve()
         })
@@ -40,7 +48,7 @@ export function setProgramValue({userId, programId, location, value}) {
 
             db.ref(`users/${userId}/programs/${programId}/${location}`).set(value)
 
-            dispatch({ type: 'SET_PROGRAM_VALUE_SUCCESS' })
+            dispatch({ type: SET_PROGRAM_VALUE_SUCCESS })
 
             resolve()
         })
@@ -50,7 +58,7 @@ export function setProgramValue({userId, programId, location, value}) {
 export function nullifyCurrentProgram() {
     return (dispatch) => {
         return new Promise((resolve) => {
-            dispatch({ type: 'NULLIFY_CURRENT_PROGRAM_SUCCESS' })
+            dispatch({ type: NULLIFY_CURRENT_PROGRAM_SUCCESS })
 
             resolve()
         })
@@ -65,7 +73,7 @@ export function getProgramTitles() {
                     dispatch({ type: null })
                 } else {
                     dispatch({
-                        type: 'GET_PROGRAM_TITLES_SUCCESS',
+                        type: GET_PROGRAM_TITLES_SUCCESS,
                         payload: { ...snapshot.val() }
                     })
                 }
@@ -108,7 +116,7 @@ export function setCurrentProgram({userId, programId}) {
             if (!userId) {
                 getProgramFromDB({programId}).then((program) => {
                     dispatch({
-                        type: 'GET_ONE_PROGRAM_SUCCESS',
+                        type: GET_ONE_PROGRAM_SUCCESS,
                         payload: { ...program, id: programId }
                     })
 
@@ -121,7 +129,7 @@ export function setCurrentProgram({userId, programId}) {
             saveProgramToUser({userId, programId}).then(program => {
                 if (program) {
                     dispatch({
-                        type: 'GET_ONE_PROGRAM_SUCCESS',
+                        type: GET_ONE_PROGRAM_SUCCESS,
                         payload: { ...program, id: programId }
                     })
 
@@ -130,7 +138,7 @@ export function setCurrentProgram({userId, programId}) {
 
                 saveProgramToUser({userId, programId}).then(program => {
                     dispatch({
-                        type: 'GET_ONE_PROGRAM_SUCCESS',
+                        type: GET_ONE_PROGRAM_SUCCESS,
                         payload: { ...program, id: programId }
                     })
 
@@ -155,7 +163,7 @@ export function listenForCurrentProgramEdit({userId, programId}) {
                     dispatch({ type: null })
                 } else {
                     dispatch({
-                        type: 'GET_ONE_PROGRAM_SUCCESS',
+                        type: GET_ONE_PROGRAM_SUCCESS,
                         payload: { ...snapshot.val(), id: programId }
                     })
                 }
@@ -171,7 +179,7 @@ export function stopListeningToCurrentProgram({userId}) {
         return new Promise((resolve) => {
             db.ref(`users/${userId}/programs`).off()
 
-            dispatch({ type: 'STOP_LISTENING_TO_CURRENT_PROGRAM_SUCCESS' })
+            dispatch({ type: STOP_LISTENING_TO_CURRENT_PROGRAM_SUCCESS })
 
             resolve()
         })
