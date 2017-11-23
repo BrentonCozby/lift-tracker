@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { setProgramValue } from '../../../actions-and-reducers/programs/programs-actions.js'
+import { setProgramValue } from '../../../actions-and-reducers/programs/programs-action-creators.js'
 
 class Day extends Component {
 

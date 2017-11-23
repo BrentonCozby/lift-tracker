@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { firebaseLoginRedirect, setUserLoadingState } from '../../actions-and-reducers/user/user-actions.js'
+import { firebaseLoginRedirect, setUserLoadingState } from '../../actions-and-reducers/user/user-action-creators.js'
 
 class LoginPage extends Component {
 

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import {
     listenForCurrentProgramEdit,
     stopListeningToCurrentProgram
-} from '../../actions-and-reducers/programs/programs-actions.js'
+} from '../../actions-and-reducers/programs/programs-action-creators.js'
 import { calcNextWeights } from './DUHR-actions.js'
 import Week from './Week/week-component.jsx'
 import OneRepMaxes from './OneRepMaxes/one-rep-maxes-component.jsx'

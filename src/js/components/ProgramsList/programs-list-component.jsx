@@ -9,7 +9,7 @@ import {
     nullifyCurrentProgram,
     saveNewProgram,
     getProgramTitles
-} from '../../actions-and-reducers/programs/programs-actions.js'
+} from '../../actions-and-reducers/programs/programs-action-creators.js'
 
 class ProgramsList extends Component {
 

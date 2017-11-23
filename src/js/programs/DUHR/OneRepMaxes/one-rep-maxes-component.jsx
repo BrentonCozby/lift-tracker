@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import sanitizeHtml from 'sanitize-html'
 
 import { setOneRepMax, setExerciseName } from '../DUHR-actions.js'
-import { updateProgram } from '../../../actions-and-reducers/programs/programs-actions.js'
+import { updateProgram } from '../../../actions-and-reducers/programs/programs-action-creators.js'
 
 class OneRepMaxes extends Component {
 

@@ -15,7 +15,7 @@ import LoadingOverlay from './LoadingOverlay/loading-overlay-component.jsx'
 import {
     listenForAuthStateChanged,
     retrieveLoginResult
-} from '../actions-and-reducers/user/user-actions.js'
+} from '../actions-and-reducers/user/user-action-creators.js'
 
 class App extends Component {
 

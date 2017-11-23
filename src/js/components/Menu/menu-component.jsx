@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import { logoutOfFirebase } from '../../actions-and-reducers/user/user-actions.js'
+import { logoutOfFirebase } from '../../actions-and-reducers/user/user-action-creators.js'
 
 class Menu extends Component {
 

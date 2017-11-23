@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { setCurrentProgram } from '../../../actions-and-reducers/programs/programs-actions.js'
+import { setCurrentProgram } from '../../../actions-and-reducers/programs/programs-action-creators.js'
 
 class ProgramCard extends Component {
 
