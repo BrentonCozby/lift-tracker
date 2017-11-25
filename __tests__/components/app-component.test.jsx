@@ -125,7 +125,7 @@ describe('App', () => {
     })
 
     test('renders app with home page when route is / and user is logged in', () => {
-        const { $component, componentJSON } = initializeComponent(initialProps)
+        const { componentJSON } = initializeComponent(initialProps)
 
         expect(retrieveLoginResultSpy).toHaveBeenCalled()
         expect(listenForAuthStateChangedSpy).toHaveBeenCalled()

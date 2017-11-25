@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { CardElement } from 'react-stripe-elements'
 
-class Form extends Component {
+export class Form extends Component {
 
     static propTypes = {
         stripe: PropTypes.object

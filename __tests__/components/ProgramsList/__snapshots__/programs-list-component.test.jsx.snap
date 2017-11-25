@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgramsList renders Programs List when user is logged in 1`] = `
+<table
+  className="ProgramsList"
+>
+  <thead>
+    <tr>
+      <th>
+        <h2
+          className="ProgramsList-title"
+        >
+          Programs
+        </h2>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td />
+    </tr>
+    <tr>
+      <td />
+    </tr>
+    <tr>
+      <td>
+        <button
+          className="save-new-program-btn"
+          onClick={[Function]}
+        >
+          Save New Program
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`ProgramsList renders renders Programs List when user is logged in (connected) 1`] = `
+<table
+  className="ProgramsList"
+>
+  <thead>
+    <tr>
+      <th>
+        <h2
+          className="ProgramsList-title"
+        >
+          Programs
+        </h2>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td />
+    </tr>
+    <tr>
+      <td />
+    </tr>
+    <tr>
+      <td>
+        <button
+          className="save-new-program-btn"
+          onClick={[Function]}
+        >
+          Save New Program
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Form from './Form/form-component.jsx'
 
-class PaymentPage extends Component {
+export class PaymentPage extends Component {
 
     render() {
 

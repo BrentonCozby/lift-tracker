@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaymentPage renders payment page (connected) 1`] = `
+<div
+  className="PaymentPage"
+>
+  <h2>
+    Payment Form
+  </h2>
+  <div
+    className="Elements"
+  />
+</div>
+`;
+
+exports[`PaymentPage renders payment page 1`] = `
+<div
+  className="PaymentPage"
+>
+  <h2>
+    Payment Form
+  </h2>
+  <div
+    className="Elements"
+  />
+</div>
+`;
