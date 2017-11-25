@@ -9,7 +9,6 @@ const SET_PROGRAM_VALUE_SUCCESS = 'SET_PROGRAM_VALUE_SUCCESS'
 const NULLIFY_CURRENT_PROGRAM_SUCCESS = 'NULLIFY_CURRENT_PROGRAM_SUCCESS'
 const GET_PROGRAM_TITLES_SUCCESS = 'GET_PROGRAM_TITLES_SUCCESS'
 const GET_ONE_PROGRAM_SUCCESS = 'GET_ONE_PROGRAM_SUCCESS'
-const STOP_LISTENING_TO_CURRENT_PROGRAM_SUCCESS = 'STOP_LISTENING_TO_CURRENT_PROGRAM_SUCCESS'
 
 export function saveNewProgram({programData}) {
     return (dispatch) => {
@@ -177,9 +176,15 @@ export function listenForCurrentProgramEdit({userId, programId}) {
 export function stopListeningToCurrentProgram({userId}) {
     return (dispatch) => {
         return new Promise((resolve) => {
-            db.ref(`users/${userId}/programs`).off()
+            if (!userId) {
+                dispatch({ type: null })
 
-            dispatch({ type: STOP_LISTENING_TO_CURRENT_PROGRAM_SUCCESS })
+                return resolve()
+            }
+
+            db.ref(`users/${userId}/programs`).off()
+            
+            dispatch({ type: NULLIFY_CURRENT_PROGRAM_SUCCESS })
 
             resolve()
         })

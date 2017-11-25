@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import ProgramsList from '../ProgramsList/programs-list-component.jsx'
 
-class HomeContainer extends Component {
+export class HomePage extends Component {
 
     static propTypes = {
         isLoggedIn: PropTypes.bool,
@@ -19,7 +19,7 @@ class HomeContainer extends Component {
 
     render() {
         return (
-            <div className="Home">
+            <div className="HomePage">
                 <h2 className="app-title">Lift Tracker</h2>
                 <ProgramsList />
             </div>
@@ -35,4 +35,4 @@ const actions = {
 
 }
 
-export default connect(mapStateToProps, actions)(HomeContainer)
+export default connect(mapStateToProps, actions)(HomePage)

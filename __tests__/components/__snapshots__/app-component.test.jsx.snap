@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders app with home page when route is / and user is logged in (connected) 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="Menu"
+  />
+  <div
+    className="LoadingOverlay"
+  />
+  <div
+    className="HomePage"
+  />
+  <footer
+    className="Footer"
+  >
+    <p
+      className="copyright"
+    >
+      © 2017. Brenton Cozby. View more projects at 
+      <a
+        href="https://brentoncozby.com"
+      >
+        brentoncozby.com
+      </a>
+      .
+    </p>
+  </footer>
+</div>
+`;
+
+exports[`App renders app with home page when route is / and user is logged in 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="Menu"
+  />
+  <div
+    className="LoadingOverlay"
+  />
+  <div
+    className="HomePage"
+  />
+  <footer
+    className="Footer"
+  >
+    <p
+      className="copyright"
+    >
+      © 2017. Brenton Cozby. View more projects at 
+      <a
+        href="https://brentoncozby.com"
+      >
+        brentoncozby.com
+      </a>
+      .
+    </p>
+  </footer>
+</div>
+`;

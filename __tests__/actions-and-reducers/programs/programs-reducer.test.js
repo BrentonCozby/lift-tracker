@@ -68,27 +68,14 @@ describe('programs-reducer', () => {
         expect(reducer(state, action)).toEqual(state)
     })
 
-    test('handles the SET_ONE_REP_MAX action', () => {
+    test('handles the NULLIFY_CURRENT_PROGRAM_SUCCESS action', () => {
         const action = {
-            type: 'SET_ONE_REP_MAX',
-            payload: {}
+            type: 'NULLIFY_CURRENT_PROGRAM_SUCCESS'
         }
 
         const expectedReducedState = {
-            ...state
-        }
-
-        expect(reducer(state, action)).toEqual(expectedReducedState)
-    })
-
-    test('handles the SET_EXERCISE_NAME action', () => {
-        const action = {
-            type: 'SET_EXERCISE_NAME',
-            payload: {}
-        }
-
-        const expectedReducedState = {
-            ...state
+            ...state,
+            current: null
         }
 
         expect(reducer(state, action)).toEqual(expectedReducedState)

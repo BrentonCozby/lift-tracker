@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 import { logoutOfFirebase } from '../../actions-and-reducers/user/user-action-creators.js'
 
-class Menu extends Component {
+export class Menu extends Component {
 
     static contextTypes = {
         router: PropTypes.object
@@ -16,8 +16,7 @@ class Menu extends Component {
     static propTypes = {
         logoutOfFirebase: PropTypes.func,
         isLoggedIn: PropTypes.bool,
-        username: PropTypes.string,
-        logout: PropTypes.func
+        username: PropTypes.string
     }
 
     state = {
@@ -48,6 +47,7 @@ class Menu extends Component {
             'menu-overlay': true,
             'visible': this.state.isMenuVisible
         })
+        
         return (
             <div>
                 <div className={menuOverlayClasses} onClick={this.toggleMenu}></div>

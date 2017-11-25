@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgramDetail renders program detail when a current program exists (connected) 1`] = `<div />`;
+
+exports[`ProgramDetail renders program detail when a current program exists 1`] = `
+<div
+  className="ProgramDetail"
+>
+  <h1
+    className="ProgramDetail-title"
+  />
+  <div>
+    Current Program
+  </div>
+</div>
+`;

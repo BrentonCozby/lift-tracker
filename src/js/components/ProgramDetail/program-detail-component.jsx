@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import { setCurrentProgram } from '../../actions-and-reducers/programs/programs-action-creators.js'
 
-class ProgramDetail extends Component {
+export class ProgramDetail extends Component {
 
     static propTypes = {
         setCurrentProgram: PropTypes.func,

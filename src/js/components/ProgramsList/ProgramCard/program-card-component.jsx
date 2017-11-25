@@ -5,20 +5,13 @@ import PropTypes from 'prop-types'
 
 import { setCurrentProgram } from '../../../actions-and-reducers/programs/programs-action-creators.js'
 
-class ProgramCard extends Component {
+export class ProgramCard extends Component {
 
     static propTypes = {
         setCurrentProgram: PropTypes.func,
         programId: PropTypes.string,
         title: PropTypes.string,
         userId: PropTypes.string
-    }
-
-    setCurrentProgram = () => {
-        this.props.setCurrentProgram({
-            userId: this.props.userId,
-            programId: this.props.programId
-        })
     }
 
     render() {

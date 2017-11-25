@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingOverlay adds class "visible" when nextProps include a loadingState with a value of true 1`] = `
+<div
+  className="LoadingOverlay"
+>
+  <img
+    alt="loading spinner"
+    className="spinner"
+    src="test-file-stub"
+  />
+</div>
+`;
+
+exports[`LoadingOverlay does not have class "visible" when all loading states are false (connected) 1`] = `
+<div
+  className="LoadingOverlay"
+>
+  <img
+    alt="loading spinner"
+    className="spinner"
+    src="test-file-stub"
+  />
+</div>
+`;
+
+exports[`LoadingOverlay does not have class "visible" when all loading states are false 1`] = `
+<div
+  className="LoadingOverlay"
+>
+  <img
+    alt="loading spinner"
+    className="spinner"
+    src="test-file-stub"
+  />
+</div>
+`;
+
+exports[`LoadingOverlay has class "visible" when some loading states are true 1`] = `
+<div
+  className="LoadingOverlay visible"
+>
+  <img
+    alt="loading spinner"
+    className="spinner"
+    src="test-file-stub"
+  />
+</div>
+`;

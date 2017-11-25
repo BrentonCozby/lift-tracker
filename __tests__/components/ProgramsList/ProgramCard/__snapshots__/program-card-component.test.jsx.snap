@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgramCard renders program card when user is logged in (connected) 1`] = `
+<a
+  className="ProgramCard"
+  href="programs/programId1234"
+  onClick={[Function]}
+>
+  <h3
+    className="ProgramCard-title"
+  >
+    program title
+  </h3>
+</a>
+`;
+
+exports[`ProgramCard renders program card when user is logged in 1`] = `
+<a
+  className="ProgramCard"
+  href="programs/programId1234"
+  onClick={[Function]}
+>
+  <h3
+    className="ProgramCard-title"
+  >
+    program title
+  </h3>
+</a>
+`;

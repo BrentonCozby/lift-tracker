@@ -75,12 +75,10 @@ export function calcNextWeights(userId, programId, plan) {
     // update database
     db.ref(`users/${userId}/programs/${programId}/plan/`).update(newPlan)
 
-    return { type: 'CALC_NEXT_WEIGHTS' }
+    return { type: 'CALC_NEXT_WEIGHTS_SUCCESS' }
 }
 
-export function setOneRepMax(params) {
-    const { userId, programId, currentProgram, newMax, location } = params
-
+export function setOneRepMax({ userId, programId, currentProgram, newMax, location }) {
     if (!userId) {
         return { type: null }
     }
@@ -102,12 +100,10 @@ export function setOneRepMax(params) {
 
     db.ref(`users/${userId}/programs/${programId}`).update(updatedProgram)
 
-    return { type: 'SET_ONE_REP_MAX' }
+    return { type: 'SET_ONE_REP_MAX_SUCCESS' }
 }
 
-export function setExerciseName(params) {
-    const { userId, programId, currentProgram, newName, location } = params
-
+export function setExerciseName({ userId, programId, currentProgram, newName, location }) {
     if (!userId) {
         return { type: null }
     }
@@ -129,5 +125,5 @@ export function setExerciseName(params) {
 
     db.ref(`users/${userId}/programs/${programId}`).update(updatedProgram)
 
-    return { type: 'SET_EXERCISE_NAME' }
+    return { type: 'SET_EXERCISE_NAME_SUCCESS' }
 }

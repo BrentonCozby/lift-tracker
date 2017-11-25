@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoMatch renders self and subcomponents 1`] = `
+<div
+  className="NoMatch"
+>
+  <h1>
+    Page not found
+  </h1>
+</div>
+`;

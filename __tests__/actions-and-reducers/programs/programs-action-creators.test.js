@@ -388,4 +388,46 @@ describe('program-actions', () => {
                 })
         })
     })
+
+    describe('stopListeningToCurrentProgram', () => {
+        let offSpy
+        let expectedActions
+
+        beforeEach(() => {
+
+            offSpy = jest.fn()
+
+            firebase.db.ref.mockReturnValue({
+                off: offSpy
+            })
+
+            expectedActions = [
+                {
+                    type: 'NULLIFY_CURRENT_PROGRAM_SUCCESS'
+                }
+            ]
+        })
+
+        test('dispatches null if userId is falsy', () => {
+            userId = undefined
+
+            expectedActions = [{ type: null }]
+
+            return store.dispatch(actions.stopListeningToCurrentProgram({ userId }))
+                .then(() => {
+                    expect(firebase.db.ref).not.toHaveBeenCalled()
+                    expect(offSpy).not.toHaveBeenCalled()
+                    expect(store.getActions()).toEqual(expectedActions)
+                })
+        })
+
+        test('dispatches NULLIFY_CURRENT_PROGRAM_SUCCESS', () => {
+            return store.dispatch(actions.stopListeningToCurrentProgram({ userId }))
+                .then(() => {
+                    expect(firebase.db.ref).toHaveBeenCalledWith(`users/${userId}/programs`)
+                    expect(offSpy).toHaveBeenCalled()
+                    expect(store.getActions()).toEqual(expectedActions)
+                })
+        })
+    })
 })

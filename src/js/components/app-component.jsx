@@ -17,7 +17,7 @@ import {
     retrieveLoginResult
 } from '../actions-and-reducers/user/user-action-creators.js'
 
-class App extends Component {
+export class App extends Component {
 
     static propTypes = {
         history: PropTypes.object,
@@ -33,7 +33,7 @@ class App extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.isLoggedIn === false && nextProps.location.pathname !== '/login') {
+        if (nextProps.isLoggedIn === false && nextProps.location.pathname !== `${PP}login`) {
             this.props.history.replace(`${PP}login`)
         }
     }

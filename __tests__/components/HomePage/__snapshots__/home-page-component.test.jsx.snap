@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage pushes history to the login page when user is not logged in 1`] = `
+<div
+  className="HomePage"
+>
+  <h2
+    className="app-title"
+  >
+    Lift Tracker
+  </h2>
+</div>
+`;
+
+exports[`HomePage renders home page when user is logged in (connected) 1`] = `
+<div
+  className="HomePage"
+>
+  <h2
+    className="app-title"
+  >
+    Lift Tracker
+  </h2>
+</div>
+`;
+
+exports[`HomePage renders home page when user is logged in 1`] = `
+<div
+  className="HomePage"
+>
+  <h2
+    className="app-title"
+  >
+    Lift Tracker
+  </h2>
+</div>
+`;

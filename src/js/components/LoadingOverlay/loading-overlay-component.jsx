@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import loadingSpinner from 'images/loading-spinner.gif'
 
-class LoadingOverlay extends Component {
+export class LoadingOverlay extends Component {
 
     static propTypes = {
         loadingStates: PropTypes.object

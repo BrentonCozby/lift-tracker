@@ -11,7 +11,7 @@ import {
     getProgramTitles
 } from '../../actions-and-reducers/programs/programs-action-creators.js'
 
-class ProgramsList extends Component {
+export class ProgramsList extends Component {
 
     static propTypes = {
         stopListeningToCurrentProgram: PropTypes.func,
