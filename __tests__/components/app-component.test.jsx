@@ -1,15 +1,23 @@
-import React from 'react'
 import 'raf/polyfill'
+import React from 'react'
 import renderer from 'react-test-renderer'
 import Enzyme, { shallow, mount } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { MemoryRouter } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
 import configStore from '../../src/js/store.js'
 import ConnectedApp, { App } from '../../src/js/components/app-component.jsx'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
+jest.mock('react-stripe-elements', () => {
+    return {
+        StripeProvider: function StripeProvider({ children }) {
+            return <div className="StripeProvider">{children}</div>
+        }
+    }
+})
 jest.mock('../../src/js/components/Menu/menu-component.jsx', () => function Menu() {
     return <div className="Menu"></div>
 })
@@ -36,24 +44,27 @@ describe('App', () => {
     let initialState
     let initialProps
     let store
-    let reactStripeElements
-    let stripeMockResult
-    let stripeSpy
     let replaceSpy
     let retrieveLoginResultSpy
     let listenForAuthStateChangedSpy
+    let initialEntries
+    let initialIndex
 
     function initializeComponent(props) {
-        const $component = shallow(
-            <Router initialEntries={[`${PP}`]} initialIndex={0}>
-                <App {...props} />
-            </Router>
+        const $component = mount(
+            <MemoryRouter initialEntries={initialEntries} initialIndex={initialIndex}>
+                <BrowserRouter>
+                    <App {...props} />
+                </BrowserRouter>
+            </MemoryRouter>
         )
 
         const componentTree = renderer.create(
-            <Router>
-                <App {...props} />
-            </Router>
+            <MemoryRouter initialEntries={initialEntries} initialIndex={initialIndex}>
+                <BrowserRouter>
+                    <App {...props} />
+                </BrowserRouter>
+            </MemoryRouter>
         )
 
         return {
@@ -69,17 +80,17 @@ describe('App', () => {
 
         const $component = mount(
             <Provider store={store}>
-                <Router>
+                <MemoryRouter>
                     <ConnectedApp {...props} />
-                </Router>
+                </MemoryRouter>
             </Provider>
         )
 
         const componentTree = renderer.create(
             <Provider store={store}>
-                <Router>
+                <MemoryRouter>
                     <ConnectedApp {...props} />
-                </Router>
+                </MemoryRouter>
             </Provider>
         )
 
@@ -92,31 +103,19 @@ describe('App', () => {
     }
 
     beforeEach(() => {
-        stripeMockResult = {
-            elements: jest.fn(),
-            createToken: jest.fn(),
-            createSource: jest.fn(),
-        }
-        stripeSpy = jest.fn().mockReturnValue(stripeMockResult)
-        window.Stripe = stripeSpy
-
-        process.env.perishable_key = 'TEST'
-
-        store = configStore()
-        reactStripeElements = jest.genMockFromModule('react-stripe-elements')
-
-        reactStripeElements.StripeProvider = jest.fn()
-
         replaceSpy = jest.fn()
         retrieveLoginResultSpy = jest.fn()
         listenForAuthStateChangedSpy = jest.fn()
+
+        initialEntries = [`${PP}`]
+        initialIndex = 0
 
         initialProps = {
             history: {
                 replace: replaceSpy
             },
             location: {
-                pathname: `${PP}`
+                pathname: PP
             },
             retrieveLoginResult: retrieveLoginResultSpy,
             listenForAuthStateChanged: listenForAuthStateChangedSpy,
@@ -124,13 +123,50 @@ describe('App', () => {
         }
     })
 
-    test('renders app with home page when route is / and user is logged in', () => {
-        const { componentJSON } = initializeComponent(initialProps)
+    test('retrieves login result and listens for auth state changed on mount', () => {
+        initializeComponent(initialProps)
 
         expect(retrieveLoginResultSpy).toHaveBeenCalled()
         expect(listenForAuthStateChangedSpy).toHaveBeenCalled()
-        expect(componentJSON).toMatchSnapshot()
     })
+
+    test('renders home page when path is /', () => {
+        const { $component } = initializeComponent(initialProps)
+
+        expect($component.find('.HomePage').length).toBe(1)
+    })
+
+    // test('renders login page when path is "/login"', () => {
+    //     initialEntries = [`${PP}login`]
+
+    //     const { $component } = initializeComponent(initialProps)
+
+    //     expect($component.find('.LoginPage').length).toBe(1)
+    // })
+
+    // test('renders program detail when path is "/programs/:id"', () => {
+    //     initialEntries = [`${PP}programs/1234`]
+
+    //     const { $component } = initializeComponent(initialProps)
+
+    //     expect($component.find('.ProgramDetail').length).toBe(1)
+    // })
+
+    // test('renders payment page when path is "/payment"', () => {
+    //     initialEntries = [`${PP}payment`]
+
+    //     const { $component } = initializeComponent(initialProps)
+
+    //     expect($component.find('.PaymentPage').length).toBe(1)
+    // })
+
+    // test('renders NoMatch component when path is anything else', () => {
+    //     initialEntries = [`${PP}foo/bar/baz`]
+
+    //     const { $component } = initializeComponent(initialProps)
+
+    //     expect($component.find('.NoMatch').length).toBe(1)
+    // })
 
     test('redirects user to login page if they are not logged in', () => {
         const app = shallow(<App {...initialProps} />)

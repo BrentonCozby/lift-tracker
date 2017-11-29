@@ -29,33 +29,3 @@ exports[`Form renders payment form 1`] = `
   />
 </form>
 `;
-
-exports[`Form renders payment page (connected) 1`] = `
-<form
-  className="PaymentForm"
-  onSubmit={[Function]}
->
-  <div
-    className="CardElement"
-  />
-  <input
-    type="submit"
-    value="submit"
-  />
-</form>
-`;
-
-exports[`Form renders payment page 1`] = `
-<form
-  className="PaymentForm"
-  onSubmit={[Function]}
->
-  <div
-    className="CardElement"
-  />
-  <input
-    type="submit"
-    value="submit"
-  />
-</form>
-`;

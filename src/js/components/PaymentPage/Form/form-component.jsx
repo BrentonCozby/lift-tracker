@@ -14,7 +14,7 @@ export class Form extends Component {
         e.preventDefault()
 
         this.props.stripe.createToken({type: 'card', name: 'Test User'}).then(({token}) => {
-            console.log('Received token', token)
+
         })
     }
 

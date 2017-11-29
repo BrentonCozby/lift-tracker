@@ -2,62 +2,35 @@
 
 exports[`App renders app with home page when route is / and user is logged in (connected) 1`] = `
 <div
-  className="App"
+  className="StripeProvider"
 >
   <div
-    className="Menu"
-  />
-  <div
-    className="LoadingOverlay"
-  />
-  <div
-    className="HomePage"
-  />
-  <footer
-    className="Footer"
+    className="App"
   >
-    <p
-      className="copyright"
+    <div
+      className="Menu"
+    />
+    <div
+      className="LoadingOverlay"
+    />
+    <div
+      className="HomePage"
+    />
+    <footer
+      className="Footer"
     >
-      © 2017. Brenton Cozby. View more projects at 
-      <a
-        href="https://brentoncozby.com"
+      <p
+        className="copyright"
       >
-        brentoncozby.com
-      </a>
-      .
-    </p>
-  </footer>
-</div>
-`;
-
-exports[`App renders app with home page when route is / and user is logged in 1`] = `
-<div
-  className="App"
->
-  <div
-    className="Menu"
-  />
-  <div
-    className="LoadingOverlay"
-  />
-  <div
-    className="HomePage"
-  />
-  <footer
-    className="Footer"
-  >
-    <p
-      className="copyright"
-    >
-      © 2017. Brenton Cozby. View more projects at 
-      <a
-        href="https://brentoncozby.com"
-      >
-        brentoncozby.com
-      </a>
-      .
-    </p>
-  </footer>
+        © 2017. Brenton Cozby. View more projects at 
+        <a
+          href="https://brentoncozby.com"
+        >
+          brentoncozby.com
+        </a>
+        .
+      </p>
+    </footer>
+  </div>
 </div>
 `;
