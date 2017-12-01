@@ -15,7 +15,7 @@ jest.mock('../../../src/js/components/PaymentPage/Form/form-component.jsx', () =
 })
 jest.mock('react-stripe-elements', () => {
     return {
-        Elements: function Elements() {
+        Elements() {
             return <div className="Elements"></div>
         }
     }

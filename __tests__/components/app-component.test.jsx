@@ -13,7 +13,7 @@ Enzyme.configure({ adapter: new EnzymeAdapter() })
 
 jest.mock('react-stripe-elements', () => {
     return {
-        StripeProvider: function StripeProvider({ children }) {
+        StripeProvider({ children }) {
             return <div className="StripeProvider">{children}</div>
         }
     }

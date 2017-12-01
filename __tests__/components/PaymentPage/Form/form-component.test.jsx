@@ -12,10 +12,12 @@ Enzyme.configure({ adapter: new EnzymeAdapter() })
 
 jest.mock('react-stripe-elements', () => {
     return {
-        CardElement: function CardElement() {
+        CardElement() {
             return <div className="CardElement"></div>
         },
-        injectStripe: (component) => component
+        injectStripe(component) {
+            return component
+        }
     }
 })
 
