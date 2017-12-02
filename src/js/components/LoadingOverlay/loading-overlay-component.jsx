@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
-import loadingSpinner from 'images/loading-spinner.gif'
-
 export class LoadingOverlay extends Component {
 
     static propTypes = {
@@ -39,14 +37,17 @@ export class LoadingOverlay extends Component {
 
         return (
             <div className={classes}>
-                <img src={loadingSpinner} alt="loading spinner" className="spinner"/>
+                <span className="loader"></span>
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    loadingStates: state.user.loadingStates
+    loadingStates: {
+        ...state.user.loadingStates,
+        ...state.stripe.loadingStates
+    }
 })
 
 const actions = {
