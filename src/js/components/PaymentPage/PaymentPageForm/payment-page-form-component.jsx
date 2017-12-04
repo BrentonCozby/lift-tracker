@@ -22,14 +22,17 @@ export class PaymentPageForm extends Component {
     onSubmit(e) {
         e.preventDefault()
 
-        this.props.stripeCreateToken(this.props.stripe)
+        this.props.stripeCreateToken(this.props.stripe, {
+            currency: 'usd',
+            amount: 1100
+        })
     }
 
     render() {
         return (
-            <form onSubmit={this.onSubmit} className="PaymentForm">
-                <CardElement />
-                <input type="submit" value="submit" />
+            <form onSubmit={this.onSubmit} className="PaymentPageForm">
+                <CardElement className="CardElement" />
+                <input type="submit" value="pay" className="submit-btn" />
             </form>
         )
     }
@@ -44,4 +47,4 @@ const actions = {
     stripeCreateToken
 }
 
-export default connect(mapStateToProps, actions)(injectStripe(PaymentPageForm))
+export default injectStripe(connect(mapStateToProps, actions)(PaymentPageForm))

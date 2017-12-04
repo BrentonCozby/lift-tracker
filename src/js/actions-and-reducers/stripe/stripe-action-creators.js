@@ -10,18 +10,20 @@ export function stripeCreateToken(stripeObject, ...args) {
             type: CREATE_TOKEN_STARTED
         })
 
-        const { token, error } = await stripeObject.createToken(args)
+        const { token, error: tokenError } = await stripeObject.createToken()
 
-        if (error) {
+        if (tokenError) {
             alert({
-                message: JSON.stringify(error, null, 2),
+                message: JSON.stringify(tokenError, null, 2),
                 type: 'error'
             })
 
             dispatch({
                 type: CREATE_TOKEN_ERROR,
-                error
+                tokenError
             })
+
+            return
         }
 
         dispatch({

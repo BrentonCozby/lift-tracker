@@ -17,6 +17,10 @@ import {
     retrieveLoginResult
 } from '../actions-and-reducers/user/user-action-creators.js'
 
+const PUBLIC_STRIPE_API_KEY = process.env.NODE_ENV === 'production'
+    ? 'pk_live_PMELFEvTng3WDCk0LDtP21w6'
+    : 'pk_test_EoGExNoDDEaXgpne0NKt4x7F'
+
 export class App extends Component {
 
     static propTypes = {
@@ -40,7 +44,7 @@ export class App extends Component {
 
     render() {
         return (
-            <StripeProvider apiKey={process.env.perishable_key}>
+            <StripeProvider apiKey={PUBLIC_STRIPE_API_KEY}>
                 <div className="App">
                     <Menu />
                     <LoadingOverlay />
