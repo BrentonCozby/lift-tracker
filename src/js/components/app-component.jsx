@@ -28,7 +28,7 @@ export class App extends Component {
         location: PropTypes.object,
         retrieveLoginResult: PropTypes.func,
         listenForAuthStateChanged: PropTypes.func,
-        isLoggedIn: PropTypes.bool
+        uid: PropTypes.string
     }
 
     componentWillMount() {
@@ -37,7 +37,7 @@ export class App extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.isLoggedIn === false && nextProps.location.pathname !== `${PP}login`) {
+        if (!nextProps.uid && nextProps.location.pathname !== `${PP}login`) {
             this.props.history.replace(`${PP}login`)
         }
     }
@@ -66,7 +66,7 @@ export class App extends Component {
 
 const mapStateToProps = function(state) {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        uid: state.user.uid
     }
 }
 

@@ -14,7 +14,7 @@ class OneRepMaxes extends Component {
         setExerciseName: PropTypes.func,
         updateProgram: PropTypes.func,
         currentProgram: PropTypes.object,
-        userId: PropTypes.string
+        uid: PropTypes.string
     }
 
     state = {
@@ -31,7 +31,7 @@ class OneRepMaxes extends Component {
         delete programWithoutId.id
 
         const params = {
-            userId: this.props.userId,
+            uid: this.props.uid,
             programId: this.props.currentProgram.id,
             currentProgram: programWithoutId,
             newMax: +e.target.value,
@@ -46,7 +46,7 @@ class OneRepMaxes extends Component {
         delete programWithoutId.id
 
         const params = {
-            userId: this.props.userId,
+            uid: this.props.uid,
             programId: this.props.currentProgram.id,
             currentProgram: programWithoutId,
             newName: sanitizeHtml(e.target.value),
@@ -78,7 +78,7 @@ class OneRepMaxes extends Component {
         })
 
         this.props.updateProgram({
-            userId: this.props.userId,
+            uid: this.props.uid,
             programId: this.props.currentProgram.id,
             data: updatedProgram
         })
@@ -107,7 +107,7 @@ class OneRepMaxes extends Component {
         })
 
         this.props.updateProgram({
-            userId: this.props.userId,
+            uid: this.props.uid,
             programId: this.props.currentProgram.id,
             data: updatedProgram
         })
@@ -165,7 +165,7 @@ class OneRepMaxes extends Component {
 
 const mapStateToProps = function(state) {
     return {
-        userId: state.user.uid
+        uid: state.user.uid
     }
 }
 

@@ -37,10 +37,10 @@ exports[`Menu renders menu in opened state when user is logged in 1`] = `
       Logout
     </a>
     <p
-      className="username"
+      className="fullName"
     >
       Logged in as 
-      username1234
+      fullName
     </p>
   </div>
 </div>
@@ -83,6 +83,7 @@ exports[`Menu renders menu in opened state when user is not logged in 1`] = `
     >
       Login
     </a>
+    
   </div>
 </div>
 `;
@@ -124,10 +125,10 @@ exports[`Menu renders menu in unopened state when user is logged in 1`] = `
       Logout
     </a>
     <p
-      className="username"
+      className="fullName"
     >
       Logged in as 
-      username1234
+      fullName
     </p>
   </div>
 </div>
@@ -170,6 +171,7 @@ exports[`Menu renders menu in unopened state when user is not logged in (connect
     >
       Login
     </a>
+    
   </div>
 </div>
 `;
@@ -211,6 +213,7 @@ exports[`Menu renders menu in unopened state when user is not logged in 1`] = `
     >
       Login
     </a>
+    
   </div>
 </div>
 `;

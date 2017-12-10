@@ -50,7 +50,7 @@ describe('LoadingOverlay', () => {
     test('does not have class "visible" when all loading states are false', () => {
         let initialProps = {
             loadingStates: {
-                isGettingUserData: false,
+                isGettingUserProgramData: false,
                 isRetrievingLoginResult: false
             }
         }
@@ -64,7 +64,7 @@ describe('LoadingOverlay', () => {
     test('has class "visible" when some loading states are true', () => {
         let initialProps = {
             loadingStates: {
-                isGettingUserData: true,
+                isGettingUserProgramData: true,
                 isRetrievingLoginResult: false
             }
         }
@@ -78,7 +78,7 @@ describe('LoadingOverlay', () => {
     test('adds class "visible" when nextProps include a loadingState with a value of true', () => {
         let initialProps = {
             loadingStates: {
-                isGettingUserData: false,
+                isGettingUserProgramData: false,
                 isRetrievingLoginResult: false
             }
         }
@@ -89,7 +89,7 @@ describe('LoadingOverlay', () => {
 
         $component.setProps({
             loadingStates: {
-                isGettingUserData: true
+                isGettingUserProgramData: true
             }
         })
 
@@ -101,7 +101,7 @@ describe('LoadingOverlay', () => {
         initialState = {
             user: {
                 loadingStates: {
-                    isGettingUserData: false,
+                    isGettingUserProgramData: false,
                     isRetrievingLoginResult: false
                 }
             }

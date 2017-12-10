@@ -18,17 +18,16 @@ export class ProgramsList extends Component {
         nullifyCurrentProgram: PropTypes.func,
         saveNewProgram: PropTypes.func,
         getProgramTitles: PropTypes.func,
-        userId: PropTypes.string,
-        isLoggedIn: PropTypes.bool,
+        uid: PropTypes.string,
         isAdmin: PropTypes.bool,
         programTitles: PropTypes.array
     }
 
     componentWillMount() {
-        this.props.stopListeningToCurrentProgram({userId: this.props.userId})
+        this.props.stopListeningToCurrentProgram({uid: this.props.uid})
         this.props.nullifyCurrentProgram()
 
-        if (this.props.isLoggedIn) {
+        if (this.props.uid) {
             this.props.getProgramTitles()
         }
     }
@@ -38,7 +37,7 @@ export class ProgramsList extends Component {
     }
 
     render() {
-        const { programTitles, isLoggedIn, isAdmin, userId } = this.props // eslint-disable-line no-unused-vars
+        const { programTitles, uid, isAdmin } = this.props // eslint-disable-line no-unused-vars
 
         return (
             <table className="ProgramsList">
@@ -62,7 +61,7 @@ export class ProgramsList extends Component {
                     ))}
                     <tr>
                         <td>
-                            {isLoggedIn && isAdmin &&
+                            {uid && isAdmin &&
                                 <button
                                     className="save-new-program-btn"
                                     onClick={this.saveNewProgram}>
@@ -79,9 +78,8 @@ export class ProgramsList extends Component {
 
 const mapStateToProps = state => ({
     programTitles: state.programs.titles,
-    isLoggedIn: state.user.isLoggedIn,
-    isAdmin: state.user.isAdmin,
-    userId: state.user.uid
+    uid: state.user.uid,
+    isAdmin: state.user.isAdmin
 })
 
 const actions = {

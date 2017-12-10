@@ -15,8 +15,8 @@ export class Menu extends Component {
 
     static propTypes = {
         logoutOfFirebase: PropTypes.func,
-        isLoggedIn: PropTypes.bool,
-        username: PropTypes.string
+        uid: PropTypes.string,
+        fullName: PropTypes.string
     }
 
     state = {
@@ -33,7 +33,7 @@ export class Menu extends Component {
     }
 
     render() {
-        const { isLoggedIn, username } = this.props
+        const { uid, fullName } = this.props
 
         const menuBtnClasses = classnames({
             'menu-button': true,
@@ -58,11 +58,11 @@ export class Menu extends Component {
                 </div>
                 <div className={menuClasses}>
                     <Link to={PP} className="Menu-item" onClick={this.toggleMenu}>Home</Link>
-                    {(isLoggedIn)
+                    {(uid)
                         ? <a className="Menu-item" onClick={this.logout}>Logout</a>
                         : <Link to={`${PP}login`} className="Menu-item" onClick={this.toggleMenu}>Login</Link>
                     }
-                    {isLoggedIn && <p className="username">Logged in as {username}</p>}
+                    {uid && <p className="fullName">Logged in as {fullName}</p>}
                 </div>
             </div>
         )
@@ -71,8 +71,8 @@ export class Menu extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isLoggedIn: state.user.isLoggedIn,
-        username: state.user.username
+        uid: state.user.uid,
+        fullName: state.user.fullName
     }
 }
 

@@ -15,7 +15,6 @@ exports[`LoginPage renders login page when page is done loading (connected) 1`] 
     <button
       className="login-btn facebook"
       data-method="Facebook"
-      disabled={false}
       onClick={[Function]}
     >
       facebook
@@ -23,7 +22,6 @@ exports[`LoginPage renders login page when page is done loading (connected) 1`] 
     <button
       className="login-btn google"
       data-method="Google"
-      disabled={false}
       onClick={[Function]}
     >
       google
@@ -31,7 +29,6 @@ exports[`LoginPage renders login page when page is done loading (connected) 1`] 
     <button
       className="login-btn twitter"
       data-method="Twitter"
-      disabled={false}
       onClick={[Function]}
     >
       twitter
@@ -55,7 +52,6 @@ exports[`LoginPage renders login page when page is done loading 1`] = `
     <button
       className="login-btn facebook"
       data-method="Facebook"
-      disabled={false}
       onClick={[Function]}
     >
       facebook
@@ -63,7 +59,6 @@ exports[`LoginPage renders login page when page is done loading 1`] = `
     <button
       className="login-btn google"
       data-method="Google"
-      disabled={false}
       onClick={[Function]}
     >
       google
@@ -71,47 +66,6 @@ exports[`LoginPage renders login page when page is done loading 1`] = `
     <button
       className="login-btn twitter"
       data-method="Twitter"
-      disabled={false}
-      onClick={[Function]}
-    >
-      twitter
-    </button>
-  </div>
-</div>
-`;
-
-exports[`LoginPage renders login page when page is loading 1`] = `
-<div
-  className="LoginPage"
->
-  <h1
-    className="LoginPage-title"
-  >
-    Login Required
-  </h1>
-  <div
-    className="login-buttons-container"
-  >
-    <button
-      className="login-btn facebook"
-      data-method="Facebook"
-      disabled={true}
-      onClick={[Function]}
-    >
-      facebook
-    </button>
-    <button
-      className="login-btn google"
-      data-method="Google"
-      disabled={true}
-      onClick={[Function]}
-    >
-      google
-    </button>
-    <button
-      className="login-btn twitter"
-      data-method="Twitter"
-      disabled={true}
       onClick={[Function]}
     >
       twitter

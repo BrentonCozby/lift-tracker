@@ -7,12 +7,12 @@ import ProgramsList from '../ProgramsList/programs-list-component.jsx'
 export class HomePage extends Component {
 
     static propTypes = {
-        isLoggedIn: PropTypes.bool,
+        uid: PropTypes.string,
         history: PropTypes.object
     }
 
     componentWillMount() {
-        if (this.props.isLoggedIn === false) {
+        if (!this.props.uid) {
             this.props.history.push(`${PP}login`)
         }
     }
@@ -28,7 +28,7 @@ export class HomePage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    isLoggedIn: state.user.isLoggedIn
+    uid: state.user.uid
 })
 
 const actions = {

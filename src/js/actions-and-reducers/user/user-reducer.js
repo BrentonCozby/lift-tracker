@@ -1,85 +1,74 @@
 import { cloneDeep } from 'lodash'
 
 const INITAL_STATE = {
-    isLoggedIn: false,
-    uid: null,
-    token: null,
-    username: null,
-    programs: null,
+    uid: '',
+    token: '',
+    fullName: '',
+    firstName: '',
+    lastName: '',
+    avatar: '',
+    email: '',
+    programs: [],
     isAdmin: false,
     loadingStates: {
-        isGettingUserData: true,
+        isGettingUserProgramData: true,
         isRetrievingLoginResult: true
     }
 }
 
 export default function userReducer(state = INITAL_STATE, action) {
     switch (action.type) {
-        case 'GET_USER_DATA_SUCCESS_WITH_PAYLOAD': {
-            const newState = {
-                ...state,
-                loadingStates: {
-                    ...state.loadingStates,
-                    isGettingUserData: false
-                }
-            }
-
-            const { data, uid } = action.payload
-
-            newState.uid = uid
-            newState.username = data.username
-            newState.programs = cloneDeep(data.programs)
-            newState.isAdmin = data.isAdmin
-            newState.isLoggedIn = true
-
-            return newState
-        }
-        case 'GET_USER_DATA_SUCCESS_NO_PAYLOAD': {
-            const newState = {
-                ...state,
-                loadingStates: {
-                    ...state.loadingStates,
-                    isGettingUserData: false
-                }
-            }
-
-            return newState
-        }
-        case 'RETRIEVE_LOGIN_RESULT_SUCCESS_WITH_PAYLOAD': {
-            const newState = {
-                ...state,
-                loadingStates: {
-                    ...state.loadingStates,
-                    isRetrievingLoginResult: false
-                }
-            }
-
-            const { user, credential } = action.payload // eslint-disable-line no-unused-vars
-
-            newState.token = credential.accessToken
-
-            return newState
-        }
-        case 'RETRIEVE_LOGIN_RESULT_SUCCESS_NO_PAYLOAD': {
-            const newState = {
-                ...state,
-                loadingStates: {
-                    ...state.loadingStates,
-                    isRetrievingLoginResult: false
-                }
-            }
-
-            return newState
-        }
-        case 'LOGOUT_SUCCESS':
+        case 'GET_USER_PROGRAM_DATA_SUCCESS_WITH_PAYLOAD': {
+            const { data } = action.payload
+            
             return {
                 ...state,
-                uid: null,
-                username: null,
-                token: null,
-                isLoggedIn: false,
-                isAdmin: false
+                loadingStates: {
+                    ...state.loadingStates,
+                    isGettingUserProgramData: false
+                },
+                programs: cloneDeep(data.programs),
+                isAdmin: data.isAdmin
             }
+        }
+        case 'GET_USER_PROGRAM_DATA_SUCCESS_NO_PAYLOAD': {
+            return {
+                ...state,
+                loadingStates: {
+                    ...state.loadingStates,
+                    isGettingUserProgramData: false
+                }
+            }
+        }
+        case 'RETRIEVE_LOGIN_RESULT_SUCCESS_WITH_PAYLOAD': {
+            const { user, credential, additionalUserInfo: { profile } } = action.payload // eslint-disable-line no-unused-vars
+
+            return {
+                ...state,
+                loadingStates: {
+                    ...state.loadingStates,
+                    isRetrievingLoginResult: false
+                },
+                uid: user.uid,
+                token: credential.accessToken,
+                email: user.email,
+                fullName: profile.name,
+                firstName: profile.givenName,
+                lastName: profile.familyName,
+                avatar: profile.picture
+            }
+        }
+        case 'RETRIEVE_LOGIN_RESULT_SUCCESS_NO_PAYLOAD': {
+            return {
+                ...state,
+                loadingStates: {
+                    ...state.loadingStates,
+                    isRetrievingLoginResult: false
+                }
+            }
+        }
+        case 'LOGOUT_SUCCESS':
+            return INITAL_STATE
         default:
             return state
     }

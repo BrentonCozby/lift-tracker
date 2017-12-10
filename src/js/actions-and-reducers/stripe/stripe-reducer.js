@@ -1,4 +1,6 @@
 const INITAL_STATE = {
+    defaultSource: '',
+    stripe_customer_id: '',
     loadingStates: {
         isCreatingToken: false
     }
@@ -7,19 +9,21 @@ const INITAL_STATE = {
 
 export default function stripeReducer(state = INITAL_STATE, action) {
     switch (action.type) {
-        case 'CREATE_TOKEN_STARTED': {
+        case 'STRIPE_CREATE_CUSTOMER_STARTED': {
             return { ...state, loadingStates: { isCreatingToken: true } }
         }
-        case 'CREATE_TOKEN_SUCCESS': {
-            const newState = {
+        case 'STRIPE_CREATE_CUSTOMER_SUCCESS': {
+            return {
                 ...state,
+                stripe_customer_id: action.payload,
                 loadingStates: { isCreatingToken: false }
             }
-
-            return newState
         }
-        case 'CREATE_TOKEN_ERROR': {
+        case 'STRIPE_CREATE_CUSTOMER_ERROR': {
             return { ...state, loadingStates: { isCreatingToken: false } }
+        }
+        case 'LOGOUT_SUCCESS': {
+            return INITAL_STATE
         }
         default:
             return state

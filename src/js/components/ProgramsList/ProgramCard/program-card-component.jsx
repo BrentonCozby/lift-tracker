@@ -11,7 +11,7 @@ export class ProgramCard extends Component {
         setCurrentProgram: PropTypes.func,
         programId: PropTypes.string,
         title: PropTypes.string,
-        userId: PropTypes.string
+        uid: PropTypes.string
     }
 
     render() {
@@ -27,7 +27,7 @@ export class ProgramCard extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userId: state.user.uid
+        uid: state.user.uid
     }
 }
 

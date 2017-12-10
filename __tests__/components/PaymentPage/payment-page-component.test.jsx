@@ -10,7 +10,7 @@ import ConnectedPaymentPage, { PaymentPage } from '../../../src/js/components/Pa
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
-jest.mock('../../../src/js/components/PaymentPage/Form/form-component.jsx', () => function Form() {
+jest.mock('../../../src/js/components/PaymentPage/PaymentPageForm/payment-page-form-component.jsx', () => function Form() {
     return <div className="PaymentForm"></div>
 })
 jest.mock('react-stripe-elements', () => {

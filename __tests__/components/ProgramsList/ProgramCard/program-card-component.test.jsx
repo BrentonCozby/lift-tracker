@@ -65,7 +65,6 @@ describe('ProgramCard', () => {
         initialProps = {
             programId: 'programId1234',
             title: 'program title',
-            userId: 'userId1234',
             uid: 'uid1234'
         }
     })

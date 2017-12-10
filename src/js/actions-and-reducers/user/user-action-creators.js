@@ -5,9 +5,9 @@ const FIREBASE_LOGIN_REDIRECT_ERROR = 'FIREBASE_LOGIN_REDIRECT_ERROR'
 const RETRIEVE_LOGIN_RESULT_SUCCESS_WITH_PAYLOAD = 'RETRIEVE_LOGIN_RESULT_SUCCESS_WITH_PAYLOAD'
 const RETRIEVE_LOGIN_RESULT_SUCCESS_NO_PAYLOAD = 'RETRIEVE_LOGIN_RESULT_SUCCESS_NO_PAYLOAD'
 const RETRIEVE_LOGIN_RESULT_ERROR = 'RETRIEVE_LOGIN_RESULT_ERROR'
-const GET_USER_DATA_SUCCESS_WITH_PAYLOAD = 'GET_USER_DATA_SUCCESS_WITH_PAYLOAD'
-const GET_USER_DATA_SUCCESS_NO_PAYLOAD = 'GET_USER_DATA_SUCCESS_NO_PAYLOAD'
-const GET_USER_DATA_ERROR = 'GET_USER_DATA_ERROR'
+const GET_USER_PROGRAM_DATA_SUCCESS_WITH_PAYLOAD = 'GET_USER_PROGRAM_DATA_SUCCESS_WITH_PAYLOAD'
+const GET_USER_PROGRAM_DATA_SUCCESS_NO_PAYLOAD = 'GET_USER_PROGRAM_DATA_SUCCESS_NO_PAYLOAD'
+const GET_USER_PROGRAM_DATA_ERROR = 'GET_USER_PROGRAM_DATA_ERROR'
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 const LOGOUT_ERROR = 'LOGOUT_ERROR'
 
@@ -59,7 +59,7 @@ export function listenForAuthStateChanged() {
             .then(user => {
                 if (user) {
                     dispatch({
-                        type: GET_USER_DATA_SUCCESS_WITH_PAYLOAD,
+                        type: GET_USER_PROGRAM_DATA_SUCCESS_WITH_PAYLOAD,
                         payload: user
                     })
 
@@ -67,13 +67,13 @@ export function listenForAuthStateChanged() {
                 }
 
                 dispatch({
-                    type: GET_USER_DATA_SUCCESS_NO_PAYLOAD,
+                    type: GET_USER_PROGRAM_DATA_SUCCESS_NO_PAYLOAD,
                     payload: null
                 })
             })
             .catch((error) => {
                 dispatch({
-                    type: GET_USER_DATA_ERROR,
+                    type: GET_USER_PROGRAM_DATA_ERROR,
                     error
                 })
             })
@@ -94,5 +94,11 @@ export function logoutOfFirebase() {
                     error
                 })
             })
+    }
+}
+
+export function updateUser(uid, data) {
+    return (dispatch) => {
+        return Promise.resolve()
     }
 }

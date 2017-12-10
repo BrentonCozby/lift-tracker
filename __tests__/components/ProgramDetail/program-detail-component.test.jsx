@@ -76,7 +76,7 @@ describe('ProgramDetail', () => {
         initialProps = {
             setCurrentProgram: setCurrentProgramSpy,
             programId: 'programId1234',
-            userId: 'userId1234',
+            uid: 'uid1234',
             currentProgram: {
                 dirName: 'DUHR'
             }
@@ -101,7 +101,7 @@ describe('ProgramDetail', () => {
             }
         }
 
-        delete initialProps.userId
+        delete initialProps.uid
         delete initialProps.currentProgram
 
         const { componentJSON } = initializeConnectedComponent(initialProps, initialState)

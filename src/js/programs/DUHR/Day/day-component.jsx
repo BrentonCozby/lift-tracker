@@ -9,7 +9,7 @@ class Day extends Component {
     static propTypes = {
         setProgramValue: PropTypes.func,
         dayIndex: PropTypes.number,
-        userId: PropTypes.string,
+        uid: PropTypes.string,
         programId: PropTypes.string,
         dbref: PropTypes.string,
         sets: PropTypes.number,
@@ -20,7 +20,7 @@ class Day extends Component {
 
     setDifficulty = e => {
         this.props.setProgramValue({
-            userId: this.props.userId,
+            uid: this.props.uid,
             programId: this.props.programId,
             location: e.target.dataset.dbref,
             value: e.target.value
@@ -97,7 +97,7 @@ class Day extends Component {
 
 const mapStateToProps = function(state) {
     return {
-        userId: state.user.uid,
+        uid: state.user.uid,
         programId: state.programs.current.id
     }
 }

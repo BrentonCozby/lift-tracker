@@ -6,22 +6,25 @@ describe('user-reducer', () => {
 
     beforeEach(() => {
         state = {
-            isLoggedIn: false,
-            uid: null,
-            token: null,
-            username: null,
-            programs: null,
+            uid: '',
+            token: '',
+            fullName: '',
+            firstName: '',
+            lastName: '',
+            avatar: '',
+            email: '',
+            programs: [],
             isAdmin: false,
             loadingStates: {
-                isGettingUserData: true,
+                isGettingUserProgramData: true,
                 isRetrievingLoginResult: true
             }
         }
     })
 
-    test('GET_USER_DATA_SUCCESS_NO_PAYLOAD', () => {
+    test('GET_USER_PROGRAM_DATA_SUCCESS_NO_PAYLOAD', () => {
         const action = {
-            type: 'GET_USER_DATA_SUCCESS_NO_PAYLOAD',
+            type: 'GET_USER_PROGRAM_DATA_SUCCESS_NO_PAYLOAD',
             payload: undefined
         }
 
@@ -29,20 +32,18 @@ describe('user-reducer', () => {
             ...state,
             loadingStates: {
                 ...state.loadingStates,
-                isGettingUserData: false
+                isGettingUserProgramData: false
             }
         }
 
         expect(reducer(state, action)).toEqual(reducedStateExpected)
     })
 
-    test('GET_USER_DATA_SUCCESS_WITH_PAYLOAD', () => {
+    test('GET_USER_PROGRAM_DATA_SUCCESS_WITH_PAYLOAD', () => {
         const action = {
-            type: 'GET_USER_DATA_SUCCESS_WITH_PAYLOAD',
+            type: 'GET_USER_PROGRAM_DATA_SUCCESS_WITH_PAYLOAD',
             payload: {
-                uid: 'uid1234',
                 data: {
-                    username: 'username',
                     programs: [
                         {title: 'program title', exercises: ['foo', 'bar']}
                     ],
@@ -55,11 +56,9 @@ describe('user-reducer', () => {
             ...state,
             loadingStates: {
                 ...state.loadingStates,
-                isGettingUserData: false
+                isGettingUserProgramData: false
             },
-            uid: action.payload.uid,
-            ...lodash.cloneDeep(action.payload.data),
-            isLoggedIn: true
+            ...lodash.cloneDeep(action.payload.data)
         }
 
         expect(reducer(state, action)).toEqual(reducedStateExpected)
@@ -86,9 +85,20 @@ describe('user-reducer', () => {
         const action = {
             type: 'RETRIEVE_LOGIN_RESULT_SUCCESS_WITH_PAYLOAD',
             payload: {
-                user: {},
+                user: {
+                    uid: 'uid1234',
+                    email: 'foo@gmail.com'
+                },
                 credential: {
                     accessToken: 'accessToken'
+                },
+                additionalUserInfo: {
+                    profile: {
+                        name: 'name',
+                        givenName: 'givenName',
+                        familyName: 'familyName',
+                        picture: 'picture'
+                    }
                 }
             }
         }
@@ -99,7 +109,13 @@ describe('user-reducer', () => {
                 ...state.loadingStates,
                 isRetrievingLoginResult: false
             },
-            token: action.payload.credential.accessToken
+            token: action.payload.credential.accessToken,
+            uid: action.payload.user.uid,
+            email: action.payload.user.email,
+            fullName: action.payload.additionalUserInfo.profile.name,
+            firstName: action.payload.additionalUserInfo.profile.givenName,
+            lastName: action.payload.additionalUserInfo.profile.familyName,
+            avatar: action.payload.additionalUserInfo.profile.picture
         }
 
         expect(reducer(state, action)).toEqual(reducedStateExpected)
@@ -110,15 +126,24 @@ describe('user-reducer', () => {
             type: 'LOGOUT_SUCCESS'
         }
 
-        const reducedStateExpected = {
-            ...state,
-            uid: null,
-            username: null,
-            token: null,
-            isLoggedIn: false,
-            isAdmin: false
+        const dirtyState = {
+            uid: 'uid1234',
+            token: 'token1234',
+            fullName: 'fullName',
+            firstName: 'firstName',
+            lastName: 'lastName',
+            avatar: 'avatar',
+            email: 'email',
+            programs: [
+                {title: 'title1'}
+            ],
+            isAdmin: true,
+            loadingStates: {
+                isGettingUserProgramData: false,
+                isRetrievingLoginResult: false
+            }
         }
 
-        expect(reducer(state, action)).toEqual(reducedStateExpected)
+        expect(reducer(dirtyState, action)).toEqual(state)
     })
 })

@@ -73,7 +73,6 @@ export function onAuthStateChanged() {
                     if(!data[user.uid]) {
                         db.ref('users/' + user.uid).set({
                             programs: {},
-                            username: user.displayName,
                             email: user.email,
                             isAdmin: false
                         })

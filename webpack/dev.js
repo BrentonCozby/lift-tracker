@@ -10,8 +10,7 @@ export default {
     entry: {
         bundle: [
             'react-hot-loader/patch',
-            'webpack-dev-server/client?http://localhost:8080',
-            'webpack/hot/only-dev-server',
+            'webpack/hot/dev-server',
             'babel-polyfill',
             resolve(Dir.src, 'js', 'index.jsx')
         ]

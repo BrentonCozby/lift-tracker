@@ -65,8 +65,8 @@ describe('Menu', () => {
 
         initialProps = {
             logoutOfFirebase: logoutOfFirebaseSpy,
-            isLoggedIn: false,
-            username: 'username1234'
+            uid: '',
+            fullName: 'fullName'
         }
     })
 
@@ -76,7 +76,7 @@ describe('Menu', () => {
         expect($component.find('.Menu').hasClass('visible')).toBe(false)
         expect($component.find('.menu-overlay').hasClass('visible')).toBe(false)
         expect($component.find('.menu-button').hasClass('close')).toBe(false)
-        expect($component.find('.username').length).toBe(0)
+        expect($component.find('.fullName').length).toBe(0)
         expect(componentJSON).toMatchSnapshot()
     })
 
@@ -88,24 +88,24 @@ describe('Menu', () => {
         expect($component.find('.Menu').hasClass('visible')).toBe(true)
         expect($component.find('.menu-overlay').hasClass('visible')).toBe(true)
         expect($component.find('.menu-button').hasClass('close')).toBe(true)
-        expect($component.find('.username').length).toBe(0)
+        expect($component.find('.fullName').length).toBe(0)
         expect(componentJSON).toMatchSnapshot()
     })
 
     test('renders menu in unopened state when user is logged in', () => {
-        initialProps.isLoggedIn = true
+        initialProps.uid = 'uid1234'
 
         const { $component, componentJSON } = initializeComponent(initialProps)
 
         expect($component.find('.Menu').hasClass('visible')).toBe(false)
         expect($component.find('.menu-overlay').hasClass('visible')).toBe(false)
         expect($component.find('.menu-button').hasClass('close')).toBe(false)
-        expect($component.find('.username').length).toBe(1)
+        expect($component.find('.fullName').length).toBe(1)
         expect(componentJSON).toMatchSnapshot()
     })
 
     test('renders menu in opened state when user is logged in', () => {
-        initialProps.isLoggedIn = true
+        initialProps.uid = 'uid1234'
 
         const { $component, componentJSON } = initializeComponent(initialProps)
 
@@ -114,7 +114,7 @@ describe('Menu', () => {
         expect($component.find('.Menu').hasClass('visible')).toBe(true)
         expect($component.find('.menu-overlay').hasClass('visible')).toBe(true)
         expect($component.find('.menu-button').hasClass('close')).toBe(true)
-        expect($component.find('.username').length).toBe(1)
+        expect($component.find('.fullName').length).toBe(1)
         expect(componentJSON).toMatchSnapshot()
     })
 
@@ -142,13 +142,13 @@ describe('Menu', () => {
     test('renders menu in unopened state when user is not logged in (connected)', () => {
         initialState = {
             user: {
-                username: 'username1234',
-                isLoggedIn: false
+                fullName: 'fullName',
+                uid: ''
             }
         }
 
-        delete initialProps.username
-        delete initialProps.isLoggedIn
+        delete initialProps.fullName
+        delete initialProps.uid
 
         const { $component, componentJSON } = initializeConnectedComponent(initialProps, initialState)
 

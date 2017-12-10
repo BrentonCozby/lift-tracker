@@ -14,7 +14,7 @@ class Program extends Component {
 
     static propTypes = {
         currentProgram: PropTypes.object,
-        userId: PropTypes.string,
+        uid: PropTypes.string,
         listenForCurrentProgramEdit: PropTypes.func,
         stopListeningToCurrentProgram: PropTypes.func,
         calcNextWeights: PropTypes.func
@@ -26,7 +26,7 @@ class Program extends Component {
 
     componentWillMount() {
         this.props.listenForCurrentProgramEdit({
-            userId: this.props.userId,
+            uid: this.props.uid,
             programId: this.props.currentProgram.id
         })
     }
@@ -34,11 +34,11 @@ class Program extends Component {
     componentDidUpdate() {
         if(this.props.currentProgram) {
             const plan = [...this.props.currentProgram.plan]
-            this.props.calcNextWeights(this.props.userId, this.props.currentProgram.id, plan)
+            this.props.calcNextWeights(this.props.uid, this.props.currentProgram.id, plan)
 
             if(!this.state.programId) {
                 this.props.listenForCurrentProgramEdit({
-                    userId: this.props.userId,
+                    uid: this.props.uid,
                     programId: this.props.currentProgram.id
                 })
                 this.setState({programId: this.props.currentProgram.id})
@@ -47,7 +47,7 @@ class Program extends Component {
     }
 
     componentWillUnmount(){
-        this.props.stopListeningToCurrentProgram({userId: this.props.userId})
+        this.props.stopListeningToCurrentProgram({uid: this.props.uid})
     }
 
     render() {
@@ -73,7 +73,7 @@ class Program extends Component {
 const mapStateToProps = function(state) {
     return {
         currentProgram: state.programs.current,
-        userId: state.user.uid
+        uid: state.user.uid
     }
 }
 

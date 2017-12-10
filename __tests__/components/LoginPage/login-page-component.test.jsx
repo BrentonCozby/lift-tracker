@@ -76,26 +76,20 @@ describe('LoginPage', () => {
                 replace: replaceSpy,
                 push: pushSpy
             },
-            isLoggedIn: false,
-            isGettingUserData: false,
-            isLoading: false,
-            userId: 'userId1234'
+            uid: '',
+            isGettingUserProgramData: false
         }
     })
 
     test('renders login page when page is done loading', () => {
-        const { $component, componentJSON } = initializeComponent(initialProps)
+        const { componentJSON } = initializeComponent(initialProps)
 
         expect(componentJSON).toMatchSnapshot()
         expect(replaceSpy).not.toHaveBeenCalled()
-
-        $component.find('.login-btn').forEach($btn => {
-            expect($btn.prop('disabled')).toBe(false)
-        })
     })
 
     test('redirects user to home page in if user is already logged in before component mounts', () => {
-        initialProps.isLoggedIn = true
+        initialProps.uid = 'uid1234'
 
         initializeComponent(initialProps)
 
@@ -107,24 +101,13 @@ describe('LoginPage', () => {
 
         expect(replaceSpy).not.toHaveBeenCalled()
 
-        $component.setProps({ isGettingUserData: true, userId: 'nextUserId1234' })
+        $component.setProps({ isGettingUserProgramData: true, uid: 'nextUid1234' })
 
         expect(pushSpy).not.toHaveBeenCalled()
 
-        $component.setProps({ isGettingUserData: false, userId: 'nextUserId1234' })
+        $component.setProps({ isGettingUserProgramData: false, uid: 'nextUid1234' })
 
         expect(pushSpy).toHaveBeenCalledWith(PP)
-    })
-
-    test('renders login page when page is loading', () => {
-        initialProps.isLoading = true
-
-        const { $component, componentJSON } = initializeComponent(initialProps)
-
-        expect(componentJSON).toMatchSnapshot()
-        $component.find('.login-btn').forEach($btn => {
-            expect($btn.prop('disabled')).toBe(true)
-        })
     })
 
     test('firebaseLoginRedirect method calls firebaseLoginRedirect action creator with method of the button clicked', () => {
@@ -144,17 +127,15 @@ describe('LoginPage', () => {
     test('renders login page when page is done loading (connected)', () => {
         initialState = {
             user: {
-                isLoggedIn: false,
                 uid: 'uid1234',
                 loadingStates: {
-                    isGettingUserData: false
+                    isGettingUserProgramData: false
                 }
             }
         }
 
-        delete initialProps.isGettingUserData
-        delete initialProps.isLoggedIn
-        delete initialProps.userId
+        delete initialProps.isGettingUserProgramData
+        delete initialProps.uid
 
         const { componentJSON } = initializeConnectedComponent(initialProps, initialState)
 

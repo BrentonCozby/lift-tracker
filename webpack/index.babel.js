@@ -9,8 +9,8 @@ import devConfig from './dev.js'
 import prodConfig from './prod.js'
 require('dotenv').config()
 
-const TARGET = process.env.npm_lifecycle_event
-const env = (TARGET === 'dev') ? 'dev' : 'prod'
+const TARGET = process.env.NODE_ENV
+const env = (TARGET === 'development') ? 'dev' : 'prod'
 
 let common = {
     output: {

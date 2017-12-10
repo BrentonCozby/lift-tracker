@@ -10,20 +10,19 @@ export class LoginPage extends Component {
         firebaseLoginRedirect: PropTypes.func,
         setUserLoadingState: PropTypes.func,
         history: PropTypes.object,
-        isLoggedIn: PropTypes.bool,
-        isGettingUserData: PropTypes.bool,
+        isGettingUserProgramData: PropTypes.bool,
         isLoading: PropTypes.bool,
-        userId: PropTypes.string
+        uid: PropTypes.string
     }
 
     componentWillMount() {
-        if (this.props.isLoggedIn) {
+        if (this.props.uid) {
             this.props.history.replace(PP)
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.isGettingUserData === false && nextProps.userId) {
+        if (nextProps.isGettingUserProgramData === false && nextProps.uid) {
             this.props.history.push(PP)
         }
     }
@@ -33,11 +32,8 @@ export class LoginPage extends Component {
     }
 
     render() {
-        const { isLoading } = this.props
-
         const btnAttrs = {
-            onClick: this.firebaseLoginRedirect,
-            disabled: isLoading
+            onClick: this.firebaseLoginRedirect
         }
 
         return (
@@ -55,9 +51,8 @@ export class LoginPage extends Component {
 
 const mapStateToProps = function(state) {
     return {
-        userId: state.user.uid,
-        isLoggedIn: state.user.isLoggedIn,
-        isGettingUserData: state.user.loadingStates.isGettingUserData
+        uid: state.user.uid,
+        isGettingUserProgramData: state.user.loadingStates.isGettingUserProgramData
     }
 }
 

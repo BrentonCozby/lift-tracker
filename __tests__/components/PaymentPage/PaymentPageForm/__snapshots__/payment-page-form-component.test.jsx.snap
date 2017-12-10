@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form renders payment form (connected) 1`] = `
+<form
+  className="PaymentPageForm"
+  onSubmit={[Function]}
+>
+  <div
+    className="CardElement"
+  />
+  <input
+    className="submit-btn"
+    type="submit"
+    value="pay"
+  />
+</form>
+`;

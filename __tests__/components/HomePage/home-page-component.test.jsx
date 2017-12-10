@@ -63,7 +63,7 @@ describe('HomePage', () => {
             history: {
                 push: pushSpy
             },
-            isLoggedIn: true
+            uid: 'uid1234'
         }
     })
 
@@ -75,7 +75,7 @@ describe('HomePage', () => {
     })
 
     test('pushes history to the login page when user is not logged in', () => {
-        initialProps.isLoggedIn = false
+        initialProps.uid = ''
 
         const { componentJSON } = initializeComponent(initialProps)
 
@@ -86,7 +86,7 @@ describe('HomePage', () => {
     test('renders home page when user is logged in (connected)', () => {
         initialState = {
             user: {
-                isLoggedIn: false
+                uid: ''
             }
         }
 

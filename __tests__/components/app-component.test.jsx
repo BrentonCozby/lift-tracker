@@ -119,7 +119,7 @@ describe('App', () => {
             },
             retrieveLoginResult: retrieveLoginResultSpy,
             listenForAuthStateChanged: listenForAuthStateChangedSpy,
-            isLoggedIn: true
+            uid: 'uid1234'
         }
     })
 
@@ -174,13 +174,13 @@ describe('App', () => {
         expect(replaceSpy).not.toHaveBeenCalled()
 
         app.setProps({
-            isLoggedIn: false
+            uid: ''
         })
 
         expect(replaceSpy).toHaveBeenCalledTimes(1)
 
         app.setProps({
-            isLoggedIn: true
+            uid: 'uid1234'
         })
 
         expect(replaceSpy).toHaveBeenCalledTimes(1)
@@ -189,11 +189,11 @@ describe('App', () => {
     test('renders app with home page when route is / and user is logged in (connected)', () => {
         initialState = {
             user: {
-                isLoggedIn: true
+                uid: 'uid1234'
             }
         }
 
-        delete initialProps.isLoggedIn
+        delete initialProps.uid
 
         const { componentJSON } = initializeConnectedComponent(initialProps, initialState)
 

@@ -76,8 +76,7 @@ describe('ProgramsList', () => {
             nullifyCurrentProgram: nullifyCurrentProgramSpy,
             saveNewProgram: saveNewProgramSpy,
             getProgramTitles: getProgramTitlesSpy,
-            userId: 'userId1234',
-            isLoggedIn: true,
+            uid: 'uidId1234',
             isAdmin: true,
             programTitles: [
                 { title: 'Program Title 1', id: '1'},
@@ -105,7 +104,6 @@ describe('ProgramsList', () => {
         initialState = {
             user: {
                 isAdmin: true,
-                isLoggedIn: true,
                 uid: 'uid1234'
             },
             programs: {
@@ -117,9 +115,8 @@ describe('ProgramsList', () => {
         }
 
         delete initialProps.programTitles
-        delete initialProps.isLoggedIn
         delete initialProps.isAdmin
-        delete initialProps.userId
+        delete initialProps.uid
 
         const { $component, componentJSON } = initializeConnectedComponent(initialProps, initialState)
 

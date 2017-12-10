@@ -18,16 +18,16 @@ export function saveNewProgram({programData}) {
     }
 }
 
-export function updateProgram({userId, programId, location, data}) {
+export function updateProgram({uid, programId, location, data}) {
     return (dispatch) => {
         return new Promise((resolve) => {
-            if (!userId) {
+            if (!uid) {
                 dispatch({ type: null })
                 
                 return resolve()
             }
 
-            db.ref(`users/${userId}/programs/${programId}${(location) ? '/' + location : ''}`).update(data)
+            db.ref(`users/${uid}/programs/${programId}${(location) ? '/' + location : ''}`).update(data)
 
             dispatch({ type: UPDATE_PROGRAM_SUCCESS })
 
@@ -36,16 +36,16 @@ export function updateProgram({userId, programId, location, data}) {
     }
 }
 
-export function setProgramValue({userId, programId, location, value}) {
+export function setProgramValue({uid, programId, location, value}) {
     return (dispatch) => {
         return new Promise((resolve) => {
-            if (!userId) {
+            if (!uid) {
                 dispatch({ type: null })
 
                 return resolve()
             }
 
-            db.ref(`users/${userId}/programs/${programId}/${location}`).set(value)
+            db.ref(`users/${uid}/programs/${programId}/${location}`).set(value)
 
             dispatch({ type: SET_PROGRAM_VALUE_SUCCESS })
 
@@ -91,14 +91,14 @@ function getProgramFromDB({programId}) {
     })
 }
 
-function saveProgramToUser({userId, programId}) {
+function saveProgramToUser({uid, programId}) {
     return new Promise((resolve) => {
-        db.ref(`users/${userId}/programs/${programId}`).once('value', snapshot => {
+        db.ref(`users/${uid}/programs/${programId}`).once('value', snapshot => {
             if (!snapshot || !snapshot.val()) {
                 getProgramFromDB({programId}).then((program) => {
-                    db.ref(`users/${userId}/programs/${programId}`).set(program)
+                    db.ref(`users/${uid}/programs/${programId}`).set(program)
 
-                    setCurrentProgram({userId, programId})
+                    setCurrentProgram({uid, programId})
 
                     resolve(null)
                 })
@@ -109,10 +109,10 @@ function saveProgramToUser({userId, programId}) {
     })
 }
 
-export function setCurrentProgram({userId, programId}) {
+export function setCurrentProgram({uid, programId}) {
     return (dispatch) => {
         return new Promise((resolve) => {
-            if (!userId) {
+            if (!uid) {
                 getProgramFromDB({programId}).then((program) => {
                     dispatch({
                         type: GET_ONE_PROGRAM_SUCCESS,
@@ -125,7 +125,7 @@ export function setCurrentProgram({userId, programId}) {
                 return
             }
 
-            saveProgramToUser({userId, programId}).then(program => {
+            saveProgramToUser({uid, programId}).then(program => {
                 if (program) {
                     dispatch({
                         type: GET_ONE_PROGRAM_SUCCESS,
@@ -135,7 +135,7 @@ export function setCurrentProgram({userId, programId}) {
                     return resolve()
                 }
 
-                saveProgramToUser({userId, programId}).then(program => {
+                saveProgramToUser({uid, programId}).then(program => {
                     dispatch({
                         type: GET_ONE_PROGRAM_SUCCESS,
                         payload: { ...program, id: programId }
@@ -148,16 +148,16 @@ export function setCurrentProgram({userId, programId}) {
     }
 }
 
-export function listenForCurrentProgramEdit({userId, programId}) {
+export function listenForCurrentProgramEdit({uid, programId}) {
     return (dispatch) => {
         return new Promise((resolve) => {
-            if (!userId) {
+            if (!uid) {
                 dispatch({ type: null })
 
                 return resolve()
             }
 
-            db.ref(`users/${userId}/programs/${programId}`).on('value', snapshot => {
+            db.ref(`users/${uid}/programs/${programId}`).on('value', snapshot => {
                 if (!snapshot || !snapshot.val()) {
                     dispatch({ type: null })
                 } else {
@@ -173,16 +173,16 @@ export function listenForCurrentProgramEdit({userId, programId}) {
     }
 }
 
-export function stopListeningToCurrentProgram({userId}) {
+export function stopListeningToCurrentProgram({uid}) {
     return (dispatch) => {
         return new Promise((resolve) => {
-            if (!userId) {
+            if (!uid) {
                 dispatch({ type: null })
 
                 return resolve()
             }
 
-            db.ref(`users/${userId}/programs`).off()
+            db.ref(`users/${uid}/programs`).off()
             
             dispatch({ type: NULLIFY_CURRENT_PROGRAM_SUCCESS })
 

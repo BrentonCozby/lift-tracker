@@ -3,8 +3,7 @@ import { injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { CardElement } from 'react-stripe-elements'
-import { alert } from '../../../actions-and-reducers/utils/create-alert.js'
-import { stripeCreateToken } from '../../../actions-and-reducers/stripe/stripe-action-creators.js'
+import { stripeCharge } from '../../../actions-and-reducers/stripe/stripe-action-creators.js'
 
 export class PaymentPageForm extends Component {
 
@@ -16,15 +15,17 @@ export class PaymentPageForm extends Component {
     static propTypes = {
         stripe: PropTypes.object,
         alert: PropTypes.func,
-        stripeCreateToken: PropTypes.func
+        stripeCharge: PropTypes.func,
+        user: PropTypes.object,
+        cart: PropTypes.object
     }
 
     onSubmit(e) {
         e.preventDefault()
 
-        this.props.stripeCreateToken(this.props.stripe, {
-            currency: 'usd',
-            amount: 1100
+        this.props.stripeChargeCustomer(this.props.stripe, {
+            stripe_customer_id: this.props.user.stripe.stripe_customer_id,
+            cart: this.props.cart
         })
     }
 
@@ -39,12 +40,12 @@ export class PaymentPageForm extends Component {
 }
 
 const mapStateToProps = state => ({ // eslint-disable-line no-unused-vars
-
+    cart: state.checkout.cart,
+    user: state.user
 })
 
 const actions = {
-    alert,
-    stripeCreateToken
+    stripeCharge
 }
 
 export default injectStripe(connect(mapStateToProps, actions)(PaymentPageForm))

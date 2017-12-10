@@ -9,13 +9,13 @@ export class ProgramDetail extends Component {
     static propTypes = {
         setCurrentProgram: PropTypes.func,
         currentProgram: PropTypes.object,
-        userId: PropTypes.string,
+        uid: PropTypes.string,
         programId: PropTypes.string
     }
 
     componentWillMount() {
         this.props.setCurrentProgram({
-            userId: this.props.userId,
+            uid: this.props.uid,
             programId: this.props.programId
         })
     }
@@ -46,7 +46,7 @@ export class ProgramDetail extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userId: state.user.uid,
+        uid: state.user.uid,
         currentProgram: state.programs.current
     }
 }

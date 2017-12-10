@@ -1,6 +1,6 @@
 import { db } from '../../firebase.js'
 
-export function calcNextWeights(userId, programId, plan) {
+export function calcNextWeights(uid, programId, plan) {
     let newPlan = {}
 
     // calculate the next weeks' weights from the previous week
@@ -73,13 +73,13 @@ export function calcNextWeights(userId, programId, plan) {
     })
 
     // update database
-    db.ref(`users/${userId}/programs/${programId}/plan/`).update(newPlan)
+    db.ref(`users/${uid}/programs/${programId}/plan/`).update(newPlan)
 
     return { type: 'CALC_NEXT_WEIGHTS_SUCCESS' }
 }
 
-export function setOneRepMax({ userId, programId, currentProgram, newMax, location }) {
-    if (!userId) {
+export function setOneRepMax({ uid, programId, currentProgram, newMax, location }) {
+    if (!uid) {
         return { type: null }
     }
 
@@ -98,13 +98,13 @@ export function setOneRepMax({ userId, programId, currentProgram, newMax, locati
         })
     })
 
-    db.ref(`users/${userId}/programs/${programId}`).update(updatedProgram)
+    db.ref(`users/${uid}/programs/${programId}`).update(updatedProgram)
 
     return { type: 'SET_ONE_REP_MAX_SUCCESS' }
 }
 
-export function setExerciseName({ userId, programId, currentProgram, newName, location }) {
-    if (!userId) {
+export function setExerciseName({ uid, programId, currentProgram, newName, location }) {
+    if (!uid) {
         return { type: null }
     }
 
@@ -123,7 +123,7 @@ export function setExerciseName({ userId, programId, currentProgram, newName, lo
         })
     })
 
-    db.ref(`users/${userId}/programs/${programId}`).update(updatedProgram)
+    db.ref(`users/${uid}/programs/${programId}`).update(updatedProgram)
 
     return { type: 'SET_EXERCISE_NAME_SUCCESS' }
 }

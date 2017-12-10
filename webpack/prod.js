@@ -11,6 +11,10 @@ import { Dir, SITE_TITLE } from '../config.js'
 export default {
     entry: {
         vendor: [
+            'babel-polyfill',
+            'raf/polyfill',
+            'whatwg-fetch',
+            'es6-promise/auto',
             'react',
             'classnames',
             'react-dom',
@@ -21,8 +25,6 @@ export default {
             'redux-thunk'
         ],
         bundle: [
-            'babel-polyfill',
-            'raf/polyfill',
             resolve(Dir.src, 'js', 'index.jsx')
         ]
     },
