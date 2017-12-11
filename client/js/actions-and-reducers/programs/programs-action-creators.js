@@ -74,66 +74,12 @@ function getProgramTitles() {
     }
 }
 
-function getProgramFromDB({programId}) {
-    return new Promise((resolve) => {
-        db.ref(`programs/${programId}`).once('value', snapshot => {
-            resolve(snapshot.val())
-        })
-    })
-}
-
-function saveProgramToUser({uid, programId}) {
-    return new Promise((resolve) => {
-        db.ref(`users/${uid}/programs/${programId}`).once('value', snapshot => {
-            if (!snapshot || !snapshot.val()) {
-                getProgramFromDB({programId}).then((program) => {
-                    db.ref(`users/${uid}/programs/${programId}`).set(program)
-
-                    setCurrentProgram({uid, programId})
-
-                    resolve(null)
-                })
-            } else {
-                resolve(snapshot.val())
-            }
-        })
-    })
-}
-
 function setCurrentProgram({uid, programId}) {
     return (dispatch) => {
-        return new Promise((resolve, reject) => {
-            if (!uid) {
-                getProgramFromDB({programId}).then((program) => {
-                    dispatch({
-                        type: SET_CURRENT_PROGRAM_SUCCESS,
-                        payload: { ...program, id: programId },
-                    })
-
-                    reject(Error('Can\'t setCurrentProgram if no uid provided.'))
-                })
-
-                return
-            }
-
-            saveProgramToUser({uid, programId}).then(program => {
-                if (program) {
-                    dispatch({
-                        type: SET_CURRENT_PROGRAM_SUCCESS,
-                        payload: { ...program, id: programId },
-                    })
-
-                    return resolve()
-                }
-
-                saveProgramToUser({uid, programId}).then(program => {
-                    dispatch({
-                        type: SET_CURRENT_PROGRAM_SUCCESS,
-                        payload: { ...program, id: programId },
-                    })
-
-                    resolve()
-                })
+        db.ref(`users/${uid}/programs/${programId}`).once('value', snapshot => {
+            dispatch({
+                type: SET_CURRENT_PROGRAM_SUCCESS,
+                payload: { ...snapshot.val(), id: programId },
             })
         })
     }

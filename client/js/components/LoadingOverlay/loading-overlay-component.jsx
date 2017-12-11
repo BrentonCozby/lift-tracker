@@ -13,16 +13,18 @@ export class LoadingOverlay extends Component {
         isVisible: false,
     }
 
-    componentWillMount() {
-        const isVisible = Object.values(this.props.loadingStates).some(state => state === true)
+    setIsVisible = (loadingStates) => {
+        this.setState({
+            isVisible: Object.values(loadingStates).some(state => state === true)
+        })
+    }
 
-        this.setState({ isVisible })
+    componentWillMount() {
+        this.setIsVisible(this.props.loadingStates)
     }
 
     componentWillReceiveProps(nextProps) {
-        const isVisible = Object.values(nextProps.loadingStates).some(state => state === true)
-        
-        this.setState({ isVisible })
+        this.setIsVisible(nextProps.loadingStates)
     }
 
     render() {

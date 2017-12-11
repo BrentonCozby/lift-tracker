@@ -21,21 +21,24 @@ class Program extends Component {
     }
 
     componentDidMount() {
-        this.props.uid && this.props.listenForCurrentProgramEdit({
+        this.props.uid &&
+        this.props.currentProgram &&
+        this.props.listenForCurrentProgramEdit({
             uid: this.props.uid,
             programId: this.props.currentProgram.id,
         })
     }
 
     componentDidUpdate() {
-        if (this.props.currentProgram) {
+        if (this.props.uid && this.props.currentProgram) {
             const plan = [...this.props.currentProgram.plan]
             this.props.calcNextWeights(this.props.uid, this.props.currentProgram.id, plan)
         }
     }
 
     componentWillUnmount(){
-        this.props.uid && this.props.stopListeningToCurrentProgram({ uid: this.props.uid })
+        this.props.uid &&
+        this.props.stopListeningToCurrentProgram({ uid: this.props.uid })
     }
 
     render() {

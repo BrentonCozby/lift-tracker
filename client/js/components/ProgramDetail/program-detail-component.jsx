@@ -7,21 +7,29 @@ import { setCurrentProgram } from '../../actions-and-reducers/programs/programs-
 export class ProgramDetail extends Component {
 
     static propTypes = {
+        match: PropTypes.object,
         setCurrentProgram: PropTypes.func,
         currentProgram: PropTypes.object,
         uid: PropTypes.string,
         programId: PropTypes.string,
     }
 
-    static defaultProps = {
-        currentProgram: null,
+    setCurrentProgram = () => {
+        this.props.uid &&
+        this.props.match.params.id &&
+        !this.props.currentProgram &&
+        this.props.setCurrentProgram({
+            uid: this.props.uid,
+            programId: this.props.match.params.id,
+        })
     }
 
     componentWillMount() {
-        this.props.uid && this.props.setCurrentProgram({
-            uid: this.props.uid,
-            programId: this.props.programId,
-        })
+        this.setCurrentProgram()
+    }
+
+    componentDidUpdate() {
+        this.setCurrentProgram()
     }
 
     render() {
@@ -36,7 +44,7 @@ export class ProgramDetail extends Component {
         })()
 
         if (!currentProgram) {
-            return <div></div>
+            return <div className="ProgramDetail"></div>
         }
         
         return (

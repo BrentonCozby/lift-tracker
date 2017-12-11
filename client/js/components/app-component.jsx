@@ -28,19 +28,13 @@ export class App extends Component {
         user: PropTypes.object,
     }
 
-    static defaultProps = {
-        user: {
-            uid: '',
-        },
-    }
-
     componentWillMount() {
         this.props.retrieveLoginResult()
         this.props.listenForAuthStateChanged()
     }
 
     componentWillReceiveProps(nextProps) {
-        const isDoneLoading = Object.keys(nextProps.loadingStates).every(state => state === false)
+        const isDoneLoading = Object.values(nextProps.loadingStates).every(state => state === false)
 
         if (isDoneLoading && !nextProps.user.uid && nextProps.location.pathname !== `${PP}login`) {
             this.props.history.replace(`${PP}login`)
@@ -55,9 +49,7 @@ export class App extends Component {
                 <Switch>
                     <Route exact path={PP} component={HomePage} />
                     <Route exact path={`${PP}login`} component={LoginPage} />
-                    <Route exact path={`${PP}programs/:id`} component={({ match }) => {
-                        return <ProgramDetail programId={match.params.id} />
-                    }} />
+                    <Route exact path={`${PP}programs/:id`} component={ProgramDetail} />
                     <Route exact path={`${PP}payment`} component={PaymentPage} />
                     <Route component={NoMatch} />
                 </Switch>
