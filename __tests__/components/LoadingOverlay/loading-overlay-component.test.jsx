@@ -4,8 +4,8 @@ import renderer from 'react-test-renderer'
 import Enzyme, { shallow, mount } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 import { Provider } from 'react-redux'
-import configStore from '../../../src/js/store.js'
-import ConnectedLoadingOverlay, { LoadingOverlay } from '../../../src/js/components/LoadingOverlay/loading-overlay-component.jsx'
+import configStore from '../../../client/js/store.js'
+import ConnectedLoadingOverlay, { LoadingOverlay } from '../../../client/js/components/LoadingOverlay/loading-overlay-component.jsx'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
@@ -50,7 +50,7 @@ describe('LoadingOverlay', () => {
     test('does not have class "visible" when all loading states are false', () => {
         let initialProps = {
             loadingStates: {
-                isGettingUserProgramData: false,
+                isGettingUserData: false,
                 isRetrievingLoginResult: false
             }
         }
@@ -64,7 +64,7 @@ describe('LoadingOverlay', () => {
     test('has class "visible" when some loading states are true', () => {
         let initialProps = {
             loadingStates: {
-                isGettingUserProgramData: true,
+                isGettingUserData: true,
                 isRetrievingLoginResult: false
             }
         }
@@ -78,7 +78,7 @@ describe('LoadingOverlay', () => {
     test('adds class "visible" when nextProps include a loadingState with a value of true', () => {
         let initialProps = {
             loadingStates: {
-                isGettingUserProgramData: false,
+                isGettingUserData: false,
                 isRetrievingLoginResult: false
             }
         }
@@ -89,7 +89,7 @@ describe('LoadingOverlay', () => {
 
         $component.setProps({
             loadingStates: {
-                isGettingUserProgramData: true
+                isGettingUserData: true
             }
         })
 
@@ -101,7 +101,7 @@ describe('LoadingOverlay', () => {
         initialState = {
             user: {
                 loadingStates: {
-                    isGettingUserProgramData: false,
+                    isGettingUserData: false,
                     isRetrievingLoginResult: false
                 }
             }

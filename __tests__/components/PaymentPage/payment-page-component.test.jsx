@@ -5,12 +5,12 @@ import Enzyme, { shallow, mount } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-import configStore from '../../../src/js/store.js'
-import ConnectedPaymentPage, { PaymentPage } from '../../../src/js/components/PaymentPage/payment-page-component.jsx'
+import configStore from '../../../client/js/store.js'
+import ConnectedPaymentPage, { PaymentPage } from '../../../client/js/components/PaymentPage/payment-page-component.jsx'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
-jest.mock('../../../src/js/components/PaymentPage/PaymentPageForm/payment-page-form-component.jsx', () => function Form() {
+jest.mock('../../../client/js/components/PaymentPage/PaymentPageForm/payment-page-form-component.jsx', () => function Form() {
     return <div className="PaymentForm"></div>
 })
 jest.mock('react-stripe-elements', () => {

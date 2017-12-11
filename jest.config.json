@@ -2,13 +2,13 @@
     "moduleNameMapper": {
         "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/file-mock.js",
         "\\.(css|less)$": "<rootDir>/__mocks__/style-mock.js",
-        "images": "<rootDir>/src/static/images/"
+        "images": "<rootDir>/client/static/images/"
     },
     "collectCoverage": true,
     "collectCoverageFrom": [
-        "**src/js/components/**/*.{js,jsx}",
-        "**src/js/actions-and-reducers/**/*.{js,jsx}",
-        "**src/js/programs/**/*.{js,jsx}",
+        "**client/js/components/**/*.{js,jsx}",
+        "**client/js/actions-and-reducers/**/*.{js,jsx}",
+        "**client/js/programs/**/*.{js,jsx}",
         "!**/node_modules/**"
     ],
     "coverageReporters": ["json", "lcov"],

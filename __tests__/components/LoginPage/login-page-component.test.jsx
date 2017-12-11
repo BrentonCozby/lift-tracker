@@ -5,8 +5,8 @@ import Enzyme, { shallow, mount } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-import configStore from '../../../src/js/store.js'
-import ConnectedLoginPage, { LoginPage } from '../../../src/js/components/LoginPage/login-page-component.jsx'
+import configStore from '../../../client/js/store.js'
+import ConnectedLoginPage, { LoginPage } from '../../../client/js/components/LoginPage/login-page-component.jsx'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
@@ -77,7 +77,7 @@ describe('LoginPage', () => {
                 push: pushSpy
             },
             uid: '',
-            isGettingUserProgramData: false
+            isGettingUserData: false
         }
     })
 
@@ -101,11 +101,11 @@ describe('LoginPage', () => {
 
         expect(replaceSpy).not.toHaveBeenCalled()
 
-        $component.setProps({ isGettingUserProgramData: true, uid: 'nextUid1234' })
+        $component.setProps({ isGettingUserData: true, uid: 'nextUid1234' })
 
         expect(pushSpy).not.toHaveBeenCalled()
 
-        $component.setProps({ isGettingUserProgramData: false, uid: 'nextUid1234' })
+        $component.setProps({ isGettingUserData: false, uid: 'nextUid1234' })
 
         expect(pushSpy).toHaveBeenCalledWith(PP)
     })
@@ -129,12 +129,12 @@ describe('LoginPage', () => {
             user: {
                 uid: 'uid1234',
                 loadingStates: {
-                    isGettingUserProgramData: false
+                    isGettingUserData: false
                 }
             }
         }
 
-        delete initialProps.isGettingUserProgramData
+        delete initialProps.isGettingUserData
         delete initialProps.uid
 
         const { componentJSON } = initializeConnectedComponent(initialProps, initialState)

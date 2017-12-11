@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import Footer from '../../../src/js/components/Footer/footer-component.jsx'
+import Footer from '../../../client/js/components/Footer/footer-component.jsx'
 
 function setup() {
     const props = {

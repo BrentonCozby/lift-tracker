@@ -23,29 +23,19 @@
         "babel"
     ],
     "rules": {
-        "indent": [
-            "error",
-            4,
+        "indent": [ "error", 4,
             {
                 "SwitchCase": 1,
                 "MemberExpression": "off"
             }
         ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "never"
-        ],
+        "linebreak-style": [ "error", "unix" ],
+        "quotes": [ "error", "single" ],
+        "semi": [ "error", "never" ],
         "no-case-declarations": "off",
         "no-console": "off",
-        "no-fallthrough": "off"
+        "no-fallthrough": "off",
+        "comma-dangle": [ "error", "always-multiline"]
     },
     "globals": {
         "PP": false,

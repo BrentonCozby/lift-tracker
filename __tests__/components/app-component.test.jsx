@@ -6,8 +6,8 @@ import EnzymeAdapter from 'enzyme-adapter-react-16'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
-import configStore from '../../src/js/store.js'
-import ConnectedApp, { App } from '../../src/js/components/app-component.jsx'
+import configStore from '../../client/js/store.js'
+import ConnectedApp, { App } from '../../client/js/components/app-component.jsx'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
@@ -18,25 +18,25 @@ jest.mock('react-stripe-elements', () => {
         }
     }
 })
-jest.mock('../../src/js/components/Menu/menu-component.jsx', () => function Menu() {
+jest.mock('../../client/js/components/Menu/menu-component.jsx', () => function Menu() {
     return <div className="Menu"></div>
 })
-jest.mock('../../src/js/components/NoMatch/no-match-component.jsx', () => function NoMatch() {
+jest.mock('../../client/js/components/NoMatch/no-match-component.jsx', () => function NoMatch() {
     return <div className="NoMatch"></div>
 })
-jest.mock('../../src/js/components/HomePage/home-page-component.jsx', () => function HomePage() {
+jest.mock('../../client/js/components/HomePage/home-page-component.jsx', () => function HomePage() {
     return <div className="HomePage"></div>
 })
-jest.mock('../../src/js/components/LoginPage/login-page-component.jsx', () => function LoginPage() {
+jest.mock('../../client/js/components/LoginPage/login-page-component.jsx', () => function LoginPage() {
     return <div className="LoginPage"></div>
 })
-jest.mock('../../src/js/components/ProgramDetail/program-detail-component.jsx', () => function ProgramDetail() {
+jest.mock('../../client/js/components/ProgramDetail/program-detail-component.jsx', () => function ProgramDetail() {
     return <div className="ProgramDetail"></div>
 })
-jest.mock('../../src/js/components/PaymentPage/payment-page-component.jsx', () => function PaymentPage() {
+jest.mock('../../client/js/components/PaymentPage/payment-page-component.jsx', () => function PaymentPage() {
     return <div className="PaymentPage"></div>
 })
-jest.mock('../../src/js/components/LoadingOverlay/loading-overlay-component.jsx', () => function LoadingOverlay() {
+jest.mock('../../client/js/components/LoadingOverlay/loading-overlay-component.jsx', () => function LoadingOverlay() {
     return <div className="LoadingOverlay"></div>
 })
 

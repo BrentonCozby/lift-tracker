@@ -1,8 +1,8 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-import * as actions from '../../../src/js/actions-and-reducers/programs/programs-action-creators.js'
-import * as firebase from '../../../src/js/firebase.js'
+import * as actions from '../../../client/js/actions-and-reducers/programs/programs-action-creators.js'
+import * as firebase from '../../../client/js/firebase.js'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
@@ -17,7 +17,7 @@ describe('program-actions', () => {
 
         store = mockStore({
             titles: [],
-            current: {}
+            current: {},
         })
 
         uid = 'uid1234'
@@ -32,7 +32,7 @@ describe('program-actions', () => {
         const newProgram = {
             title: 'program title',
             foo: 'foo',
-            bar: ['bar']
+            bar: ['bar'],
         }
 
         return store.dispatch(actions.saveNewProgram({programData: newProgram}))
@@ -59,7 +59,7 @@ describe('program-actions', () => {
             uid = undefined
 
             const expectedActions = [
-                { type: null }
+                { type: null },
             ]
 
             return store.dispatch(actions.updateProgram({uid}))
@@ -74,7 +74,7 @@ describe('program-actions', () => {
             const expectedRefString = `users/${uid}/programs/${programId}${(dbLocation) ? '/' + dbLocation : ''}`
 
             const expectedActions = [
-                { type: 'UPDATE_PROGRAM_SUCCESS' }
+                { type: 'UPDATE_PROGRAM_SUCCESS' },
             ]
 
             return store.dispatch(actions.updateProgram({uid, programId, location: dbLocation, data}))
@@ -90,7 +90,7 @@ describe('program-actions', () => {
             const expectedRefString = `users/${uid}/programs/${programId}${(dbLocation) ? '/' + dbLocation : ''}`
 
             const expectedActions = [
-                { type: 'UPDATE_PROGRAM_SUCCESS' }
+                { type: 'UPDATE_PROGRAM_SUCCESS' },
             ]
             
             return store.dispatch(actions.updateProgram({uid, programId, location: dbLocation, data}))
@@ -102,7 +102,7 @@ describe('program-actions', () => {
         })
     })
 
-    describe('setProgramValue', () => {
+    describe('updateProgram', () => {
         let setSpy
         let dbLocation
         let value
@@ -120,10 +120,10 @@ describe('program-actions', () => {
             uid = undefined
 
             const expectedActions = [
-                { type: null }
+                { type: null },
             ]
 
-            return store.dispatch(actions.setProgramValue({uid}))
+            return store.dispatch(actions.updateProgram({uid}))
                 .then(() => {
                     expect(firebase.db.ref).not.toHaveBeenCalled()
                     expect(setSpy).not.toHaveBeenCalled()
@@ -137,10 +137,10 @@ describe('program-actions', () => {
             const expectedRefString = `users/${uid}/programs/${programId}/${dbLocation}`
 
             const expectedActions = [
-                { type: 'SET_PROGRAM_VALUE_SUCCESS' }
+                { type: 'UPDATE_PROGRAM_SUCCESS' },
             ]
 
-            return store.dispatch(actions.setProgramValue({uid, programId, location: dbLocation, value}))
+            return store.dispatch(actions.updateProgram({uid, programId, location: dbLocation, value}))
                 .then(() => {
                     expect(firebase.db.ref).toHaveBeenCalledWith(expectedRefString)
                     expect(setSpy).toHaveBeenCalledWith(value)
@@ -151,7 +151,7 @@ describe('program-actions', () => {
 
     test('nullifyCurrentProgram', () => {
         const expectedActions = [
-            { type: 'NULLIFY_CURRENT_PROGRAM_SUCCESS' }
+            { type: 'NULLIFY_CURRENT_PROGRAM_SUCCESS' },
         ]
 
         return store.dispatch(actions.nullifyCurrentProgram())
@@ -171,11 +171,11 @@ describe('program-actions', () => {
             program = {
                 title: 'program title',
                 foo: 'foo',
-                bar: ['bar']
+                bar: ['bar'],
             }
 
             snapshot = {
-                val: () => program
+                val: () => program,
             }
 
             setSpy = jest.fn()
@@ -185,7 +185,7 @@ describe('program-actions', () => {
 
             firebase.db.ref.mockReturnValue({
                 set: setSpy,
-                once: onceSpy
+                once: onceSpy,
             })
 
             expectedActions = [
@@ -193,9 +193,9 @@ describe('program-actions', () => {
                     type: 'GET_ONE_PROGRAM_SUCCESS',
                     payload: {
                         ...program,
-                        id: programId
-                    }
-                }
+                        id: programId,
+                    },
+                },
             ]
         })
 
@@ -227,29 +227,29 @@ describe('program-actions', () => {
             const expectedRefString = `users/${uid}/programs/${programId}`
 
             snapshot = {
-                val: () => null
+                val: () => null,
             }
 
             expectedActions = [
                 {
                     type: 'GET_ONE_PROGRAM_SUCCESS',
                     payload: {
-                        id: programId
-                    }
+                        id: programId,
+                    },
                 },
                 {
                     type: 'GET_ONE_PROGRAM_SUCCESS',
                     payload: {
                         ...program,
-                        id: programId
-                    }
-                }
+                        id: programId,
+                    },
+                },
             ]
 
             return store.dispatch(actions.setCurrentProgram({uid, programId}))
                 .then(() => {
                     snapshot = {
-                        val: () => program
+                        val: () => program,
                     }
 
                     return store.dispatch(actions.setCurrentProgram({uid, programId}))
@@ -272,7 +272,7 @@ describe('program-actions', () => {
             programTitles = ['title 1', 'title 2', 'title 3']
 
             snapshot = {
-                val: () => programTitles
+                val: () => programTitles,
             }
 
             onceSpy = jest.fn((string, callback) => {
@@ -280,20 +280,20 @@ describe('program-actions', () => {
             })
 
             firebase.db.ref.mockReturnValue({
-                once: onceSpy
+                once: onceSpy,
             })
 
             expectedActions = [
                 {
                     type: 'GET_PROGRAM_TITLES_SUCCESS',
-                    payload: {...programTitles}
-                }
+                    payload: {...programTitles},
+                },
             ]
         })
 
         test('dispatches null if no snapshot value', () => {
             snapshot = {
-                val: () => null
+                val: () => null,
             }
 
             expectedActions = [{ type: null }]
@@ -326,11 +326,11 @@ describe('program-actions', () => {
             program = {
                 title: 'program title',
                 foo: 'foo',
-                bar: ['bar']
+                bar: ['bar'],
             }
 
             snapshot = {
-                val: () => program
+                val: () => program,
             }
 
             onSpy = jest.fn((string, callback) => {
@@ -338,16 +338,16 @@ describe('program-actions', () => {
             })
 
             firebase.db.ref.mockReturnValue({
-                on: onSpy
+                on: onSpy,
             })
 
             expectedActions = [
                 {
                     type: 'GET_ONE_PROGRAM_SUCCESS',
                     payload: {
-                        ...program, id: programId
-                    }
-                }
+                        ...program, id: programId,
+                    },
+                },
             ]
         })
 
@@ -375,7 +375,7 @@ describe('program-actions', () => {
 
         test('dispatches null if no snapshot value', () => {
             snapshot = {
-                val: () => null
+                val: () => null,
             }
 
             expectedActions = [{ type: null }]
@@ -398,13 +398,13 @@ describe('program-actions', () => {
             offSpy = jest.fn()
 
             firebase.db.ref.mockReturnValue({
-                off: offSpy
+                off: offSpy,
             })
 
             expectedActions = [
                 {
-                    type: 'NULLIFY_CURRENT_PROGRAM_SUCCESS'
-                }
+                    type: 'NULLIFY_CURRENT_PROGRAM_SUCCESS',
+                },
             ]
         })
 

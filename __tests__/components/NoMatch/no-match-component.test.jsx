@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import NoMatch from '../../../src/js/components/NoMatch/no-match-component.jsx'
+import NoMatch from '../../../client/js/components/NoMatch/no-match-component.jsx'
 
 function setup() {
     const props = {

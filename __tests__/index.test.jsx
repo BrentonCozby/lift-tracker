@@ -3,8 +3,8 @@
 // import { Provider } from 'react-redux'
 // import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-// import configStore from '../src/js/store.js'
-// import App from '../src/js/components/app-component.jsx'
+// import configStore from '../client/js/store.js'
+// import App from '../client/js/components/app-component.jsx'
 
 // describe('app-component', () => {
 //     let stripeMockFn

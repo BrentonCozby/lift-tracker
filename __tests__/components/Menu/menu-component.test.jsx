@@ -5,8 +5,8 @@ import Enzyme, { shallow, mount } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-import configStore from '../../../src/js/store.js'
-import ConnectedMenu, { Menu } from '../../../src/js/components/Menu/menu-component.jsx'
+import configStore from '../../../client/js/store.js'
+import ConnectedMenu, { Menu } from '../../../client/js/components/Menu/menu-component.jsx'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 

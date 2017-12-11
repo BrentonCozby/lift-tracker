@@ -5,8 +5,8 @@ import Enzyme, { shallow, mount } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-import configStore from '../../../../src/js/store.js'
-import ConnectedForm, { Form } from '../../../../src/js/components/PaymentPage/PaymentPageForm/payment-page-form-component.jsx'
+import configStore from '../../../../client/js/store.js'
+import ConnectedForm, { Form } from '../../../../client/js/components/PaymentPage/PaymentPageForm/payment-page-form-component.jsx'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 

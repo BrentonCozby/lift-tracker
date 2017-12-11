@@ -1,8 +1,8 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-import * as actions from '../../../src/js/actions-and-reducers/user/user-action-creators.js'
-import * as firebase from '../../../src/js/firebase.js'
+import * as actions from '../../../client/js/actions-and-reducers/user/user-action-creators.js'
+import * as firebase from '../../../client/js/firebase.js'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
@@ -112,7 +112,7 @@ describe('user-action-creators', () => {
     })
 
     describe('listenForAuthStateChanged', () => {
-        test('dispatches GET_USER_PROGRAM_DATA_SUCCESS_NO_PAYLOAD when it returns a resolved promise (no payload)', () => {
+        test('dispatches GET_USER_DATA_SUCCESS_NO_PAYLOAD when it returns a resolved promise (no payload)', () => {
             let onAuthStateChangedSpy = jest.fn(() => {
                 return Promise.resolve(null)
             })
@@ -120,7 +120,7 @@ describe('user-action-creators', () => {
             firebase.onAuthStateChanged = onAuthStateChangedSpy
 
             const expectedActions = [
-                { type: 'GET_USER_PROGRAM_DATA_SUCCESS_NO_PAYLOAD', payload: null }
+                { type: 'GET_USER_DATA_SUCCESS_NO_PAYLOAD', payload: null }
             ]
 
             return store.dispatch(actions.listenForAuthStateChanged())
@@ -130,7 +130,7 @@ describe('user-action-creators', () => {
                 })
         })
 
-        test('dispatches GET_USER_PROGRAM_DATA_SUCCESS_WITH_PAYLOAD when it returns a resolved promise (with payload)', () => {
+        test('dispatches GET_USER_DATA_SUCCESS_WITH_PAYLOAD when it returns a resolved promise (with payload)', () => {
             let onAuthStateChangedSpy = jest.fn(() => {
                 return Promise.resolve({ uid: 'uid123' })
             })
@@ -138,7 +138,7 @@ describe('user-action-creators', () => {
             firebase.onAuthStateChanged = onAuthStateChangedSpy
 
             const expectedActions = [
-                { type: 'GET_USER_PROGRAM_DATA_SUCCESS_WITH_PAYLOAD', payload: { uid: 'uid123' } }
+                { type: 'GET_USER_DATA_SUCCESS_WITH_PAYLOAD', payload: { uid: 'uid123' } }
             ]
 
             return store.dispatch(actions.listenForAuthStateChanged())
@@ -148,7 +148,7 @@ describe('user-action-creators', () => {
                 })
         })
 
-        test('dispatches GET_USER_PROGRAM_DATA_ERROR when it returns a rejected promise', () => {
+        test('dispatches GET_USER_DATA_ERROR when it returns a rejected promise', () => {
             let onAuthStateChangedSpy = jest.fn(() => {
                 return Promise.reject(Error('failed to get user data'))
             })
@@ -156,7 +156,7 @@ describe('user-action-creators', () => {
             firebase.onAuthStateChanged = onAuthStateChangedSpy
 
             const expectedActions = [
-                { type: 'GET_USER_PROGRAM_DATA_ERROR', error: Error('failed to get user data') }
+                { type: 'GET_USER_DATA_ERROR', error: Error('failed to get user data') }
             ]
 
             return store.dispatch(actions.listenForAuthStateChanged())

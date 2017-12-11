@@ -1,5 +1,5 @@
 import lodash from 'lodash'
-import reducer from '../../../src/js/actions-and-reducers/user/user-reducer.js'
+import reducer from '../../../client/js/actions-and-reducers/user/user-reducer.js'
 
 describe('user-reducer', () => {
     let state
@@ -16,15 +16,15 @@ describe('user-reducer', () => {
             programs: [],
             isAdmin: false,
             loadingStates: {
-                isGettingUserProgramData: true,
+                isGettingUserData: true,
                 isRetrievingLoginResult: true
             }
         }
     })
 
-    test('GET_USER_PROGRAM_DATA_SUCCESS_NO_PAYLOAD', () => {
+    test('GET_USER_DATA_SUCCESS_NO_PAYLOAD', () => {
         const action = {
-            type: 'GET_USER_PROGRAM_DATA_SUCCESS_NO_PAYLOAD',
+            type: 'GET_USER_DATA_SUCCESS_NO_PAYLOAD',
             payload: undefined
         }
 
@@ -32,16 +32,16 @@ describe('user-reducer', () => {
             ...state,
             loadingStates: {
                 ...state.loadingStates,
-                isGettingUserProgramData: false
+                isGettingUserData: false
             }
         }
 
         expect(reducer(state, action)).toEqual(reducedStateExpected)
     })
 
-    test('GET_USER_PROGRAM_DATA_SUCCESS_WITH_PAYLOAD', () => {
+    test('GET_USER_DATA_SUCCESS_WITH_PAYLOAD', () => {
         const action = {
-            type: 'GET_USER_PROGRAM_DATA_SUCCESS_WITH_PAYLOAD',
+            type: 'GET_USER_DATA_SUCCESS_WITH_PAYLOAD',
             payload: {
                 data: {
                     programs: [
@@ -56,7 +56,7 @@ describe('user-reducer', () => {
             ...state,
             loadingStates: {
                 ...state.loadingStates,
-                isGettingUserProgramData: false
+                isGettingUserData: false
             },
             ...lodash.cloneDeep(action.payload.data)
         }
@@ -139,7 +139,7 @@ describe('user-reducer', () => {
             ],
             isAdmin: true,
             loadingStates: {
-                isGettingUserProgramData: false,
+                isGettingUserData: false,
                 isRetrievingLoginResult: false
             }
         }

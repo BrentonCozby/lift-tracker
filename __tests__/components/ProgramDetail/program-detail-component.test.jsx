@@ -5,12 +5,12 @@ import Enzyme, { shallow, mount } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-import configStore from '../../../src/js/store.js'
-import ConnectedProgramDetail, { ProgramDetail } from '../../../src/js/components/ProgramDetail/program-detail-component.jsx'
+import configStore from '../../../client/js/store.js'
+import ConnectedProgramDetail, { ProgramDetail } from '../../../client/js/components/ProgramDetail/program-detail-component.jsx'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
-jest.mock('../../../src/js/programs/DUHR/DUHR-component.jsx', () => {
+jest.mock('../../../client/js/programs/DUHR/DUHR-component.jsx', () => {
     return {
         default: function CurrentProgramComponent() {
             return (<div>Current Program</div>)

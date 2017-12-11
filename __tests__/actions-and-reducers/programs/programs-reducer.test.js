@@ -1,5 +1,5 @@
 import { clone } from 'lodash'
-import reducer from '../../../src/js/actions-and-reducers/programs/programs-reducer.js'
+import reducer from '../../../client/js/actions-and-reducers/programs/programs-reducer.js'
 
 describe('programs-reducer', () => {
     let state

@@ -5,12 +5,12 @@ import Enzyme, { shallow, mount } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-import configStore from '../../../src/js/store.js'
-import ConnectedHomePage, { HomePage } from '../../../src/js/components/HomePage/home-page-component.jsx'
+import configStore from '../../../client/js/store.js'
+import ConnectedHomePage, { HomePage } from '../../../client/js/components/HomePage/home-page-component.jsx'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
-jest.mock('../../../src/js/components/ProgramsList/programs-list-component.jsx')
+jest.mock('../../../client/js/components/ProgramsList/programs-list-component.jsx')
 
 describe('HomePage', () => {
     let initialState
