@@ -20,6 +20,7 @@ module.exports = {
             'react-dom',
             'react-redux',
             'react-router-dom',
+            'react-router-redux',
             'redux',
             'redux-promise',
             'redux-thunk',

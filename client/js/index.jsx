@@ -2,7 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { StripeProvider } from 'react-stripe-elements'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+import { ConnectedRouter } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory'
 import { AppContainer as ReactHotLoader } from 'react-hot-loader'
 
 import configStore from './store.js'
@@ -29,22 +31,22 @@ const render = (Component) => {
         ReactDOM.render(
             <ReactHotLoader>
                 <Provider store={store}>
-                    <Router>
+                    <ConnectedRouter history={createHistory()}>
                         <StripeProvider apiKey={PUBLIC_STRIPE_API_KEY}>
                             <Route path={PP} component={Component} />
                         </StripeProvider>
-                    </Router>
+                    </ConnectedRouter>
                 </Provider>
             </ReactHotLoader>,
             document.getElementById('root'))
     } else {
         ReactDOM.render(
             <Provider store={store}>
-                <Router>
+                <ConnectedRouter history={createHistory()}>
                     <StripeProvider apiKey={PUBLIC_STRIPE_API_KEY}>
                         <Route path={PP} component={Component} />
                     </StripeProvider>
-                </Router>
+                </ConnectedRouter>
             </Provider>,
             document.getElementById('root'))
     }

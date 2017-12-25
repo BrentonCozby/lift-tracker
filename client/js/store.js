@@ -2,6 +2,8 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import reduxPromise from 'redux-promise'
 import thunk from 'redux-thunk'
+import createHistory from 'history/createBrowserHistory'
+import { routerMiddleware } from 'react-router-redux'
 import rootReducer from './actions-and-reducers/root-reducer.js'
 
 const composeEnhancers = composeWithDevTools({
@@ -10,7 +12,8 @@ const composeEnhancers = composeWithDevTools({
 
 const middleware = applyMiddleware(
     reduxPromise,
-    thunk
+    thunk,
+    routerMiddleware(createHistory())
 )
 
 export default function configStore(initialState) {
