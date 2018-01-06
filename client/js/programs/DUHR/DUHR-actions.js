@@ -1,6 +1,50 @@
 import { db } from '../../firebase.js'
 
+export function getCurrentDay({ location }) {
+    return new Promise(resolve => {
+        db.ref(location).once('value', snapshot => {
+            resolve(snapshot.val())
+        })
+    })
+}
+
+export function updateDateCompleted({ uid, programId, location }) {
+    if (!location) {
+        return { type: 'UPDATE_DATE_COMPLETED_ERROR', message: 'Invalid day location provided' }
+    }
+
+    const dayRef = db.ref(`users/${uid}/programs/${programId}/${location}`)
+
+    return dispatch => {
+        dayRef.once('value', snapshot => {
+            const day = snapshot.val()
+
+            if (!day) {
+                return dispatch({ type: 'UPDATE_DATE_COMPLETED_ERROR', message: 'No snapshot of day from firebase found' })
+            }
+
+            if (day.exercises.some(e => !e.difficulty)) {
+                dayRef.update({ dateCompleted: null })
+
+                return dispatch({ type: null })
+            }
+
+            if (day.dateCompleted) {
+                return dispatch({ type: null })
+            }
+
+            dayRef.update({ dateCompleted: new Date() })
+
+            dispatch({ type: 'UPDATE_DATE_COMPLETED_SUCCESS' })
+        })
+    }
+}
+
 export function calcNextWeights(uid, programId, plan) {
+    if (!uid || !programId || !plan) {
+        return { type: 'CALC_NEXT_WEIGHTS_ERROR' }
+    }
+
     let newPlan = {}
 
     // calculate the next weeks' weights from the previous week
@@ -10,8 +54,8 @@ export function calcNextWeights(uid, programId, plan) {
                 return false
             }
 
-            if(day.exercises.some(e => !e.difficulty)) {
-                // skip creating next day and delete it if exists
+            // skip creating next day and delete it if exists if day is not complete
+            if (day.exercises.some(e => !e.difficulty)) {
                 const dbref = `${weekIndex + 1}/${dayIndex}`
                 newPlan[dbref] = null
                 return false
@@ -25,7 +69,7 @@ export function calcNextWeights(uid, programId, plan) {
                 const newNextExercise = {
                     diff: currentExercise.diff,
                     name: currentExercise.name,
-                    difficulty: undefined
+                    difficulty: undefined,
                 }
 
                 // if it is first week and only week
@@ -79,7 +123,7 @@ export function calcNextWeights(uid, programId, plan) {
 }
 
 export function setOneRepMax({ uid, programId, currentProgram, newMax, location }) {
-    if (!uid) {
+    if (!uid || !programId || !currentProgram || !newMax || !location) {
         return { type: 'SET_ONE_REP_MAX_ERROR' }
     }
 
@@ -104,7 +148,7 @@ export function setOneRepMax({ uid, programId, currentProgram, newMax, location 
 }
 
 export function setExerciseName({ uid, programId, currentProgram, newName, location }) {
-    if (!uid) {
+    if (!uid || !programId || !currentProgram || !newName || !location) {
         return { type: 'SET_EXERCISE_NAME_ERROR' }
     }
 
@@ -126,4 +170,16 @@ export function setExerciseName({ uid, programId, currentProgram, newName, locat
     db.ref(`users/${uid}/programs/${programId}`).update(updatedProgram)
 
     return { type: 'SET_EXERCISE_NAME_SUCCESS' }
+}
+
+export function setExerciseWeight({ uid, programId, location, newWeight }) {
+    if (!uid || !programId || !location || !newWeight) {
+        return { type: 'EDIT_WEIGHT_AMOUNT_ERROR' }
+    }
+
+    const exerciseRef = db.ref(`users/${uid}/programs/${programId}/${location}`)
+
+    exerciseRef.update({ weight: newWeight })
+
+    return { type: 'EDIT_WEIGHT_AMOUNT_SUCCESS' }
 }

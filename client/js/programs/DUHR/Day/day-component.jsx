@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { updateProgram } from '../../../actions-and-reducers/programs/programs-action-creators.js'
+import { updateProgram } from 'actions-and-reducers/programs/programs-action-creators.js'
+import { updateDateCompleted, setExerciseWeight } from '../DUHR-actions.js'
 
 class Day extends Component {
 
     static propTypes = {
         updateProgram: PropTypes.func,
+        updateDateCompleted: PropTypes.func,
+        setExerciseWeight: PropTypes.func,
         dayIndex: PropTypes.number,
         uid: PropTypes.string,
         programId: PropTypes.string,
@@ -18,12 +21,45 @@ class Day extends Component {
         exercises: PropTypes.array,
     }
 
+    state = {
+        currentDay: {},
+    }
+
     setDifficulty = e => {
-        this.props.uid && this.props.updateProgram({
+        if (!this.props.uid) {
+            return
+        }
+
+        this.props.updateProgram({
             uid: this.props.uid,
             programId: this.props.programId,
             location: e.target.dataset.dbref,
             data: { difficulty: e.target.value },
+        })
+
+        this.props.updateDateCompleted({
+            uid: this.props.uid,
+            programId: this.props.programId,
+            location: this.props.dbref,
+        })
+    }
+
+    setWeight = e => {
+        console.log({
+            uid: this.props.uid,
+            programId: this.props.programId,
+            location: e.target.dataset.dbref,
+            newWeight: e.target.value,
+        });
+        if (!this.props.uid) {
+            return
+        }
+
+        this.props.setExerciseWeight({
+            uid: this.props.uid,
+            programId: this.props.programId,
+            location: e.target.dataset.dbref,
+            newWeight: e.target.value,
         })
     }
 
@@ -75,7 +111,14 @@ class Day extends Component {
                             <td className="exercise-name">
                                 {exercise.name}
                             </td>
-                            <td className="exercise-weight">{exercise.weight}</td>
+                            <td className="exercise-weight">
+                                <input
+                                    type="text"
+                                    data-dbref={`${dbref}/exercises/${index}`}
+                                    value={exercise.weight}
+                                    onChange={this.setWeight}
+                                />
+                            </td>
                             <td className="exercise-difficulty">
                                 <select
                                     value={exercise.difficulty}
@@ -104,6 +147,8 @@ const mapStateToProps = function(state) {
 
 const actions = {
     updateProgram,
+    updateDateCompleted,
+    setExerciseWeight,
 }
 
 export default connect(mapStateToProps, actions)(Day)

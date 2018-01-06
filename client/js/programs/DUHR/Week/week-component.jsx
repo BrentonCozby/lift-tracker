@@ -9,11 +9,11 @@ class Week extends Component {
     static propTypes = {
         weekIndex: PropTypes.number,
         days: PropTypes.array,
-        dbref: PropTypes.string
+        dbref: PropTypes.string,
     }
 
     state = {
-        isExpanded: false
+        isExpanded: false,
     }
 
     expand = () => {
