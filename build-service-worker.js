@@ -1,8 +1,8 @@
-import swPrecache from 'sw-precache'
-import { Dir, SITE_NAME } from './config.js'
-import { resolve } from 'path'
+const swPrecache = require('sw-precache')
+const { Dir, SITE_NAME } = require('./config.js')
+const { resolve } = require('path')
 
-swPrecache.write(resolve(Dir.dist, 'service-worker.js'), {
+swPrecache.write(resolve(Dir.client, 'service-worker.js'), {
     cacheId: SITE_NAME,
     filename: 'service-worker.js',
     stripPrefix: Dir.dist,
@@ -12,7 +12,7 @@ swPrecache.write(resolve(Dir.dist, 'service-worker.js'), {
     dontCacheBustUrlsMatching: [
         /\.(js|json|css)$/, // I'm cache busting these files myself
     ],
-    skipWaiting: true
+    skipWaiting: true,
 }, (err) => {
     if (err) {
         throw new Error(err)

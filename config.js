@@ -5,12 +5,12 @@ const { resolve } = require('path')
 
 // PP (public path) must begin and end with '/' unless it is just '/'
 module.exports.PP = ['dev', 'dev:api', 'dev:client'].indexOf(process.npm_lifecycle_event) > -1
-    ? '/lift-tracker/'
+    ? '/'
     : '/'
 module.exports.SITE_TITLE = 'Lift Tracker'
 module.exports.SITE_NAME = 'lift-tracker'
 module.exports.DESCRIPTION = 'Track your workout progress with ease.'
-module.exports.SITE_URL = 'http://brentoncozby.com/lift-tracker'
+module.exports.SITE_URL = 'https://d3cbqu8s5ha2bg.cloudfront.net/'
 module.exports.SITE_IMAGE = ''
 module.exports.DEVELOPER_NAME = 'Brenton Cozby'
 module.exports.DEVELOPER_URL = 'https://brentoncozby.com'
@@ -20,6 +20,7 @@ module.exports.DEV_PATH = __dirname
 module.exports.Dir = {
     dist: resolve(__dirname, 'dist'),
     client: resolve(__dirname, 'client'),
+    api: resolve(__dirname, 'api'),
     css: resolve(__dirname, 'client', 'css'),
     js: resolve(__dirname, 'client', 'js'),
     static: resolve(__dirname, 'client', 'static'),
