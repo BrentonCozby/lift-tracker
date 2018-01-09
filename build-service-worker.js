@@ -2,7 +2,7 @@ const swPrecache = require('sw-precache')
 const { Dir, SITE_NAME } = require('./config.js')
 const { resolve } = require('path')
 
-swPrecache.write(resolve(Dir.client, 'service-worker.js'), {
+swPrecache.write(resolve(Dir.dist, 'client', 'service-worker.js'), {
     cacheId: SITE_NAME,
     filename: 'service-worker.js',
     stripPrefix: Dir.dist,
