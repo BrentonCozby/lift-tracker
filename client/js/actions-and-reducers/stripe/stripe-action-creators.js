@@ -15,7 +15,7 @@ const STRIPE_CHARGED_STARTED = 'STRIPE_CHARGED_STARTED'
 const STRIPE_CHARGE_SUCCESS = 'STRIPE_CHARGE_SUCCESS'
 const STRIPE_CHARGE_ERROR = 'STRIPE_CHARGE_ERROR'
 
-const API_HOST = process.env.NODE_ENV === 'development' ? 'http://localhost:8081/api' : '/api'
+const API_HOST = process.env.NODE_ENV === 'development' ? 'http://localhost:8081/api' : 'https://brentoncozby.com/lift-tracker-api'
 
 function stripeCreateCustomer({ uid, email }) {
     store.dispatch({ type: STRIPE_CREATE_CUSTOMER_STARTED })

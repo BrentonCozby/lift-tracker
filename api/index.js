@@ -4,7 +4,7 @@ import app from './app.js'
 
 const server = http.createServer(app)
 let currentApp = app
-const PORT = process.env.SERVER_PORT || 8080
+const PORT = process.env.API_PORT || 8080
 
 server.listen(PORT)
 

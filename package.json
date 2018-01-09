@@ -6,6 +6,7 @@
     "license": "MIT",
     "scripts": {
         "dev:api": "cross-env rimraf ./dist/api && webpack --config ./webpack/api.index.babel.js",
+        "prod:api": "cross-env NODE_ENV=production babel-node dist/api/api.bundle.js",
         "dev:client": "cross-env rimraf ./dist/client && webpack-dev-server --config ./webpack/client.index.babel.js",
         "dev": "cross-env rimraf dist && npm-run-all --parallel dev:api dev:client",
         "build:api": "rimraf ./dist/api && cross-env NODE_ENV=production webpack -p --config ./webpack/api.index.babel.js --progress --profile --colors",
@@ -39,6 +40,7 @@
         "redux-thunk": "^2.2.0",
         "sanitize-html": "^1.16.3",
         "start-server-webpack-plugin": "^2.2.0",
+        "stripe": "^5.4.0",
         "webpack-node-externals": "^1.6.0",
         "whatwg-fetch": "^2.0.3"
     },
@@ -80,7 +82,6 @@
         "resource-hints-webpack-plugin": "^0.0.1",
         "rimraf": "^2.6.2",
         "sass-loader": "^6.0.3",
-        "stripe": "^5.4.0",
         "style-loader": "^0.16.1",
         "url-loader": "^0.5.8",
         "webpack": "^3.10.0",
