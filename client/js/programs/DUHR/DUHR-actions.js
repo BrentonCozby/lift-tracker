@@ -123,7 +123,7 @@ export function calcNextWeights(uid, programId, plan) {
 }
 
 export function setOneRepMax({ uid, programId, currentProgram, newMax, location }) {
-    if (!uid || !programId || !currentProgram || !newMax || !location) {
+    if (!uid || !programId || !currentProgram || isNaN(newMax) || isNaN(location)) {
         return { type: 'SET_ONE_REP_MAX_ERROR' }
     }
 
@@ -148,7 +148,7 @@ export function setOneRepMax({ uid, programId, currentProgram, newMax, location 
 }
 
 export function setExerciseName({ uid, programId, currentProgram, newName, location }) {
-    if (!uid || !programId || !currentProgram || !newName || !location) {
+    if (!uid || !programId || !currentProgram || !newName || isNaN(location)) {
         return { type: 'SET_EXERCISE_NAME_ERROR' }
     }
 
@@ -173,7 +173,7 @@ export function setExerciseName({ uid, programId, currentProgram, newName, locat
 }
 
 export function setExerciseWeight({ uid, programId, location, newWeight }) {
-    if (!uid || !programId || !location || !newWeight) {
+    if (!uid || !programId || !location || isNaN(parseFloat(newWeight))) {
         return { type: 'EDIT_WEIGHT_AMOUNT_ERROR' }
     }
 

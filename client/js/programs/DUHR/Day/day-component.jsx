@@ -45,12 +45,6 @@ class Day extends Component {
     }
 
     setWeight = e => {
-        console.log({
-            uid: this.props.uid,
-            programId: this.props.programId,
-            location: e.target.dataset.dbref,
-            newWeight: e.target.value,
-        });
         if (!this.props.uid) {
             return
         }
