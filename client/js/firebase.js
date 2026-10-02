@@ -1,7 +1,7 @@
 import firebase from 'firebase'
 
 const config = {
-    apiKey: 'AIzaSyBuVY-9uL38UFQzauQwhb0VDEbxG5uxMg4',
+    apiKey: '',
     authDomain: 'lift-tracker-e0496.firebaseapp.com',
     databaseURL: 'https://lift-tracker-e0496.firebaseio.com',
     projectId: 'lift-tracker-e0496',
